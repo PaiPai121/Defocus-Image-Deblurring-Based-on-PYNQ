@@ -1,25 +1,13 @@
 from PIL import Image
 from matplotlib.pyplot import imsave
 import numpy as np
-from numpy import pi
-from mpl_toolkits.mplot3d import Axes3D
-import matplotlib.pyplot as plt
+
 
 from time import clock
 
 from GaussianAndImage import *
 
 
-def test_kernelCreate():
-    r = 10
-    kernel = KernelMaker(r)
-    x_values = np.arange(-r,r+1,1)
-    y_values = np.arange(-r,r+1,1)
-    X,Y = np.meshgrid(x_values,y_values)
-    fig = plt.figure()
-    ax = Axes3D(fig)
-    ax.plot_surface(X,Y,kernel)
-    plt.show()
 
 def GaussianBlur(array, kernel , mode):
     '''高斯模糊'''

@@ -1,22 +1,36 @@
 from PIL import Image
 import numpy as np
 from numpy import pi
-
-def KernelMaker(r):  ### r 是半径
-    '''高斯分布卷积核'''
-    
-    kernel = np.empty((2*r+1,2*r+1))
+from mpl_toolkits.mplot3d import Axes3D
+import matplotlib.pyplot as plt
+def KernelMaker(r,mode = 'Gauss'):  ### r 是半径
+    kernel = np.zeros((2*r+1,2*r+1))
     summat = 0 ## 矩阵求和，用来归一化
-    for i in range(0,2*r+1):
-        for j in range(0,2*r+1):
-            dr2 = 2*(r**2) # double r^2 
-            gaussp = (1/(pi*dr2)) * np.exp( -((i-r)**2 + (j-r)**2) / (dr2)  )
-            kernel[i][j] = gaussp
-            summat += gaussp
-    
-    kernel = kernel/summat## 归一化
-    if __name__ == "__main__":
-        print("高斯函数矩阵为\n",kernel)
+    '''高斯分布卷积核'''
+    if mode == 'Gauss':
+        for i in range(0,2*r+1):
+            for j in range(0,2*r+1):
+                dr2 = 2*(r**2) # double r^2 
+                gaussp = np.exp( -((i-r)**2 + (j-r)**2) / (dr2)  )
+                kernel[i][j] = gaussp
+                summat += gaussp
+        
+        kernel = kernel/summat## 归一化
+        if __name__ == "__main__":
+            print("高斯函数矩阵为\n",kernel)
+
+    ### 均匀分布卷积核
+    elif (mode == 'homo'):
+        r2 = r**2
+        for i in range(0,2*r+1):
+            for j in range(0,2*r+1):
+                if (i-r)**2 + (j-r)**2 < r**2:
+                    kernel[i][j] = 1/r2
+                    summat += 1/r2
+        kernel /= summat
+        if __name__ == "__main__":
+            print("均匀分布卷积核为\n",kernel)
+            print(sum(sum(kernel)))
     return kernel
 
 def Channel_partial(img):
@@ -48,3 +62,25 @@ def Channel_Compound(nR,nG,nB):
     imgArray = np.asarray(imgArray, np.uint8)
     img = Image.fromarray(imgArray)
     return img
+
+def Surface3D(array):
+    width = array.shape[0]
+    height = array.shape[1]
+    x_values = np.arange(0,height,1) - height // 2
+    y_values = np.arange(0,width ,1) - width // 2
+    X,Y = np.meshgrid(x_values,y_values)
+    fig = plt.figure()
+    ax = Axes3D(fig)
+    ax.plot_surface(X,Y,array)
+    plt.show()
+
+
+
+def test_kernelCreate():
+    r = 10
+    kernel = KernelMaker(r,mode = 'homo')
+    Surface3D(kernel)
+    
+
+if __name__ == "__main__":
+    test_kernelCreate()

@@ -4,14 +4,14 @@
 #include <hls_opencv.h>
 
 #include "WienerDeblur.h"
-#include "canny_edge.h"
 
-#define INPUT_IMG "E:/PYNQ/PYNQ_Canny_Edge/PYNQ_Canny_Edge/source_code/lena_gray.bmp"
+#define INPUT_IMG "E:/XilinxDeblur/Defocus-Image-Deblurring-Based-on-PYNQ/HLS/3.bmp"
 //#define INPUT_IMG "../../../solidWhiteRight.jpg"
-#define OUTPUT_IMG "E:/XilinxDeblur/HLS/WienerDeblur/calc.png"
-#define W 960//512//640//1920
-#define H 540//512//480//1080
-#define CH 3//3
+#define OUTPUT_IMG "E:/XilinxDeblur/Defocus-Image-Deblurring-Based-on-PYNQ/HLS/output.png"
+
+#define W 512//1000//960//512//640//1920
+#define H 512//1000//540//512//480//1080
+#define CH 1//3
 
 
 
@@ -32,7 +32,6 @@ void reset_data(void) {
 int main() {
 
 	cv::Mat imgSrc;
-    ////  read image
 	imgSrc = cv::imread(INPUT_IMG,CV_8UC1);
 	printf("r %d, c %d, d %d\n",imgSrc.rows,imgSrc.cols,imgSrc.dims);
 
@@ -44,12 +43,11 @@ int main() {
 	{
 	    for(int j = 0; j < width; j++)
 	    {
-	        input_buffer[i * _stride + j] = myData[ i * _stride + j];//input 缂撳瓨
+	        input_buffer[i * _stride + j] = myData[ i * _stride + j];
 	    }
 	}
 
 	for (int i = 0; i < PACKETS; ++i) {
-        /// 
 		input_data[i].data.range(7,0) = input_buffer[4*i];
 		input_data[i].data.range(15,8) = input_buffer[4*i + 1];
 		input_data[i].data.range(23,16) = input_buffer[4*i + 2];
@@ -63,20 +61,15 @@ int main() {
 	int8_t k0[4] = {-1, 0, 1, 0};
 	int8_t k1[4] = {-2, 0, 2, 0};
 	int8_t k2[4] = {-1, 0, 1, 0};
-
 	ap_uint<32> r1 = *((unsigned long *)k0);
 	ap_uint<32> r2 = *((unsigned long *)k1);
 	ap_uint<32> r3 = *((unsigned long *)k2);
-
 	int th1 = 80;
 	int th2 = 80;
-
- 	//WienerDeblur(input_data,output_data,imgSrc.rows,imgSrc.cols);
- 	canny_edge(input_data,output_data,imgSrc.rows,imgSrc.cols, th1, th2);
+	WienerDeblur(input_data,output_data,imgSrc.rows,imgSrc.cols);//, th1, th2);
 	printf("Evaluate results\n");
 
 	for (int i = 0; i < PACKETS; ++i) {
-        //
 		output_buffer[4*i] = output_data[i].data.range(7,0);
 		output_buffer[4*i + 1] = output_data[i].data.range(15,8);
 		output_buffer[4*i + 2] = output_data[i].data.range(23,16);
@@ -96,42 +89,42 @@ int main() {
 		}
 	}
 
-	cv::imwrite(OUTPUT_IMG, imgHWcalc);//鍐欏浘鍍�
-	cv::Mat imgcalc = cv::Mat(imgSrc.rows,imgSrc.cols,CV_8UC1);
-	cv::Canny(imgSrc,imgcalc,th1,th2);	//generate test image
-	cv::imwrite("E:/PYNQ/PYNQ_Canny_Edge/PYNQ_Canny_Edge/source_code/openCVcalc.png", imgcalc);//涓�涓牱
+	cv::imwrite(OUTPUT_IMG, imgHWcalc);
+//	cv::Mat imgcalc = cv::Mat(imgSrc.rows,imgSrc.cols,CV_8UC1);
+//	cv::Canny(imgSrc,imgcalc,th1,th2);	//generate test image
+//	cv::imwrite("E:/XilinxDeblur/Defocus-Image-Deblurring-Based-on-PYNQ/HLS/openCVcalc.png", imgcalc);
 
-	// Get a matrix with non-zero values at points where the
-	// two matrices have different values
-	cv::Mat diff = imgcalc != imgHWcalc;
-	cv::Mat imgHWcalcColour;
-	cv::Mat diffColour;
-	cv::Mat diffColour2;
-	cv::Mat diffColour3;
-	cv::cvtColor(imgHWcalc,imgHWcalcColour,CV_GRAY2BGR);
-	cv::cvtColor(diff,diffColour,CV_GRAY2BGR);
-	//write diff
-	cv::Mat ch1, ch2, ch3; // declare three matrices
-	// "channels" is a vector of 3 Mat arrays:
-	cv::vector<cv::Mat> channels(3);
-	// split img:
-	cv::split(diffColour, channels);
-	// get the channels (follow BGR order in OpenCV)
-	ch1 = channels[0];
-	ch2 = channels[1];
-	ch3 = channels[2];
-	ch1 *= 0;
-	ch2 *= 0;
+//	// Get a matrix with non-zero values at points where the
+//	// two matrices have different values
+//	cv::Mat diff = imgcalc != imgHWcalc;
+//	cv::Mat imgHWcalcColour;
+//	cv::Mat diffColour;
+//	cv::Mat diffColour2;
+//	cv::Mat diffColour3;
+//	cv::cvtColor(imgHWcalc,imgHWcalcColour,CV_GRAY2BGR);
+//	cv::cvtColor(diff,diffColour,CV_GRAY2BGR);
+//	//write diff
+//	cv::Mat ch1, ch2, ch3; // declare three matrices
+//	// "channels" is a vector of 3 Mat arrays:
+//	cv::vector<cv::Mat> channels(3);
+//	// split img:
+//	cv::split(diffColour, channels);
+//	// get the channels (follow BGR order in OpenCV)
+//	ch1 = channels[0];
+//	ch2 = channels[1];
+//	ch3 = channels[2];
+//	ch1 *= 0;
+//	ch2 *= 0;
 	// modify channel// then merge
-	cv::merge(channels, diffColour2);
-	cv::add(imgHWcalcColour, diffColour2, diffColour3);
-	cv::imwrite("E:/XilinxProject/DeBlur/HLS/calcDiff.png", diffColour3);
-	if(cv::countNonZero(diff)==0){
-		printf("imgHWcalc and imgcalc are equal\n");
-	}else{
-		printf("imgHWcalc and imgcalc are NOT equal\n");
-		printf("imgHWcalc and imgcalc are NOT equal with %d false pixels2 of %d\n",cv::countNonZero(diff),cv::countNonZero(imgcalc));
-	}
+//	cv::merge(channels, diffColour2);
+//	cv::add(imgHWcalcColour, diffColour2, diffColour3);
+//	cv::imwrite("E:/XilinxDeblur/Defocus-Image-Deblurring-Based-on-PYNQ/HLS/calcDiff.png", diffColour3);
+//	if(cv::countNonZero(diff)==0){
+//		printf("imgHWcalc and imgcalc are equal\n");
+//	}else{
+//		printf("imgHWcalc and imgcalc are NOT equal\n");
+//		printf("imgHWcalc and imgcalc are NOT equal with %d false pixels2 of %d\n",cv::countNonZero(diff),cv::countNonZero(imgcalc));
+//	}
 	// Equal if no elements disagree
 	//assert(cv::countNonZero(diff)==0);
 }
