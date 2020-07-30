@@ -3,8 +3,7 @@ learned from The canny_edge IP
 */
 #include "WienerDeblur.h"
 
-
-void WienerDeblur(wide_stream* in_stream, wide_stream* out_stream, ap_uint<32> rows, ap_uint<32> cols){
+void WienerDeblur(wide_stream* in_stream, wide_stream* out_stream, ap_uint<32> rows, ap_uint<32> cols){//, int threshold1, int threshold2){
 #pragma HLS INTERFACE axis port=in_stream bundle=INPUT
 #pragma HLS INTERFACE axis port=out_stream bundle=OUTPUT
 
@@ -15,29 +14,31 @@ void WienerDeblur(wide_stream* in_stream, wide_stream* out_stream, ap_uint<32> r
 #pragma HLS INTERFACE ap_stable port=rows
 #pragma HLS INTERFACE ap_stable port=cols
 
+	bool direction = 1;
+ 	const int row = 1024;
+	const int col = 1024;
+	static cmpxData xn1[row][col];	//FFT input data
+	static cmpxData xk1[row][col];	//FFT output data
+	static cmpxData middle[row][col];	//FFT middle data
+	cmpxData in[col];
+	cmpxData out[col];
 
 	GRAY_IMAGE src_bw(rows, cols);
-
 	GRAY_IMAGE src1(rows, cols);
 	GRAY_IMAGE src2(rows, cols);
+	GRAY_IMAGE res(rows, cols); //test
 
-    GRAY_IMAGE res(rows, cols);
+	GRAY_PIXEL pixel_gd1;
+	GRAY_PIXEL pixel_gd2;
+	GRAY_PIXEL element_pixel;
 
-    GRAY_PIXEL element_pixel;
-    GRAY_PIXEL pixel_gd;
-
+	config_t fft_config1;	//���������ã�
+	status_t fft_status1;	//�����״̬��
 
 #pragma HLS dataflow
 	const int col_packets = cols/4;
 	const int packets = col_packets*rows;
 	const int pixel_cnt = rows*cols;
-
-	static cmpxData Array[600][600];
-
-//	hls::Scalar<1, unsigned char> pixel_gd;//��ʱ���������ݴ��������?
-	int width = cols;
-	int height = rows;
-
 
 	for(int r = 0; r < packets; r++){
 	#pragma HLS pipeline II=4
@@ -50,50 +51,111 @@ void WienerDeblur(wide_stream* in_stream, wide_stream* out_stream, ap_uint<32> r
 	}
 
 	hls::Duplicate( src_bw, src1, src2 );
-//
-//	GRAY_PIXEL pixel_gd2;
-	short mat2[600][600];
-//	for(int r = 0; r < rows; r++)
-//		{
-//			for(int c = 0; c < cols; c++)
-//			{
-//				src2 >> pixel_gd2;
-//
-//				mat2[r][c] = pixel_gd2.val[0];
-//			}
-//		}
 
-
-
-	for( int i = 0; i < rows+1; i++ ) {
-  		for( int j = 0; j < cols+1; j++ ) {
- #pragma HLS LOOP_FLATTEN OFF
- #pragma HLS DEPENDENCE array inter false
- #pragma HLS PIPELINE
-			  if ( i < rows && j < cols ) {
-				  src2 >> pixel_gd;
-				  Array[i][j].real(pixel_gd.val[0]);// = (pixel_gd.val[0],10);
-				  mat2[i][j] = pixel_gd.val[0];
-				  // printf("i:%d,j:%d,pixel:%d",i,j,Array[i][j]);
-			  }
-  		}
-	}
-
-//
-	for( int i = 0; i < rows+1; i++ ) {
-  		for( int j = 0; j < cols+1; j++ ) {
- #pragma HLS LOOP_FLATTEN OFF
- #pragma HLS DEPENDENCE array inter false
- #pragma HLS PIPELINE
-			  if ( i < rows && j < cols ) {
-				  element_pixel.val[0] =  Array[i][j].real();   //mat2[i][j];//*Array[i][j].real();
-				  res << element_pixel;
-			  }
-  		}
+	for(int r = 0; r < rows; r++)
+	{
+		for(int c = 0; c < cols; c++)
+		{
+			src1 >> pixel_gd1;
+			xn1[r][c].real(pixel_gd1.val[0]);
+		}
 	}
 
 
-//
+	const int SAMPLES = (1 << FFT_NFFT_MAX);
+
+    static cmpxData xn_input[SAMPLES];
+    static cmpxData xk_output[SAMPLES];
+
+    /// 将数据写入向量，以便fft
+//    for (int i = 0; i < cols ; i++){
+//    	xn_input[i].real( xn1[0][i].real() );
+//    	xn_input[i].imag( xn1[0][i].imag() );
+//    	printf("in %d num %f \n",i,xn_input[i].real());
+//    }
+    bool ovflo;
+
+    //  进行二维fft
+    // 行遍历
+    for (int r = 0; r < rows ; r++){
+    	//写入向量
+		for (int c = 0; c < cols ; c++){
+			xn_input[c].real( xn1[r][c].real() );
+			xn_input[c].imag( xn1[r][c].imag() );
+			//printf("in %d num %f \n",i,xn_input[i].real());
+		   }
+		fft_top(0, xn_input, xk_output, &ovflo);
+		//从向量读出
+		for (int c = 0; c < cols ; c++){
+			middle[r][c].real(xk_output[c].real());
+			middle[r][c].imag(xk_output[c].imag());
+			//printf("in %d num %f \n",i,xn_input[i].real());
+		}
+    }
+
+    // 列遍历
+    for (int c = 0; c < cols ; c++){
+    	//写入向量
+		for (int r = 0; r < rows ; r++){
+			xn_input[r].real( middle[r][c].real() );
+			xn_input[r].imag( middle[r][c].imag() );
+			//printf("in %d num %f \n",i,xn_input[i].real());
+		   }
+		fft_top(0, xn_input, xk_output, &ovflo);
+		//从向量读出
+		for (int r = 0; r < rows ; r++){
+			xk1[r][c].real(xk_output[r].real());
+			xk1[r][c].imag(xk_output[r].imag());
+			//printf("in %d num %f \n",i,xn_input[i].real());
+		}
+    }
+
+
+
+    // 进行二维ifft
+    // 行遍历
+    for (int r = 0; r < rows ; r++){
+    	//写入向量
+		for (int c = 0; c < cols ; c++){
+			xn_input[c].real( xn1[r][c].real() );
+			xn_input[c].imag( xn1[r][c].imag() );
+			//printf("in %d num %f \n",i,xn_input[i].real());
+		   }
+		fft_top(1, xn_input, xk_output, &ovflo);
+		//从向量读出
+		for (int c = 0; c < cols ; c++){
+			middle[r][c].real(xk_output[c].real());
+			middle[r][c].imag(xk_output[c].imag());
+			//printf("in %d num %f \n",i,xn_input[i].real());
+		}
+    }
+
+    // 列遍历
+    for (int c = 0; c < cols ; c++){
+    	//写入向量
+		for (int r = 0; r < rows ; r++){
+			xn_input[r].real( middle[r][c].real() );
+			xn_input[r].imag( middle[r][c].imag() );
+			//printf("in %d num %f \n",i,xn_input[i].real());
+		   }
+		fft_top(1, xn_input, xk_output, &ovflo);
+		//从向量读出
+		for (int r = 0; r < rows ; r++){
+			xk1[r][c].real(xk_output[r].real());
+			xk1[r][c].imag(xk_output[r].imag());
+			//printf("in %d num %f \n",i,xn_input[i].real());
+		}
+    }
+
+	for(int r = 0; r < rows; r++)
+	{
+		for(int c = 0; c < cols; c++)
+		{
+			element_pixel.val[0] = xk1[r][c].real();
+			res << element_pixel;
+		}
+	}
+
 
     for(int r = 0; r < rows; r++){
     #pragma HLS pipeline II=4
@@ -110,3 +172,4 @@ void WienerDeblur(wide_stream* in_stream, wide_stream* out_stream, ap_uint<32> r
 		}
 	}
 }
+
