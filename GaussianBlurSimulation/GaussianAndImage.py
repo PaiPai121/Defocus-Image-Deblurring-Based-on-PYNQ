@@ -1,3 +1,4 @@
+from os import write
 from PIL import Image
 import numpy as np
 from numpy import pi
@@ -16,8 +17,8 @@ def KernelMaker(r,mode = 'Gauss'):  ### r 是半径
                 summat += gaussp
         
         kernel = kernel/summat## 归一化
-        if __name__ == "__main__":
-            print("高斯函数矩阵为\n",kernel)
+        # if __name__ == "__main__":
+            # print("高斯函数矩阵为\n",kernel)
 
     ### 均匀分布卷积核
     elif (mode == 'homo'):
@@ -81,6 +82,44 @@ def test_kernelCreate():
     kernel = KernelMaker(r,mode = 'homo')
     Surface3D(kernel)
     
+    
 
 if __name__ == "__main__":
-    test_kernelCreate()
+    # test_kernelCreate()
+    kernel = KernelMaker(10)
+    k_F = np.fft.ifft2(kernel,[512,512])
+    k_F *= 1e8
+    print(kernel[10][10])
+    print(sum(sum(kernel)))
+    datName = "./HLS/kernelReal.dat"
+    f=open(datName, "a+")
+    # f.write('{')
+    for i in range(k_F.shape[0]):
+        f.write('{')
+        for j in range(k_F.shape[1]):
+            f.write( str(round(k_F[i][j].real,4)))
+            if j < k_F.shape[1]-1:
+                f.write(',')
+        f.write('}')
+        if i < k_F.shape[0] - 1:
+            f.write(',')
+        f.write('\n')
+    # f.write('}')
+    f.close()
+
+
+    datName = "./HLS/kernelImag.dat"
+    f=open(datName, "a+")
+    # f.write('{')
+    for i in range(k_F.shape[0]):
+        f.write('{')
+        for j in range(k_F.shape[1]):
+            f.write(str(round(k_F[i][j].imag,4)))
+            if j < k_F.shape[1]-1:
+                f.write(',')
+        f.write('}')
+        if i < k_F.shape[0] - 1:
+            f.write(',')
+        f.write('\n')
+    # f.write('}')
+    f.close()

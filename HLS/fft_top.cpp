@@ -99,7 +99,7 @@ void dummy_proc_fe(
 {
     int i; 
     config->setDir(direction);
-    config->setSch(0x2AB);
+    config->setSch(0x0AA);
     for (i=0; i< FFT_LENGTH; i++)
         out[i] = in[i];
 }

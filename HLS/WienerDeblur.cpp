@@ -3,6 +3,20 @@ learned from The canny_edge IP
 */
 #include "WienerDeblur.h"
 
+void MatrixMultiply(cmpxData m1[512][512],cmpxData m2[512][512],cmpxData out[512][512]){
+#pragma HLS ARRAY_RESHAPE variable = a complete dim = 0
+#pragma HLS ARRAY_RESHAPE variable = b complete dim = 0
+	for(int r = 0;r<512;r++)
+	{
+#pragma HLS PIPELINE rewind
+		for(int c = 0;c<512;c++ ){
+#pragma HLS UNROLL
+			out[r][c] = m1[r][c]*m2[r][c];
+		}
+	}
+}
+
+
 void WienerDeblur(wide_stream* in_stream, wide_stream* out_stream, ap_uint<32> rows, ap_uint<32> cols){//, int threshold1, int threshold2){
 #pragma HLS INTERFACE axis port=in_stream bundle=INPUT
 #pragma HLS INTERFACE axis port=out_stream bundle=OUTPUT
@@ -15,11 +29,12 @@ void WienerDeblur(wide_stream* in_stream, wide_stream* out_stream, ap_uint<32> r
 #pragma HLS INTERFACE ap_stable port=cols
 
 	bool direction = 1;
- 	const int row = 1024;
-	const int col = 1024;
+ 	const int row = 512;
+	const int col = 512;
 	static cmpxData xn1[row][col];	//FFT input data
 	static cmpxData xk1[row][col];	//FFT output data
 	static cmpxData middle[row][col];	//FFT middle data
+	static cmpxData multres[row][col]; //mutiple result
 	cmpxData in[col];
 	cmpxData out[col];
 
@@ -34,6 +49,28 @@ void WienerDeblur(wide_stream* in_stream, wide_stream* out_stream, ap_uint<32> r
 
 	config_t fft_config1;	//���������ã�
 	status_t fft_status1;	//�����״̬��
+
+	///////////////     Kernel FFT后的数据          //////////////
+	static float Ker_Real[row][col] ={
+#include "kernelReal.dat"
+	};
+	static float Ker_Imag[row][col] ={
+#include "kernelImag.dat"
+	};
+	////// 这里很奇怪如果用const就会报错
+
+	static cmpxData Ker_F[row][col];
+	cmpxData temp;
+	for (int r = 0;r<row;r++){
+		for(int c = 0;c<col;c++){
+//			printf("Real :%f\n", Ker_Real[r][c]);
+//			printf("Imag :%f\n", Ker_Imag[r][c]);
+//			printf("Real :%f , Imag:%f \n",Ker_Real[r][c],Ker_Imag[r][c]);
+			Ker_F[r][c].real(Ker_Real[r][c]);
+			Ker_F[r][c].imag(Ker_Imag[r][c]);
+		}
+	}
+	///////////////////////////////////////////////
 
 #pragma HLS dataflow
 	const int col_packets = cols/4;
@@ -67,12 +104,7 @@ void WienerDeblur(wide_stream* in_stream, wide_stream* out_stream, ap_uint<32> r
     static cmpxData xn_input[SAMPLES];
     static cmpxData xk_output[SAMPLES];
 
-    /// 将数据写入向量，以便fft
-//    for (int i = 0; i < cols ; i++){
-//    	xn_input[i].real( xn1[0][i].real() );
-//    	xn_input[i].imag( xn1[0][i].imag() );
-//    	printf("in %d num %f \n",i,xn_input[i].real());
-//    }
+
     bool ovflo;
 
     //  进行二维fft
@@ -110,7 +142,13 @@ void WienerDeblur(wide_stream* in_stream, wide_stream* out_stream, ap_uint<32> r
 		}
     }
 
+    //////////////////////////////////////////////////////////////////
+    //////////////////// Matrix Multiply /////////////////////////////
+    MatrixMultiply(Ker_F,xk1,xn1);
 
+
+
+    //////////////////////////////////////////////////////////////////
 
     // 进行二维ifft
     // 行遍历
@@ -152,6 +190,7 @@ void WienerDeblur(wide_stream* in_stream, wide_stream* out_stream, ap_uint<32> r
 		for(int c = 0; c < cols; c++)
 		{
 			element_pixel.val[0] = xk1[r][c].real();
+//			printf("%d\n",element_pixel.val[0]);
 			res << element_pixel;
 		}
 	}
@@ -172,4 +211,3 @@ void WienerDeblur(wide_stream* in_stream, wide_stream* out_stream, ap_uint<32> r
 		}
 	}
 }
-
