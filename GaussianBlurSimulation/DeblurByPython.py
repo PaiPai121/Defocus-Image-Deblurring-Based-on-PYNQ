@@ -29,7 +29,7 @@ def WienerFilter(array, kernel , k):
     new_array = np.fft.ifft2(new_F_array[0])
     new_array = np.asarray(new_array, np.uint8)
     print("耗费时间：",Timer)
-    return new_array*k
+    return new_array
 
 def RGBWienerFilter(img,kernel,k):
     nR,nG,nB = Channel_partial(img)
@@ -76,8 +76,8 @@ def RGBLaplaceSharpen(img):
 
 if __name__ == "__main__":
     img = Image.open(r'.\HLS\blurImg.bmp') 
-    r = 5
-    k = 1
+    r = 3
+    k = 11
     # img.show()
     kernel = KernelMaker(r)
     newimg = RGBWienerFilter(img,kernel,k)

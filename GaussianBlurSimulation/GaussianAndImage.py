@@ -85,12 +85,13 @@ def test_kernelCreate():
     
     
 
-if False:
+if __name__ == "__main__":
     # test_kernelCreate()
-    kernel = KernelMaker(10)
-    k_F = np.fft.ifft2(kernel,[512,512])
-    k_F *= 512*512
-    print(kernel[10][10])
+    kernel = KernelMaker(3)
+    k_F = np.fft.ifft2(kernel,[256,256])
+    print(k_F.shape)
+    # k_F *= 512*512
+    # print(kernel[10][10])
     print(sum(sum(kernel)))
     datName = "./HLS/kernelReal.dat"
     f=open(datName, "a+")

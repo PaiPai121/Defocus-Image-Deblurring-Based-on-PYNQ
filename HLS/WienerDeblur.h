@@ -15,7 +15,8 @@ const char FFT_STATUS_WIDTH                    = 8;
 const char FFT_CONFIG_WIDTH                    = 16;
 const char FFT_NFFT_MAX                        = 10;
 const int  FFT_LENGTH                          = 1 << FFT_NFFT_MAX;	//The size of the FFT data set
-const int coef                                 = 10000000;//FFT coefficient
+const int coef                                 = 31*10000000;//FFT coefficient
+const int Kernel_Size                          = 256;
 
 struct wide_stream {
 	ap_uint<32> data;
@@ -52,15 +53,43 @@ void WienerDeblur(
 	ap_uint<32> rows,
 	ap_uint<32> cols);//,// int threshold1, int threshold2);
 
+//void dummy_proc_fe(
+//    bool direction,
+//    config_t* config,
+//    cmpxData in[FFT_LENGTH],
+//    cmpxData out[FFT_LENGTH]);
+
+//void dummy_proc_be(
+//    status_t* status_in,
+//    bool* ovflo,
+//    cmpxData in[FFT_LENGTH],
+//    cmpxData out[FFT_LENGTH]);
+
+//void dummy_proc_middle (
+//    config_t* config_in,
+//    config_t* config_out,
+//    status_t* st_in,
+//    cmpxData in[FFT_LENGTH],
+//    cmpxData out[FFT_LENGTH]);
+
+//void fft_top(
+//    bool direction,
+//    cmpxData in[FFT_LENGTH],
+//    cmpxData out[FFT_LENGTH],
+//    bool* ovflo);
+
+///// Matrix
+//
+//void MatrixMultiply(cmpxData m1[512][512],cmpxData m2[512][512],cmpxData out[512][512]);
+//void MatrixDivide(cmpxData m1[512][512],cmpxData m2[512][512],cmpxData out[512][512]);
+//void MatrixConj(cmpxData m1[512][512],cmpxData out[512][512]);
+//void MatrixMold(cmpxData m1[512][512],cmpxData out[512][512]);
+//void MatrixPlusNum(cmpxData m1[512][512],float k,cmpxData out[512][512]);
+
+//// new/////
 void dummy_proc_fe(
     bool direction,
     config_t* config,
-    cmpxData in[FFT_LENGTH],
-    cmpxData out[FFT_LENGTH]);
-
-void dummy_proc_be(
-    status_t* status_in,
-    bool* ovflo,
     cmpxData in[FFT_LENGTH],
     cmpxData out[FFT_LENGTH]);
 
@@ -73,6 +102,40 @@ void dummy_proc_middle (
 
 void fft_top(
     bool direction,
-    cmpxData in[FFT_LENGTH],
-    cmpxData out[FFT_LENGTH],
+    cmpxData in[FFT_LENGTH],	//xn1 -> in
+    cmpxData out[FFT_LENGTH],	//out -> xk1
     bool* ovflo);
+
+void KernelMaker(
+	int r,
+	char mode,
+	data_t kernel[7][7]
+);
+
+
+void InnerProd(
+	cmpxData in1[Kernel_Size][Kernel_Size],
+	cmpxData in2[Kernel_Size][Kernel_Size],
+	cmpxData out[Kernel_Size][Kernel_Size]);
+
+void matrix_modulus(
+	cmpxData mat_in[Kernel_Size][Kernel_Size],
+	cmpxData mat_out[Kernel_Size][Kernel_Size]);
+
+void matrix_plus_SNR(
+	cmpxData mat_in[Kernel_Size][Kernel_Size],
+	cmpxData mat_out[Kernel_Size][Kernel_Size],
+	data_t k);
+
+void matrix_div(
+	cmpxData mat_in1[Kernel_Size][Kernel_Size],
+	cmpxData mat_in2[Kernel_Size][Kernel_Size],
+	cmpxData mat_out[Kernel_Size][Kernel_Size]);
+
+const float Ker_Real[256][256] ={
+#include "kernelReal.dat"
+	};
+
+static float Ker_Imag[256][256] ={
+#include "kernelImag.dat"
+	};
