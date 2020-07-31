@@ -41,11 +41,11 @@ def GaussianBlur(array, kernel , mode):
 
 
 if __name__ == "__main__":
-    r = 10  ## 卷积核半径
+    r = 5  ## 卷积核半径
     kernel = KernelMaker(r)
     ## 测试一下生成卷积核
     # test_kernelCreate() 
-    path = r'E:\Xilinx失焦\Blur\1.jpg'
+    path = r'.\HLS\3.bmp'
     img = Image.open(path)
     nR,nG,nB = Channel_partial(img)
 
@@ -54,4 +54,4 @@ if __name__ == "__main__":
     FnB = GaussianBlur(nB,kernel,'fft')
 
     newimg = Channel_Compound(FnR,FnG,FnB)
-    newimg.save('半径'+str(r)+'.jpg')
+    newimg.save(r'.\HLS\blurImg.bmp')

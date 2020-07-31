@@ -8,14 +8,14 @@ learn from the canny_edge IP
 #include "hls_fft.h"
 #include "math.h"
 
-
 // configurable params
 const char FFT_INPUT_WIDTH                     = 16;
 const char FFT_OUTPUT_WIDTH                    = FFT_INPUT_WIDTH;
 const char FFT_STATUS_WIDTH                    = 8;
 const char FFT_CONFIG_WIDTH                    = 16;
-const char FFT_NFFT_MAX                        = 9;
-const int  FFT_LENGTH                          = 1<<FFT_NFFT_MAX;	//The size of the FFT data set
+const char FFT_NFFT_MAX                        = 10;
+const int  FFT_LENGTH                          = 1 << FFT_NFFT_MAX;	//The size of the FFT data set
+const int coef                                 = 10000000;//FFT coefficient
 
 struct wide_stream {
 	ap_uint<32> data;
@@ -27,7 +27,6 @@ struct config1 : hls::ip_fft::params_t {
 	static const unsigned ordering_opt = hls::ip_fft::natural_order;
 	static const unsigned config_width = FFT_CONFIG_WIDTH;
 	static const unsigned status_width = FFT_STATUS_WIDTH;
-	static const unsigned max_nfft = 9;
 	static const unsigned phase_factor_width = 24;	//ʹ��Ĭ�ϲ���16�ᱨ��
 };
 

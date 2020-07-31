@@ -51,12 +51,9 @@ Revision History: September 26, 2013 - initial release
 #-  THIS COPYRIGHT NOTICE AND DISCLAIMER MUST BE RETAINED AS
 #-  PART OF THIS FILE AT ALL TIMES. 
 #- ************************************************************************
-
-
 This file contains confidential and proprietary information of Xilinx, Inc. and 
 is protected under U.S. and international copyright and other intellectual 
 property laws.
-
 DISCLAIMER
 This disclaimer is not a license and does not grant any rights to the materials 
 distributed herewith. Except as otherwise provided in a valid license issued to 
@@ -72,7 +69,6 @@ special, incidental, or consequential loss or damage (including loss of data,
 profits, goodwill, or any type of loss or damage suffered as a result of any 
 action brought by a third party) even if such damage or loss was reasonably 
 foreseeable or Xilinx had been advised of the possibility of the same.
-
 CRITICAL APPLICATIONS
 Xilinx products are not designed or intended to be fail-safe, or for use in any 
 application requiring fail-safe performance, such as life-support or safety 
@@ -83,10 +79,8 @@ to death, personal injury, or severe property or environmental damage
 sole risk and liability of any use of Xilinx products in Critical Applications, 
 subject only to applicable laws and regulations governing limitations on product 
 liability. 
-
 THIS COPYRIGHT NOTICE AND DISCLAIMER MUST BE RETAINED AS PART OF THIS FILE AT 
 ALL TIMES.
-
 *******************************************************************************/
 
 #include "WienerDeblur.h"
@@ -99,7 +93,7 @@ void dummy_proc_fe(
 {
     int i; 
     config->setDir(direction);
-    config->setSch(0x0AA);
+    config->setSch(0x2AB);
     for (i=0; i< FFT_LENGTH; i++)
         out[i] = in[i];
 }
@@ -191,4 +185,3 @@ void fft_top(
     
     dummy_proc_be(&fft_status2, ovflo, xk2, out);
 }
-

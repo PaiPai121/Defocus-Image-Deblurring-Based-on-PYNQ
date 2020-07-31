@@ -4,6 +4,7 @@ import numpy as np
 from numpy import pi
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
+from numpy.core.numeric import False_
 def KernelMaker(r,mode = 'Gauss'):  ### r 是半径
     kernel = np.zeros((2*r+1,2*r+1))
     summat = 0 ## 矩阵求和，用来归一化
@@ -84,11 +85,11 @@ def test_kernelCreate():
     
     
 
-if __name__ == "__main__":
+if False:
     # test_kernelCreate()
     kernel = KernelMaker(10)
     k_F = np.fft.ifft2(kernel,[512,512])
-    k_F *= 1e8
+    k_F *= 512*512
     print(kernel[10][10])
     print(sum(sum(kernel)))
     datName = "./HLS/kernelReal.dat"
@@ -97,7 +98,7 @@ if __name__ == "__main__":
     for i in range(k_F.shape[0]):
         f.write('{')
         for j in range(k_F.shape[1]):
-            f.write( str(round(k_F[i][j].real,4)))
+            f.write( str(k_F[i][j].real))
             if j < k_F.shape[1]-1:
                 f.write(',')
         f.write('}')
@@ -114,7 +115,7 @@ if __name__ == "__main__":
     for i in range(k_F.shape[0]):
         f.write('{')
         for j in range(k_F.shape[1]):
-            f.write(str(round(k_F[i][j].imag,4)))
+            f.write(str(k_F[i][j].imag))
             if j < k_F.shape[1]-1:
                 f.write(',')
         f.write('}')
@@ -123,3 +124,7 @@ if __name__ == "__main__":
         f.write('\n')
     # f.write('}')
     f.close()
+
+# if True:
+#     I = Image.open("/HLS/3.bmp")
+#     I.

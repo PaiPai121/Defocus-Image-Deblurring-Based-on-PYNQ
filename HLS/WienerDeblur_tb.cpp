@@ -5,7 +5,7 @@
 
 #include "WienerDeblur.h"
 
-#define INPUT_IMG "E:/XilinxDeblur/Defocus-Image-Deblurring-Based-on-PYNQ/HLS/3.bmp"
+#define INPUT_IMG "E:/XilinxDeblur/Defocus-Image-Deblurring-Based-on-PYNQ/HLS/blurImg.bmp"
 //#define INPUT_IMG "../../../solidWhiteRight.jpg"
 #define OUTPUT_IMG "E:/XilinxDeblur/Defocus-Image-Deblurring-Based-on-PYNQ/HLS/outputtest.png"
 

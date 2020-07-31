@@ -24,8 +24,8 @@ def WienerFilter(array, kernel , k):
     F_kernel = np.fft.fft2(kernel,s = (width,height))
     # Surface3D(np.abs(F_array[width//5:width//5*4,height//5:height//5*4]))
     ######## 计算原图f的估计值
-    # new_F_array = [ 1/F_kernel * (np.abs(F_kernel)**2/(np.abs(F_kernel)**2 + k)) ]*F_array
-    new_F_array = [ 1/F_kernel * (np.conj(F_kernel)/(np.abs(F_kernel)**2 + k)) ]*F_array
+    new_F_array = [ 1/F_kernel * (np.abs(F_kernel)**2/(np.abs(F_kernel)**2 + k)) ]*F_array
+    # new_F_array = [ 1/F_kernel * (np.conj(F_kernel)/(np.abs(F_kernel)**2 + k)) ]*F_array
     new_array = np.fft.ifft2(new_F_array[0])
     new_array = np.asarray(new_array, np.uint8)
     print("耗费时间：",Timer)
@@ -75,12 +75,13 @@ def RGBLaplaceSharpen(img):
     return newnew_img
 
 if __name__ == "__main__":
-    img = Image.open(r'C:\Users\kzz69\Desktop\2.jpg')   # (BasePath+r'\blur10.jpg')
+    img = Image.open(r'.\HLS\blurImg.bmp') 
     r = 5
-    k = 150
-    img.show()
-    kernel = KernelMaker(r,mode = 'homo')
+    k = 1
+    # img.show()
+    kernel = KernelMaker(r)
     newimg = RGBWienerFilter(img,kernel,k)
+    newimg.show()
     # newimg = LSdeconvFilter(img,kernel,k)
     # newimg.save('Wiener'+str(r)+'.jpg')
     # newimg.show("without Laplace")
@@ -88,6 +89,6 @@ if __name__ == "__main__":
     # newnew_img = RGBLaplaceSharpen(img)
     # #newnew_img.show("with Laplace")
 
-    nn = Image.fromarray(np.array(newimg)//20 + np.array(img))
+    # nn = Image.fromarray(np.array(newimg)//20 + np.array(img))
 
-    nn.show()
+    # nn.show()

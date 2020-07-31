@@ -3,6 +3,7 @@ learned from The canny_edge IP
 */
 #include "WienerDeblur.h"
 
+
 void MatrixMultiply(cmpxData m1[512][512],cmpxData m2[512][512],cmpxData out[512][512]){
 #pragma HLS ARRAY_RESHAPE variable = a complete dim = 0
 #pragma HLS ARRAY_RESHAPE variable = b complete dim = 0
@@ -15,6 +16,63 @@ void MatrixMultiply(cmpxData m1[512][512],cmpxData m2[512][512],cmpxData out[512
 		}
 	}
 }
+
+void MatrixDivide(cmpxData m1[512][512],cmpxData m2[512][512],cmpxData out[512][512]){
+#pragma HLS ARRAY_RESHAPE variable = a complete dim = 0
+#pragma HLS ARRAY_RESHAPE variable = b complete dim = 0
+	for(int r = 0;r<512;r++)
+	{
+#pragma HLS PIPELINE rewind
+		for(int c = 0;c<512;c++ ){
+#pragma HLS UNROLL
+			out[r][c] = m1[r][c]/m2[r][c];
+		}
+	}
+}
+
+void MatrixConj(cmpxData m1[512][512],cmpxData out[512][512]){
+#pragma HLS ARRAY_RESHAPE variable = a complete dim = 0
+#pragma HLS ARRAY_RESHAPE variable = b complete dim = 0
+	for(int r = 0;r<512;r++)
+	{
+#pragma HLS PIPELINE rewind
+		for(int c = 0;c<512;c++ ){
+#pragma HLS UNROLL
+			out[r][c].real(m1[r][c].real());
+			out[r][c].imag(-m1[r][c].imag());
+		}
+	}
+}
+
+
+void MatrixMold(cmpxData m1[512][512],cmpxData out[512][512]){
+#pragma HLS ARRAY_RESHAPE variable = a complete dim = 0
+#pragma HLS ARRAY_RESHAPE variable = b complete dim = 0
+	for(int r = 0;r<512;r++)
+	{
+#pragma HLS PIPELINE rewind
+		for(int c = 0;c<512;c++ ){
+#pragma HLS UNROLL
+			out[r][c].imag(0);
+			out[r][c].real(sqrt( pow (m1[r][c].real(),2) + pow( m1[r][c].imag() , 2) ));
+		}
+	}
+}
+
+void MatrixPlusNum(cmpxData m1[512][512],float k,cmpxData out[512][512]){
+#pragma HLS ARRAY_RESHAPE variable = a complete dim = 0
+#pragma HLS ARRAY_RESHAPE variable = b complete dim = 0
+	for(int r = 0;r<512;r++)
+	{
+#pragma HLS PIPELINE rewind
+		for(int c = 0;c<512;c++ ){
+#pragma HLS UNROLL
+			out[r][c].real(m1[r][c].real() + k);
+			out[r][c].imag(m1[r][c].imag());
+		}
+	}
+}
+
 
 
 void WienerDeblur(wide_stream* in_stream, wide_stream* out_stream, ap_uint<32> rows, ap_uint<32> cols){//, int threshold1, int threshold2){
@@ -34,7 +92,7 @@ void WienerDeblur(wide_stream* in_stream, wide_stream* out_stream, ap_uint<32> r
 	static cmpxData xn1[row][col];	//FFT input data
 	static cmpxData xk1[row][col];	//FFT output data
 	static cmpxData middle[row][col];	//FFT middle data
-	static cmpxData multres[row][col]; //mutiple result
+	static cmpxData multres[row][col]; //Multiple result
 	cmpxData in[col];
 	cmpxData out[col];
 
@@ -47,30 +105,29 @@ void WienerDeblur(wide_stream* in_stream, wide_stream* out_stream, ap_uint<32> r
 	GRAY_PIXEL pixel_gd2;
 	GRAY_PIXEL element_pixel;
 
-	config_t fft_config1;	//���������ã�
-	status_t fft_status1;	//�����״̬��
+	config_t fft_config1;	//大威天龙
+	status_t fft_status1;	//世尊地藏
+
 
 	///////////////     Kernel FFT后的数据          //////////////
 	static float Ker_Real[row][col] ={
-#include "kernelReal.dat"
-	};
+	#include "kernelReal.dat"
+		};
 	static float Ker_Imag[row][col] ={
-#include "kernelImag.dat"
-	};
-	////// 这里很奇怪如果用const就会报错
+	#include "kernelImag.dat"
+		};
+		////// 这里很奇怪如果用const就会报错
 
 	static cmpxData Ker_F[row][col];
 	cmpxData temp;
 	for (int r = 0;r<row;r++){
 		for(int c = 0;c<col;c++){
-//			printf("Real :%f\n", Ker_Real[r][c]);
-//			printf("Imag :%f\n", Ker_Imag[r][c]);
-//			printf("Real :%f , Imag:%f \n",Ker_Real[r][c],Ker_Imag[r][c]);
 			Ker_F[r][c].real(Ker_Real[r][c]);
 			Ker_F[r][c].imag(Ker_Imag[r][c]);
+//			printf("Real :%f , Imag:%f \n",Ker_F[r][c].real(),Ker_F[r][c].imag());
 		}
 	}
-	///////////////////////////////////////////////
+		///////////////////////////////////////////////
 
 #pragma HLS dataflow
 	const int col_packets = cols/4;
@@ -104,7 +161,6 @@ void WienerDeblur(wide_stream* in_stream, wide_stream* out_stream, ap_uint<32> r
     static cmpxData xn_input[SAMPLES];
     static cmpxData xk_output[SAMPLES];
 
-
     bool ovflo;
 
     //  进行二维fft
@@ -117,10 +173,11 @@ void WienerDeblur(wide_stream* in_stream, wide_stream* out_stream, ap_uint<32> r
 			//printf("in %d num %f \n",i,xn_input[i].real());
 		   }
 		fft_top(0, xn_input, xk_output, &ovflo);
+//		printf("%d\n",ovflo);
 		//从向量读出
 		for (int c = 0; c < cols ; c++){
-			middle[r][c].real(xk_output[c].real());
-			middle[r][c].imag(xk_output[c].imag());
+			middle[r][c].real(xk_output[c].real()/row);
+			middle[r][c].imag(xk_output[c].imag()/row);
 			//printf("in %d num %f \n",i,xn_input[i].real());
 		}
     }
@@ -136,34 +193,71 @@ void WienerDeblur(wide_stream* in_stream, wide_stream* out_stream, ap_uint<32> r
 		fft_top(0, xn_input, xk_output, &ovflo);
 		//从向量读出
 		for (int r = 0; r < rows ; r++){
-			xk1[r][c].real(xk_output[r].real());
-			xk1[r][c].imag(xk_output[r].imag());
+			xk1[r][c].real(xk_output[r].real()/col);
+			xk1[r][c].imag(xk_output[r].imag()/col);
 			//printf("in %d num %f \n",i,xn_input[i].real());
 		}
     }
 
+    /////////////// 频谱矩阵存入了 xk 1
+
+
+
+
+//	for (int r = 0;r<row;r++){
+//		for(int c = 0;c<col;c++){
+//			printf("Real :%f , Imag:%f \n",xk1[r][c].real(),xk1[r][c].imag());
+//		}
+//	}
+
+
+
     //////////////////////////////////////////////////////////////////
     //////////////////// Matrix Multiply /////////////////////////////
-    MatrixMultiply(Ker_F,xk1,xn1);
+	static cmpxData Kernel_conj[row][col]; // kernel conj
+	MatrixConj(Ker_F,Kernel_conj); //
+
+//	for (int r = 0;r<row;r++){
+//	 		for(int c = 0;c<col;c++){
+//	   			printf("Real :%f , Imag:%f \n",Kernel_conj[r][c].real(),Kernel_conj[r][c].imag());
+//	 		}
+//	}
+	////////////////// Simple  deconv ///////////////////////////////////
+	static cmpxData buffer[row][col];
+	MatrixDivide(xk1,Ker_F,xn1);
 
 
-
+//	static cmpxData Kernel_Mold[row][col]; // kernel conj
+//	MatrixMold(Ker_F,Kernel_Mold); //
+//	static cmpxData Kernel_Mold2[row][col];
+//    MatrixMultiply(Kernel_Mold,Kernel_Mold,Kernel_Mold2);// kernelMold^2
+//    static cmpxData Kernel_2PK[row][col];//(np.abs(PSF_fft)**2 + K)
+//    MatrixPlusNum(Kernel_Mold2,0.01,Kernel_2PK); //F/Fkernel
+//    static cmpxData buffer[row][col];
+//    MatrixDivide(Kernel_conj,Kernel_2PK,buffer);
+//    MatrixMultiply(buffer,xk1,xn1);
+//	for (int r = 0;r<row;r++){
+//	 		for(int c = 0;c<col;c++){
+//	   			printf("Real :%f , Imag:%f \n",xn1[r][c].real(),xn1[r][c].imag());
+//	 		}
+//	}
     //////////////////////////////////////////////////////////////////
+
+
 
     // 进行二维ifft
     // 行遍历
     for (int r = 0; r < rows ; r++){
     	//写入向量
 		for (int c = 0; c < cols ; c++){
-			xn_input[c].real( xn1[r][c].real() );
-			xn_input[c].imag( xn1[r][c].imag() );
+			xn_input[c]  =  xn1[r][c];
 			//printf("in %d num %f \n",i,xn_input[i].real());
 		   }
 		fft_top(1, xn_input, xk_output, &ovflo);
 		//从向量读出
 		for (int c = 0; c < cols ; c++){
-			middle[r][c].real(xk_output[c].real());
-			middle[r][c].imag(xk_output[c].imag());
+			middle[r][c].real(xk_output[c].real()/row);
+			middle[r][c].imag(xk_output[c].imag()/row);
 			//printf("in %d num %f \n",i,xn_input[i].real());
 		}
     }
@@ -172,25 +266,32 @@ void WienerDeblur(wide_stream* in_stream, wide_stream* out_stream, ap_uint<32> r
     for (int c = 0; c < cols ; c++){
     	//写入向量
 		for (int r = 0; r < rows ; r++){
-			xn_input[r].real( middle[r][c].real() );
-			xn_input[r].imag( middle[r][c].imag() );
+			xn_input[r] = middle[r][c];
 			//printf("in %d num %f \n",i,xn_input[i].real());
 		   }
 		fft_top(1, xn_input, xk_output, &ovflo);
 		//从向量读出
 		for (int r = 0; r < rows ; r++){
-			xk1[r][c].real(xk_output[r].real());
-			xk1[r][c].imag(xk_output[r].imag());
+			xn1[r][c].real(xk_output[r].real()/col/16/450);
+			xn1[r][c].imag(xk_output[r].imag()/col/16/450);
 			//printf("in %d num %f \n",i,xn_input[i].real());
 		}
     }
+
+    	for (int r = 0;r<row;r++){
+    		for(int c = 0;c<col;c++){
+    			printf("Real :%f , Imag:%f \n",xn1[r][c].real(),xn1[r][c].imag());
+    		}
+    	}
+
+
+
 
 	for(int r = 0; r < rows; r++)
 	{
 		for(int c = 0; c < cols; c++)
 		{
-			element_pixel.val[0] = xk1[r][c].real();
-//			printf("%d\n",element_pixel.val[0]);
+			element_pixel.val[0] = xn1[r][c].real();
 			res << element_pixel;
 		}
 	}
