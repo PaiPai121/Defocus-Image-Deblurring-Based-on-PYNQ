@@ -8,23 +8,24 @@
 
 原图
 
-[img1](/GaussianBlurSimulation/test_img_gray.jpg)
+![img1](/GaussianBlurSimulation/test_img_gray.jpg)
 
 模糊图
 
-[img2](/GaussianBlurSimulation/blur.jpg)
+![img2](/GaussianBlurSimulation/blur.jpg)
 
 复原图
 
-[img3](/GaussianBlurSimulation/test_out.jpg)
+![img3](/GaussianBlurSimulation/test_out.jpg)
 
 
 ## 示例2：
 
 模糊图
 
-[img4](/GaussianBlurSimulation/2.jpg)
+![img4](/GaussianBlurSimulation/2.jpg)
 
 复原图
-[img4](/GaussianBlurSimulation/Wiener10.jpg)
+
+![img4](/GaussianBlurSimulation/Wiener10.jpg)
 
