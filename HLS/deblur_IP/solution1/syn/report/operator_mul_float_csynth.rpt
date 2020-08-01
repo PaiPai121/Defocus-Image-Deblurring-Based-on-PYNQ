@@ -1,0 +1,171 @@
+
+
+================================================================
+== Vivado HLS Report for 'operator_mul_float'
+================================================================
+* Date:           Sat Aug  1 17:20:28 2020
+
+* Version:        2018.3 (Build 2405991 on Thu Dec 06 23:56:15 MST 2018)
+* Project:        deblur_IP
+* Solution:       solution1
+* Product family: zynq
+* Target device:  xc7z020clg400-1
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing (ns): 
+    * Summary: 
+    +--------+-------+----------+------------+
+    |  Clock | Target| Estimated| Uncertainty|
+    +--------+-------+----------+------------+
+    |ap_clk  |  10.00|     7.256|        1.25|
+    +--------+-------+----------+------------+
+
++ Latency (clock cycles): 
+    * Summary: 
+    +-----+-----+-----+-----+----------+
+    |  Latency  |  Interval | Pipeline |
+    | min | max | min | max |   Type   |
+    +-----+-----+-----+-----+----------+
+    |    9|    9|    1|    1| function |
+    +-----+-----+-----+-----+----------+
+
+    + Detail: 
+        * Instance: 
+        +-------------------------------------+---------------------------+-----+-----+-----+-----+----------+
+        |                                     |                           |  Latency  |  Interval | Pipeline |
+        |               Instance              |           Module          | min | max | min | max |   Type   |
+        +-------------------------------------+---------------------------+-----+-----+-----+-----+----------+
+        |grp_operator_mul_assign_float_fu_34  |operator_mul_assign_float  |    9|    9|    1|    1| function |
+        +-------------------------------------+---------------------------+-----+-----+-----+-----+----------+
+
+        * Loop: 
+        N/A
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++-----------------+---------+-------+--------+-------+
+|       Name      | BRAM_18K| DSP48E|   FF   |  LUT  |
++-----------------+---------+-------+--------+-------+
+|DSP              |        -|      -|       -|      -|
+|Expression       |        -|      -|       0|     12|
+|FIFO             |        -|      -|       -|      -|
+|Instance         |        -|     16|    1248|   2090|
+|Memory           |        -|      -|       -|      -|
+|Multiplexer      |        -|      -|       -|     54|
+|Register         |        -|      -|      10|      -|
++-----------------+---------+-------+--------+-------+
+|Total            |        0|     16|    1258|   2156|
++-----------------+---------+-------+--------+-------+
+|Available        |      280|    220|  106400|  53200|
++-----------------+---------+-------+--------+-------+
+|Utilization (%)  |        0|      7|       1|      4|
++-----------------+---------+-------+--------+-------+
+
++ Detail: 
+    * Instance: 
+    +-------------------------------------+---------------------------+---------+-------+------+------+
+    |               Instance              |           Module          | BRAM_18K| DSP48E|  FF  |  LUT |
+    +-------------------------------------+---------------------------+---------+-------+------+------+
+    |grp_operator_mul_assign_float_fu_34  |operator_mul_assign_float  |        0|     16|  1248|  2090|
+    +-------------------------------------+---------------------------+---------+-------+------+------+
+    |Total                                |                           |        0|     16|  1248|  2090|
+    +-------------------------------------+---------------------------+---------+-------+------+------+
+
+    * DSP48: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +-----------------------------------------------+----------+-------+---+----+------------+------------+
+    |                 Variable Name                 | Operation| DSP48E| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +-----------------------------------------------+----------+-------+---+----+------------+------------+
+    |ap_block_pp0_stage0_11001                      |    and   |      0|  0|   2|           1|           1|
+    |ap_block_pp0_stage0_11001_ignoreCallOp13       |    and   |      0|  0|   2|           1|           1|
+    |ap_block_pp0_stage0_subdone                    |    or    |      0|  0|   2|           1|           1|
+    |ap_block_state1_pp0_stage0_iter0               |    or    |      0|  0|   2|           1|           1|
+    |ap_block_state1_pp0_stage0_iter0_ignore_call4  |    or    |      0|  0|   2|           1|           1|
+    |ap_enable_pp0                                  |    xor   |      0|  0|   2|           1|           2|
+    +-----------------------------------------------+----------+-------+---+----+------------+------------+
+    |Total                                          |          |      0|  0|  12|           6|           7|
+    +-----------------------------------------------+----------+-------+---+----+------------+------------+
+
+    * Multiplexer: 
+    +-------------------------+----+-----------+-----+-----------+
+    |           Name          | LUT| Input Size| Bits| Total Bits|
+    +-------------------------+----+-----------+-----+-----------+
+    |G_M_imag_blk_n           |   9|          2|    1|          2|
+    |G_M_imag_read            |   9|          2|    1|          2|
+    |G_M_real_blk_n           |   9|          2|    1|          2|
+    |G_M_real_read            |   9|          2|    1|          2|
+    |gauss_blur_M_imag_blk_n  |   9|          2|    1|          2|
+    |gauss_blur_M_real_blk_n  |   9|          2|    1|          2|
+    +-------------------------+----+-----------+-----+-----------+
+    |Total                    |  54|         12|    6|         12|
+    +-------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +-------------------------+---+----+-----+-----------+
+    |           Name          | FF| LUT| Bits| Const Bits|
+    +-------------------------+---+----+-----+-----------+
+    |ap_CS_fsm                |  1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter1  |  1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter2  |  1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter3  |  1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter4  |  1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter5  |  1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter6  |  1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter7  |  1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter8  |  1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter9  |  1|   0|    1|          0|
+    +-------------------------+---+----+-----+-----------+
+    |Total                    | 10|   0|   10|          0|
+    +-------------------------+---+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++---------------------------+-----+-----+------------+-------------------+--------------+
+|         RTL Ports         | Dir | Bits|  Protocol  |   Source Object   |    C Type    |
++---------------------------+-----+-----+------------+-------------------+--------------+
+|ap_clk                     |  in |    1| ap_ctrl_hs |  operator*<float> | return value |
+|ap_rst                     |  in |    1| ap_ctrl_hs |  operator*<float> | return value |
+|ap_start                   |  in |    1| ap_ctrl_hs |  operator*<float> | return value |
+|ap_done                    | out |    1| ap_ctrl_hs |  operator*<float> | return value |
+|ap_idle                    | out |    1| ap_ctrl_hs |  operator*<float> | return value |
+|ap_ready                   | out |    1| ap_ctrl_hs |  operator*<float> | return value |
+|ap_ce                      |  in |    1| ap_ctrl_hs |  operator*<float> | return value |
+|ap_return_0                | out |   32| ap_ctrl_hs |  operator*<float> | return value |
+|ap_return_1                | out |   32| ap_ctrl_hs |  operator*<float> | return value |
+|gauss_blur_M_real_blk_n    | out |    1| ap_ctrl_hs |  operator*<float> | return value |
+|gauss_blur_M_imag_blk_n    | out |    1| ap_ctrl_hs |  operator*<float> | return value |
+|G_M_real_blk_n             | out |    1| ap_ctrl_hs |  operator*<float> | return value |
+|G_M_imag_blk_n             | out |    1| ap_ctrl_hs |  operator*<float> | return value |
+|gauss_blur_M_real_dout     |  in |   32|   ap_fifo  | gauss_blur_M_real |    pointer   |
+|gauss_blur_M_real_empty_n  |  in |    1|   ap_fifo  | gauss_blur_M_real |    pointer   |
+|gauss_blur_M_real_read     | out |    1|   ap_fifo  | gauss_blur_M_real |    pointer   |
+|gauss_blur_M_imag_dout     |  in |   32|   ap_fifo  | gauss_blur_M_imag |    pointer   |
+|gauss_blur_M_imag_empty_n  |  in |    1|   ap_fifo  | gauss_blur_M_imag |    pointer   |
+|gauss_blur_M_imag_read     | out |    1|   ap_fifo  | gauss_blur_M_imag |    pointer   |
+|G_M_real_dout              |  in |   32|   ap_fifo  |      G_M_real     |    pointer   |
+|G_M_real_empty_n           |  in |    1|   ap_fifo  |      G_M_real     |    pointer   |
+|G_M_real_read              | out |    1|   ap_fifo  |      G_M_real     |    pointer   |
+|G_M_imag_dout              |  in |   32|   ap_fifo  |      G_M_imag     |    pointer   |
+|G_M_imag_empty_n           |  in |    1|   ap_fifo  |      G_M_imag     |    pointer   |
+|G_M_imag_read              | out |    1|   ap_fifo  |      G_M_imag     |    pointer   |
++---------------------------+-----+-----+------------+-------------------+--------------+
+

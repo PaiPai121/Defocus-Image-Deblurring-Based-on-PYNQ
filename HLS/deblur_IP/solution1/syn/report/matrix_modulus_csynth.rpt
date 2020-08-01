@@ -1,0 +1,189 @@
+
+
+================================================================
+== Vivado HLS Report for 'matrix_modulus'
+================================================================
+* Date:           Sat Aug  1 17:20:02 2020
+
+* Version:        2018.3 (Build 2405991 on Thu Dec 06 23:56:15 MST 2018)
+* Project:        deblur_IP
+* Solution:       solution1
+* Product family: zynq
+* Target device:  xc7z020clg400-1
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing (ns): 
+    * Summary: 
+    +--------+-------+----------+------------+
+    |  Clock | Target| Estimated| Uncertainty|
+    +--------+-------+----------+------------+
+    |ap_clk  |  10.00|    10.136|        1.25|
+    +--------+-------+----------+------------+
+
++ Latency (clock cycles): 
+    * Summary: 
+    +---------+---------+---------+---------+---------+
+    |      Latency      |      Interval     | Pipeline|
+    |   min   |   max   |   min   |   max   |   Type  |
+    +---------+---------+---------+---------+---------+
+    |  6947329|  6947329|  6947329|  6947329|   none  |
+    +---------+---------+---------+---------+---------+
+
+    + Detail: 
+        * Instance: 
+        +---------------------------------+----------------------+-----+-----+-----+-----+----------+
+        |                                 |                      |  Latency  |  Interval | Pipeline |
+        |             Instance            |        Module        | min | max | min | max |   Type   |
+        +---------------------------------+----------------------+-----+-----+-----+-----+----------+
+        |grp_pow_generic_double_s_fu_96   |pow_generic_double_s  |   66|   66|    1|    1| function |
+        |grp_pow_generic_double_s_fu_125  |pow_generic_double_s  |   66|   66|    1|    1| function |
+        |StgValue_299_real_r_fu_154       |real_r                |    0|    0|    0|    0|   none   |
+        |StgValue_300_imag_fu_161         |imag                  |    0|    0|    0|    0|   none   |
+        +---------------------------------+----------------------+-----+-----+-----+-----+----------+
+
+        * Loop: 
+        +-------------+---------+---------+----------+-----------+-----------+------+----------+
+        |             |      Latency      | Iteration|  Initiation Interval  | Trip |          |
+        |  Loop Name  |   min   |   max   |  Latency |  achieved |   target  | Count| Pipelined|
+        +-------------+---------+---------+----------+-----------+-----------+------+----------+
+        |- Loop 1     |  6947328|  6947328|     27138|          -|          -|   256|    no    |
+        | + Loop 1.1  |    27136|    27136|       106|          -|          -|   256|    no    |
+        +-------------+---------+---------+----------+-----------+-----------+------+----------+
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++-----------------+---------+-------+--------+-------+
+|       Name      | BRAM_18K| DSP48E|   FF   |  LUT  |
++-----------------+---------+-------+--------+-------+
+|DSP              |        -|      -|       -|      -|
+|Expression       |        -|      -|       0|     60|
+|FIFO             |        -|      -|       -|      -|
+|Instance         |      134|     69|   32859|  19890|
+|Memory           |        -|      -|       -|      -|
+|Multiplexer      |        -|      -|       -|    549|
+|Register         |        -|      -|     594|      -|
++-----------------+---------+-------+--------+-------+
+|Total            |      134|     69|   33453|  20499|
++-----------------+---------+-------+--------+-------+
+|Available        |      280|    220|  106400|  53200|
++-----------------+---------+-------+--------+-------+
+|Utilization (%)  |       47|     31|      31|     38|
++-----------------+---------+-------+--------+-------+
+
++ Detail: 
+    * Instance: 
+    +---------------------------------+----------------------+---------+-------+-------+------+
+    |             Instance            |        Module        | BRAM_18K| DSP48E|   FF  |  LUT |
+    +---------------------------------+----------------------+---------+-------+-------+------+
+    |WienerDeblur_daddLf8_U111        |WienerDeblur_daddLf8  |        0|      3|    445|  1149|
+    |WienerDeblur_dsqrMgi_U112        |WienerDeblur_dsqrMgi  |        0|      0|   1832|  2180|
+    |WienerDeblur_fpexKfY_U109        |WienerDeblur_fpexKfY  |        0|      0|    100|   138|
+    |WienerDeblur_fpexKfY_U110        |WienerDeblur_fpexKfY  |        0|      0|    100|   138|
+    |WienerDeblur_fptreOg_U108        |WienerDeblur_fptreOg  |        0|      0|    128|   277|
+    |StgValue_300_imag_fu_161         |imag                  |        0|      0|      1|    11|
+    |grp_pow_generic_double_s_fu_96   |pow_generic_double_s  |       67|     33|  15126|  7993|
+    |grp_pow_generic_double_s_fu_125  |pow_generic_double_s  |       67|     33|  15126|  7993|
+    |StgValue_299_real_r_fu_154       |real_r                |        0|      0|      1|    11|
+    +---------------------------------+----------------------+---------+-------+-------+------+
+    |Total                            |                      |      134|     69|  32859| 19890|
+    +---------------------------------+----------------------+---------+-------+-------+------+
+
+    * DSP48: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +---------------------+----------+-------+---+----+------------+------------+
+    |    Variable Name    | Operation| DSP48E| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +---------------------+----------+-------+---+----+------------+------------+
+    |c_2_fu_204_p2        |     +    |      0|  0|  15|           9|           1|
+    |r_2_fu_192_p2        |     +    |      0|  0|  15|           9|           1|
+    |exitcond1_fu_186_p2  |   icmp   |      0|  0|  13|           9|          10|
+    |exitcond_fu_198_p2   |   icmp   |      0|  0|  13|           9|          10|
+    |ap_block_state108    |    or    |      0|  0|   2|           1|           1|
+    |ap_block_state3      |    or    |      0|  0|   2|           1|           1|
+    +---------------------+----------+-------+---+----+------------+------------+
+    |Total                |          |      0|  0|  60|          38|          24|
+    +---------------------+----------+-------+---+----+------------+------------+
+
+    * Multiplexer: 
+    +---------------------------+-----+-----------+-----+-----------+
+    |            Name           | LUT | Input Size| Bits| Total Bits|
+    +---------------------------+-----+-----------+-----+-----------+
+    |ap_NS_fsm                  |  477|        109|    1|        109|
+    |c_reg_85                   |    9|          2|    9|         18|
+    |fft_kernel_M_imag_blk_n    |    9|          2|    1|          2|
+    |fft_kernel_M_real_blk_n    |    9|          2|    1|          2|
+    |fft_kernel_modu_M_i_blk_n  |    9|          2|    1|          2|
+    |fft_kernel_modu_M_i_write  |    9|          2|    1|          2|
+    |fft_kernel_modu_M_r_blk_n  |    9|          2|    1|          2|
+    |fft_kernel_modu_M_r_write  |    9|          2|    1|          2|
+    |r_reg_74                   |    9|          2|    9|         18|
+    +---------------------------+-----+-----------+-----+-----------+
+    |Total                      |  549|        125|   25|        157|
+    +---------------------------+-----+-----------+-----+-----------+
+
+    * Register: 
+    +----------------------------------------------+-----+----+-----+-----------+
+    |                     Name                     |  FF | LUT| Bits| Const Bits|
+    +----------------------------------------------+-----+----+-----+-----------+
+    |ap_CS_fsm                                     |  108|   0|  108|          0|
+    |c_2_reg_221                                   |    9|   0|    9|          0|
+    |c_reg_85                                      |    9|   0|    9|          0|
+    |fft_kernel_M_imag_r_reg_231                   |   32|   0|   32|          0|
+    |fft_kernel_M_real_r_reg_226                   |   32|   0|   32|          0|
+    |grp_pow_generic_double_s_fu_125_ap_start_reg  |    1|   0|    1|          0|
+    |grp_pow_generic_double_s_fu_96_ap_start_reg   |    1|   0|    1|          0|
+    |r_2_reg_213                                   |    9|   0|    9|          0|
+    |r_reg_74                                      |    9|   0|    9|          0|
+    |tmp_39_reg_261                                |   64|   0|   64|          0|
+    |tmp_i1_reg_251                                |   64|   0|   64|          0|
+    |tmp_i_reg_246                                 |   64|   0|   64|          0|
+    |tmp_s_reg_256                                 |   64|   0|   64|          0|
+    |x_assign_1_reg_241                            |   64|   0|   64|          0|
+    |x_assign_reg_236                              |   64|   0|   64|          0|
+    +----------------------------------------------+-----+----+-----+-----------+
+    |Total                                         |  594|   0|  594|          0|
+    +----------------------------------------------+-----+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++----------------------------+-----+-----+------------+---------------------+--------------+
+|          RTL Ports         | Dir | Bits|  Protocol  |    Source Object    |    C Type    |
++----------------------------+-----+-----+------------+---------------------+--------------+
+|ap_clk                      |  in |    1| ap_ctrl_hs |    matrix_modulus   | return value |
+|ap_rst                      |  in |    1| ap_ctrl_hs |    matrix_modulus   | return value |
+|ap_start                    |  in |    1| ap_ctrl_hs |    matrix_modulus   | return value |
+|ap_done                     | out |    1| ap_ctrl_hs |    matrix_modulus   | return value |
+|ap_idle                     | out |    1| ap_ctrl_hs |    matrix_modulus   | return value |
+|ap_ready                    | out |    1| ap_ctrl_hs |    matrix_modulus   | return value |
+|fft_kernel_M_real_dout      |  in |   32|   ap_fifo  |  fft_kernel_M_real  |    pointer   |
+|fft_kernel_M_real_empty_n   |  in |    1|   ap_fifo  |  fft_kernel_M_real  |    pointer   |
+|fft_kernel_M_real_read      | out |    1|   ap_fifo  |  fft_kernel_M_real  |    pointer   |
+|fft_kernel_M_imag_dout      |  in |   32|   ap_fifo  |  fft_kernel_M_imag  |    pointer   |
+|fft_kernel_M_imag_empty_n   |  in |    1|   ap_fifo  |  fft_kernel_M_imag  |    pointer   |
+|fft_kernel_M_imag_read      | out |    1|   ap_fifo  |  fft_kernel_M_imag  |    pointer   |
+|fft_kernel_modu_M_r_din     | out |   32|   ap_fifo  | fft_kernel_modu_M_r |    pointer   |
+|fft_kernel_modu_M_r_full_n  |  in |    1|   ap_fifo  | fft_kernel_modu_M_r |    pointer   |
+|fft_kernel_modu_M_r_write   | out |    1|   ap_fifo  | fft_kernel_modu_M_r |    pointer   |
+|fft_kernel_modu_M_i_din     | out |   32|   ap_fifo  | fft_kernel_modu_M_i |    pointer   |
+|fft_kernel_modu_M_i_full_n  |  in |    1|   ap_fifo  | fft_kernel_modu_M_i |    pointer   |
+|fft_kernel_modu_M_i_write   | out |    1|   ap_fifo  | fft_kernel_modu_M_i |    pointer   |
++----------------------------+-----+-----+------------+---------------------+--------------+
+

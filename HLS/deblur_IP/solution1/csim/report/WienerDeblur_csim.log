@@ -1,0 +1,9 @@
+INFO: [SIM 2] *************** CSIM start ***************
+INFO: [SIM 4] CSIM will launch GCC as the compiler.
+   Compiling ../../../../WienerDeblur.cpp in debug mode
+   Generating csim.exe
+r 256, c 256, d 2
+WARNING: Hls::stream 'hls::stream<unsigned char>.3' contains leftover data, which may result in RTL simulation hanging.
+Evaluate results
+INFO: [SIM 1] CSim done with 0 errors.
+INFO: [SIM 3] *************** CSIM finish ***************

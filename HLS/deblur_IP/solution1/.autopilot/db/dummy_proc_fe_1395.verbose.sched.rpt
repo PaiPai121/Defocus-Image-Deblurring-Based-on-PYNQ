@@ -1,0 +1,135 @@
+
+
+================================================================
+== Vivado HLS Report for 'dummy_proc_fe_1395'
+================================================================
+* Date:           Sat Aug  1 17:12:51 2020
+
+* Version:        2018.3 (Build 2405991 on Thu Dec 06 23:56:15 MST 2018)
+* Project:        deblur_IP
+* Solution:       solution1
+* Product family: zynq
+* Target device:  xc7z020clg400-1
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing (ns): 
+    * Summary: 
+    +--------+-------+----------+------------+
+    |  Clock | Target| Estimated| Uncertainty|
+    +--------+-------+----------+------------+
+    |ap_clk  |  10.00|     7.268|        1.25|
+    +--------+-------+----------+------------+
+
++ Latency (clock cycles): 
+    * Summary: 
+    +-----+-----+-----+-----+---------+
+    |  Latency  |  Interval | Pipeline|
+    | min | max | min | max |   Type  |
+    +-----+-----+-----+-----+---------+
+    |  257|  257|  257|  257|   none  |
+    +-----+-----+-----+-----+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +----------+-----+-----+----------+-----------+-----------+------+----------+
+        |          |  Latency  | Iteration|  Initiation Interval  | Trip |          |
+        | Loop Name| min | max |  Latency |  achieved |   target  | Count| Pipelined|
+        +----------+-----+-----+----------+-----------+-----------+------+----------+
+        |- Loop 1  |  256|  256|         1|          -|          -|   256|    no    |
+        +----------+-----+-----+----------+-----------+-----------+------+----------+
+
+============================================================
++ Verbose Summary: Synthesis Manager
+============================================================
+InlineROM: 1
+ExposeGlobal: 0
+============================================================
++ Verbose Summary: CDFG Model
+============================================================
+IsTopModel: 0
+ResetActiveHigh: 1
+IsCombinational: 0
+IsDatapathOnly: 0
+HasWiredReturn: 1
+HasMFsm: 0
+HasVarLatency: 1
+IsPipeline: 0
+IsRtlPipelined: 0
+IsInstanceOverlapped: 0
+IsDontTouch: 0
+HasImplIP: 0
+IsGatedGlobalClock: 0
+
+
+============================================================
++ Verbose Summary: Schedule
+============================================================
+* Number of FSM states : 2
+* Pipeline : 0
+* Dataflow Pipeline: 0
+
+* FSM state transitions: 
+1 --> 
+	2  / true
+2 --> 
+	2  / (!exitcond)
+
+* FSM state operations: 
+
+State 1 <SV = 0> <Delay = 1.76>
+ST_1 : Operation 3 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecInterface(i64* @xn1, [8 x i8]* @p_str11, i32 0, i32 0, [1 x i8]* @p_str3, i32 0, i32 1024, [1 x i8]* @p_str3, [1 x i8]* @p_str3, [1 x i8]* @p_str3, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str3, [1 x i8]* @p_str3)"   --->   Operation 3 'specinterface' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 4 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecInterface(i64* %in_r, [8 x i8]* @p_str11, i32 0, i32 0, [1 x i8]* @p_str3, i32 0, i32 1024, [1 x i8]* @p_str3, [1 x i8]* @p_str3, [1 x i8]* @p_str3, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str3, [1 x i8]* @p_str3)"   --->   Operation 4 'specinterface' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 5 [1/1] (0.00ns)   --->   "%direction_read = call i1 @_ssdm_op_Read.ap_auto.i1(i1 %direction)" [WienerDeblur.cpp:298]   --->   Operation 5 'read' 'direction_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 6 [1/1] (0.00ns)   --->   "%tmp_s = call i9 @_ssdm_op_BitConcatenate.i9.i8.i1(i8 -85, i1 %direction_read)" [D:/Vivado_Webpack/Vivado/2018.3/common/technology/autopilot\hls_fft.h:302->WienerDeblur.cpp:304]   --->   Operation 6 'bitconcatenate' 'tmp_s' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 7 [1/1] (0.00ns)   --->   "%p_Result_s = call i16 @_ssdm_op_PartSet.i16.i16.i9.i32.i32(i16 undef, i9 %tmp_s, i32 0, i32 8)" [D:/Vivado_Webpack/Vivado/2018.3/common/technology/autopilot\hls_fft.h:302->WienerDeblur.cpp:304]   --->   Operation 7 'partset' 'p_Result_s' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 8 [1/1] (1.76ns)   --->   "br label %0" [WienerDeblur.cpp:305]   --->   Operation 8 'br' <Predicate = true> <Delay = 1.76>
+
+State 2 <SV = 1> <Delay = 7.26>
+ST_2 : Operation 9 [1/1] (0.00ns)   --->   "%i = phi i9 [ 0, %_ZN3hls6ip_fft8config_tI7config1E6setSchEjj.exit ], [ %i_2, %1 ]"   --->   Operation 9 'phi' 'i' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 10 [1/1] (1.66ns)   --->   "%exitcond = icmp eq i9 %i, -256" [WienerDeblur.cpp:305]   --->   Operation 10 'icmp' 'exitcond' <Predicate = true> <Delay = 1.66> <Core = "Cmp">   --->   Core 25 'Cmp' <Latency = 0> <II = 1> <Delay = 1.66> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 11 [1/1] (0.00ns)   --->   "%empty = call i32 (...)* @_ssdm_op_SpecLoopTripCount(i64 256, i64 256, i64 256)"   --->   Operation 11 'speclooptripcount' 'empty' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 12 [1/1] (1.82ns)   --->   "%i_2 = add i9 %i, 1" [WienerDeblur.cpp:305]   --->   Operation 12 'add' 'i_2' <Predicate = true> <Delay = 1.82> <Core = "AddSub">   --->   Core 14 'AddSub' <Latency = 0> <II = 1> <Delay = 1.82> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 13 [1/1] (0.00ns)   --->   "br i1 %exitcond, label %2, label %1" [WienerDeblur.cpp:305]   --->   Operation 13 'br' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 14 [1/1] (3.63ns)   --->   "%in_read = call i64 @_ssdm_op_Read.ap_fifo.volatile.i64P(i64* %in_r)" [WienerDeblur.cpp:306]   --->   Operation 14 'read' 'in_read' <Predicate = (!exitcond)> <Delay = 3.63> <Core = "FIFO">   --->   Core 32 'FIFO' <Latency = 0> <II = 1> <Delay = 3.63> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = 64> <Depth = 2> <FIFO>
+ST_2 : Operation 15 [1/1] (3.63ns)   --->   "call void @_ssdm_op_Write.ap_fifo.volatile.i64P(i64* @xn1, i64 %in_read)" [WienerDeblur.cpp:306]   --->   Operation 15 'write' <Predicate = (!exitcond)> <Delay = 3.63> <Core = "FIFO">   --->   Core 32 'FIFO' <Latency = 0> <II = 1> <Delay = 3.63> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = 64> <Depth = 2> <FIFO>
+ST_2 : Operation 16 [1/1] (0.00ns)   --->   "br label %0" [WienerDeblur.cpp:305]   --->   Operation 16 'br' <Predicate = (!exitcond)> <Delay = 0.00>
+ST_2 : Operation 17 [1/1] (0.00ns)   --->   "ret i16 %p_Result_s" [WienerDeblur.cpp:307]   --->   Operation 17 'ret' <Predicate = (exitcond)> <Delay = 0.00>
+
+
+============================================================
++ Verbose Summary: Timing violations
+============================================================
+Target clock period: 10ns, clock uncertainty: 1.25ns.
+
+ <State 1>: 1.77ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation ('i') with incoming values : ('i', WienerDeblur.cpp:305) [11]  (1.77 ns)
+
+ <State 2>: 7.27ns
+The critical path consists of the following:
+	fifo read on port 'in_r' (WienerDeblur.cpp:306) [17]  (3.63 ns)
+	fifo write on port 'xn1' (WienerDeblur.cpp:306) [18]  (3.63 ns)
+
+
+============================================================
++ Verbose Summary: Binding
+============================================================
+N/A
+* FSMD analyzer results:
+  - Output states:
+ - Input state : 
+  - Chain level:
+	State 1
+	State 2
+
+
+============================================================
++ Verbose Summary: Datapath Resource usage 
+============================================================
+N/A

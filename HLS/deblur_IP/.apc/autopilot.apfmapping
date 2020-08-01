@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<autopilotfilemapping:AutoPilotFileMapping xmlns:autopilotfilemapping="www.autoesl.com/autopilotfilemapping">
+  <source>
+    <originFiles name="WienerDeblur.cpp" path="E:\FPGA\SummerSchool\project_things\deblur_IP\WienerDeblur.cpp"/>
+  </source>
+  <testbench>
+    <originFiles name="WienerDeblur_tb.cpp" path="E:\FPGA\SummerSchool\project_things\deblur_IP\WienerDeblur_tb.cpp"/>
+  </testbench>
+</autopilotfilemapping:AutoPilotFileMapping>

@@ -1,0 +1,176 @@
+
+
+================================================================
+== Vivado HLS Report for 'matrix_div'
+================================================================
+* Date:           Sat Aug  1 17:20:27 2020
+
+* Version:        2018.3 (Build 2405991 on Thu Dec 06 23:56:15 MST 2018)
+* Project:        deblur_IP
+* Solution:       solution1
+* Product family: zynq
+* Target device:  xc7z020clg400-1
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing (ns): 
+    * Summary: 
+    +--------+-------+----------+------------+
+    |  Clock | Target| Estimated| Uncertainty|
+    +--------+-------+----------+------------+
+    |ap_clk  |  10.00|     7.256|        1.25|
+    +--------+-------+----------+------------+
+
++ Latency (clock cycles): 
+    * Summary: 
+    +---------+---------+---------+---------+---------+
+    |      Latency      |      Interval     | Pipeline|
+    |   min   |   max   |   min   |   max   |   Type  |
+    +---------+---------+---------+---------+---------+
+    |  1966593|  1966593|  1966593|  1966593|   none  |
+    +---------+---------+---------+---------+---------+
+
+    + Detail: 
+        * Instance: 
+        +------------------------------+--------------------+-----+-----+-----+-----+---------+
+        |                              |                    |  Latency  |  Interval | Pipeline|
+        |           Instance           |       Module       | min | max | min | max |   Type  |
+        +------------------------------+--------------------+-----+-----+-----+-----+---------+
+        |grp_operator_div_float_fu_72  |operator_div_float  |   27|   27|   27|   27|   none  |
+        +------------------------------+--------------------+-----+-----+-----+-----+---------+
+
+        * Loop: 
+        +-------------+---------+---------+----------+-----------+-----------+------+----------+
+        |             |      Latency      | Iteration|  Initiation Interval  | Trip |          |
+        |  Loop Name  |   min   |   max   |  Latency |  achieved |   target  | Count| Pipelined|
+        +-------------+---------+---------+----------+-----------+-----------+------+----------+
+        |- Loop 1     |  1966592|  1966592|      7682|          -|          -|   256|    no    |
+        | + Loop 1.1  |     7680|     7680|        30|          -|          -|   256|    no    |
+        +-------------+---------+---------+----------+-----------+-----------+------+----------+
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++-----------------+---------+-------+--------+-------+
+|       Name      | BRAM_18K| DSP48E|   FF   |  LUT  |
++-----------------+---------+-------+--------+-------+
+|DSP              |        -|      -|       -|      -|
+|Expression       |        -|      -|       0|     58|
+|FIFO             |        -|      -|       -|      -|
+|Instance         |        -|     24|    3569|   5324|
+|Memory           |        -|      -|       -|      -|
+|Multiplexer      |        -|      -|       -|    105|
+|Register         |        -|      -|     106|      -|
++-----------------+---------+-------+--------+-------+
+|Total            |        0|     24|    3675|   5487|
++-----------------+---------+-------+--------+-------+
+|Available        |      280|    220|  106400|  53200|
++-----------------+---------+-------+--------+-------+
+|Utilization (%)  |        0|     10|       3|     10|
++-----------------+---------+-------+--------+-------+
+
++ Detail: 
+    * Instance: 
+    +------------------------------+--------------------+---------+-------+------+------+
+    |           Instance           |       Module       | BRAM_18K| DSP48E|  FF  |  LUT |
+    +------------------------------+--------------------+---------+-------+------+------+
+    |grp_operator_div_float_fu_72  |operator_div_float  |        0|     24|  3569|  5324|
+    +------------------------------+--------------------+---------+-------+------+------+
+    |Total                         |                    |        0|     24|  3569|  5324|
+    +------------------------------+--------------------+---------+-------+------+------+
+
+    * DSP48: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +--------------------+----------+-------+---+----+------------+------------+
+    |    Variable Name   | Operation| DSP48E| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +--------------------+----------+-------+---+----+------------+------------+
+    |c_3_fu_102_p2       |     +    |      0|  0|  15|           9|           1|
+    |r_3_fu_90_p2        |     +    |      0|  0|  15|           9|           1|
+    |exitcond1_fu_84_p2  |   icmp   |      0|  0|  13|           9|          10|
+    |exitcond_fu_96_p2   |   icmp   |      0|  0|  13|           9|          10|
+    |ap_block_state5     |    or    |      0|  0|   2|           1|           1|
+    +--------------------+----------+-------+---+----+------------+------------+
+    |Total               |          |      0|  0|  58|          37|          23|
+    +--------------------+----------+-------+---+----+------------+------------+
+
+    * Multiplexer: 
+    +------------------------+----+-----------+-----+-----------+
+    |          Name          | LUT| Input Size| Bits| Total Bits|
+    +------------------------+----+-----------+-----+-----------+
+    |G1_M_imag_read          |   9|          2|    1|          2|
+    |G1_M_real_read          |   9|          2|    1|          2|
+    |G_M_imag_blk_n          |   9|          2|    1|          2|
+    |G_M_real_blk_n          |   9|          2|    1|          2|
+    |ap_NS_fsm               |  33|          6|    1|          6|
+    |c_reg_61                |   9|          2|    9|         18|
+    |fft_kernel_M_imag_read  |   9|          2|    1|          2|
+    |fft_kernel_M_real_read  |   9|          2|    1|          2|
+    |r_reg_50                |   9|          2|    9|         18|
+    +------------------------+----+-----------+-----+-----------+
+    |Total                   | 105|         22|   25|         54|
+    +------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +-------------------------------------------+----+----+-----+-----------+
+    |                    Name                   | FF | LUT| Bits| Const Bits|
+    +-------------------------------------------+----+----+-----+-----------+
+    |ap_CS_fsm                                  |   5|   0|    5|          0|
+    |c_3_reg_127                                |   9|   0|    9|          0|
+    |c_reg_61                                   |   9|   0|    9|          0|
+    |grp_operator_div_float_fu_72_ap_start_reg  |   1|   0|    1|          0|
+    |p_0_reg_132                                |  32|   0|   32|          0|
+    |p_1_reg_137                                |  32|   0|   32|          0|
+    |r_3_reg_119                                |   9|   0|    9|          0|
+    |r_reg_50                                   |   9|   0|    9|          0|
+    +-------------------------------------------+----+----+-----+-----------+
+    |Total                                      | 106|   0|  106|          0|
+    +-------------------------------------------+----+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++---------------------------+-----+-----+------------+-------------------+--------------+
+|         RTL Ports         | Dir | Bits|  Protocol  |   Source Object   |    C Type    |
++---------------------------+-----+-----+------------+-------------------+--------------+
+|ap_clk                     |  in |    1| ap_ctrl_hs |     matrix_div    | return value |
+|ap_rst                     |  in |    1| ap_ctrl_hs |     matrix_div    | return value |
+|ap_start                   |  in |    1| ap_ctrl_hs |     matrix_div    | return value |
+|ap_done                    | out |    1| ap_ctrl_hs |     matrix_div    | return value |
+|ap_idle                    | out |    1| ap_ctrl_hs |     matrix_div    | return value |
+|ap_ready                   | out |    1| ap_ctrl_hs |     matrix_div    | return value |
+|G1_M_real_dout             |  in |   32|   ap_fifo  |     G1_M_real     |    pointer   |
+|G1_M_real_empty_n          |  in |    1|   ap_fifo  |     G1_M_real     |    pointer   |
+|G1_M_real_read             | out |    1|   ap_fifo  |     G1_M_real     |    pointer   |
+|G1_M_imag_dout             |  in |   32|   ap_fifo  |     G1_M_imag     |    pointer   |
+|G1_M_imag_empty_n          |  in |    1|   ap_fifo  |     G1_M_imag     |    pointer   |
+|G1_M_imag_read             | out |    1|   ap_fifo  |     G1_M_imag     |    pointer   |
+|fft_kernel_M_real_dout     |  in |   32|   ap_fifo  | fft_kernel_M_real |    pointer   |
+|fft_kernel_M_real_empty_n  |  in |    1|   ap_fifo  | fft_kernel_M_real |    pointer   |
+|fft_kernel_M_real_read     | out |    1|   ap_fifo  | fft_kernel_M_real |    pointer   |
+|fft_kernel_M_imag_dout     |  in |   32|   ap_fifo  | fft_kernel_M_imag |    pointer   |
+|fft_kernel_M_imag_empty_n  |  in |    1|   ap_fifo  | fft_kernel_M_imag |    pointer   |
+|fft_kernel_M_imag_read     | out |    1|   ap_fifo  | fft_kernel_M_imag |    pointer   |
+|G_M_real_din               | out |   32|   ap_fifo  |      G_M_real     |    pointer   |
+|G_M_real_full_n            |  in |    1|   ap_fifo  |      G_M_real     |    pointer   |
+|G_M_real_write             | out |    1|   ap_fifo  |      G_M_real     |    pointer   |
+|G_M_imag_din               | out |   32|   ap_fifo  |      G_M_imag     |    pointer   |
+|G_M_imag_full_n            |  in |    1|   ap_fifo  |      G_M_imag     |    pointer   |
+|G_M_imag_write             | out |    1|   ap_fifo  |      G_M_imag     |    pointer   |
++---------------------------+-----+-----+------------+-------------------+--------------+
+

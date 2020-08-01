@@ -1,0 +1,1930 @@
+
+
+================================================================
+== Vivado HLS Report for 'matrix_modulus'
+================================================================
+* Date:           Sat Aug  1 17:20:02 2020
+
+* Version:        2018.3 (Build 2405991 on Thu Dec 06 23:56:15 MST 2018)
+* Project:        deblur_IP
+* Solution:       solution1
+* Product family: zynq
+* Target device:  xc7z020clg400-1
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing (ns): 
+    * Summary: 
+    +--------+-------+----------+------------+
+    |  Clock | Target| Estimated| Uncertainty|
+    +--------+-------+----------+------------+
+    |ap_clk  |  10.00|    10.136|        1.25|
+    +--------+-------+----------+------------+
+
++ Latency (clock cycles): 
+    * Summary: 
+    +---------+---------+---------+---------+---------+
+    |      Latency      |      Interval     | Pipeline|
+    |   min   |   max   |   min   |   max   |   Type  |
+    +---------+---------+---------+---------+---------+
+    |  6947329|  6947329|  6947329|  6947329|   none  |
+    +---------+---------+---------+---------+---------+
+
+    + Detail: 
+        * Instance: 
+        +---------------------------------+----------------------+-----+-----+-----+-----+----------+
+        |                                 |                      |  Latency  |  Interval | Pipeline |
+        |             Instance            |        Module        | min | max | min | max |   Type   |
+        +---------------------------------+----------------------+-----+-----+-----+-----+----------+
+        |grp_pow_generic_double_s_fu_96   |pow_generic_double_s  |   66|   66|    1|    1| function |
+        |grp_pow_generic_double_s_fu_125  |pow_generic_double_s  |   66|   66|    1|    1| function |
+        |StgValue_299_real_r_fu_154       |real_r                |    0|    0|    0|    0|   none   |
+        |StgValue_300_imag_fu_161         |imag                  |    0|    0|    0|    0|   none   |
+        +---------------------------------+----------------------+-----+-----+-----+-----+----------+
+
+        * Loop: 
+        +-------------+---------+---------+----------+-----------+-----------+------+----------+
+        |             |      Latency      | Iteration|  Initiation Interval  | Trip |          |
+        |  Loop Name  |   min   |   max   |  Latency |  achieved |   target  | Count| Pipelined|
+        +-------------+---------+---------+----------+-----------+-----------+------+----------+
+        |- Loop 1     |  6947328|  6947328|     27138|          -|          -|   256|    no    |
+        | + Loop 1.1  |    27136|    27136|       106|          -|          -|   256|    no    |
+        +-------------+---------+---------+----------+-----------+-----------+------+----------+
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++-----------------+---------+-------+--------+-------+
+|       Name      | BRAM_18K| DSP48E|   FF   |  LUT  |
++-----------------+---------+-------+--------+-------+
+|DSP              |        -|      -|       -|      -|
+|Expression       |        -|      -|       0|     60|
+|FIFO             |        -|      -|       -|      -|
+|Instance         |      134|     69|   32859|  19890|
+|Memory           |        -|      -|       -|      -|
+|Multiplexer      |        -|      -|       -|    549|
+|Register         |        -|      -|     594|      -|
++-----------------+---------+-------+--------+-------+
+|Total            |      134|     69|   33453|  20499|
++-----------------+---------+-------+--------+-------+
+|Available        |      280|    220|  106400|  53200|
++-----------------+---------+-------+--------+-------+
+|Utilization (%)  |       47|     31|      31|     38|
++-----------------+---------+-------+--------+-------+
+
++ Detail: 
+    * Instance: 
+    +---------------------------------+----------------------+---------+-------+-------+------+
+    |             Instance            |        Module        | BRAM_18K| DSP48E|   FF  |  LUT |
+    +---------------------------------+----------------------+---------+-------+-------+------+
+    |WienerDeblur_daddLf8_U111        |WienerDeblur_daddLf8  |        0|      3|    445|  1149|
+    |WienerDeblur_dsqrMgi_U112        |WienerDeblur_dsqrMgi  |        0|      0|   1832|  2180|
+    |WienerDeblur_fpexKfY_U109        |WienerDeblur_fpexKfY  |        0|      0|    100|   138|
+    |WienerDeblur_fpexKfY_U110        |WienerDeblur_fpexKfY  |        0|      0|    100|   138|
+    |WienerDeblur_fptreOg_U108        |WienerDeblur_fptreOg  |        0|      0|    128|   277|
+    |StgValue_300_imag_fu_161         |imag                  |        0|      0|      1|    11|
+    |grp_pow_generic_double_s_fu_96   |pow_generic_double_s  |       67|     33|  15126|  7993|
+    |grp_pow_generic_double_s_fu_125  |pow_generic_double_s  |       67|     33|  15126|  7993|
+    |StgValue_299_real_r_fu_154       |real_r                |        0|      0|      1|    11|
+    +---------------------------------+----------------------+---------+-------+-------+------+
+    |Total                            |                      |      134|     69|  32859| 19890|
+    +---------------------------------+----------------------+---------+-------+-------+------+
+
+    * DSP48: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +---------------------+----------+-------+---+----+------------+------------+
+    |    Variable Name    | Operation| DSP48E| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +---------------------+----------+-------+---+----+------------+------------+
+    |c_2_fu_204_p2        |     +    |      0|  0|  15|           9|           1|
+    |r_2_fu_192_p2        |     +    |      0|  0|  15|           9|           1|
+    |exitcond1_fu_186_p2  |   icmp   |      0|  0|  13|           9|          10|
+    |exitcond_fu_198_p2   |   icmp   |      0|  0|  13|           9|          10|
+    |ap_block_state108    |    or    |      0|  0|   2|           1|           1|
+    |ap_block_state3      |    or    |      0|  0|   2|           1|           1|
+    +---------------------+----------+-------+---+----+------------+------------+
+    |Total                |          |      0|  0|  60|          38|          24|
+    +---------------------+----------+-------+---+----+------------+------------+
+
+    * Multiplexer: 
+    +---------------------------+-----+-----------+-----+-----------+
+    |            Name           | LUT | Input Size| Bits| Total Bits|
+    +---------------------------+-----+-----------+-----+-----------+
+    |ap_NS_fsm                  |  477|        109|    1|        109|
+    |c_reg_85                   |    9|          2|    9|         18|
+    |fft_kernel_M_imag_blk_n    |    9|          2|    1|          2|
+    |fft_kernel_M_real_blk_n    |    9|          2|    1|          2|
+    |fft_kernel_modu_M_i_blk_n  |    9|          2|    1|          2|
+    |fft_kernel_modu_M_i_write  |    9|          2|    1|          2|
+    |fft_kernel_modu_M_r_blk_n  |    9|          2|    1|          2|
+    |fft_kernel_modu_M_r_write  |    9|          2|    1|          2|
+    |r_reg_74                   |    9|          2|    9|         18|
+    +---------------------------+-----+-----------+-----+-----------+
+    |Total                      |  549|        125|   25|        157|
+    +---------------------------+-----+-----------+-----+-----------+
+
+    * Register: 
+    +----------------------------------------------+-----+----+-----+-----------+
+    |                     Name                     |  FF | LUT| Bits| Const Bits|
+    +----------------------------------------------+-----+----+-----+-----------+
+    |ap_CS_fsm                                     |  108|   0|  108|          0|
+    |c_2_reg_221                                   |    9|   0|    9|          0|
+    |c_reg_85                                      |    9|   0|    9|          0|
+    |fft_kernel_M_imag_r_reg_231                   |   32|   0|   32|          0|
+    |fft_kernel_M_real_r_reg_226                   |   32|   0|   32|          0|
+    |grp_pow_generic_double_s_fu_125_ap_start_reg  |    1|   0|    1|          0|
+    |grp_pow_generic_double_s_fu_96_ap_start_reg   |    1|   0|    1|          0|
+    |r_2_reg_213                                   |    9|   0|    9|          0|
+    |r_reg_74                                      |    9|   0|    9|          0|
+    |tmp_39_reg_261                                |   64|   0|   64|          0|
+    |tmp_i1_reg_251                                |   64|   0|   64|          0|
+    |tmp_i_reg_246                                 |   64|   0|   64|          0|
+    |tmp_s_reg_256                                 |   64|   0|   64|          0|
+    |x_assign_1_reg_241                            |   64|   0|   64|          0|
+    |x_assign_reg_236                              |   64|   0|   64|          0|
+    +----------------------------------------------+-----+----+-----+-----------+
+    |Total                                         |  594|   0|  594|          0|
+    +----------------------------------------------+-----+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++----------------------------+-----+-----+------------+---------------------+--------------+
+|          RTL Ports         | Dir | Bits|  Protocol  |    Source Object    |    C Type    |
++----------------------------+-----+-----+------------+---------------------+--------------+
+|ap_clk                      |  in |    1| ap_ctrl_hs |    matrix_modulus   | return value |
+|ap_rst                      |  in |    1| ap_ctrl_hs |    matrix_modulus   | return value |
+|ap_start                    |  in |    1| ap_ctrl_hs |    matrix_modulus   | return value |
+|ap_done                     | out |    1| ap_ctrl_hs |    matrix_modulus   | return value |
+|ap_idle                     | out |    1| ap_ctrl_hs |    matrix_modulus   | return value |
+|ap_ready                    | out |    1| ap_ctrl_hs |    matrix_modulus   | return value |
+|fft_kernel_M_real_dout      |  in |   32|   ap_fifo  |  fft_kernel_M_real  |    pointer   |
+|fft_kernel_M_real_empty_n   |  in |    1|   ap_fifo  |  fft_kernel_M_real  |    pointer   |
+|fft_kernel_M_real_read      | out |    1|   ap_fifo  |  fft_kernel_M_real  |    pointer   |
+|fft_kernel_M_imag_dout      |  in |   32|   ap_fifo  |  fft_kernel_M_imag  |    pointer   |
+|fft_kernel_M_imag_empty_n   |  in |    1|   ap_fifo  |  fft_kernel_M_imag  |    pointer   |
+|fft_kernel_M_imag_read      | out |    1|   ap_fifo  |  fft_kernel_M_imag  |    pointer   |
+|fft_kernel_modu_M_r_din     | out |   32|   ap_fifo  | fft_kernel_modu_M_r |    pointer   |
+|fft_kernel_modu_M_r_full_n  |  in |    1|   ap_fifo  | fft_kernel_modu_M_r |    pointer   |
+|fft_kernel_modu_M_r_write   | out |    1|   ap_fifo  | fft_kernel_modu_M_r |    pointer   |
+|fft_kernel_modu_M_i_din     | out |   32|   ap_fifo  | fft_kernel_modu_M_i |    pointer   |
+|fft_kernel_modu_M_i_full_n  |  in |    1|   ap_fifo  | fft_kernel_modu_M_i |    pointer   |
+|fft_kernel_modu_M_i_write   | out |    1|   ap_fifo  | fft_kernel_modu_M_i |    pointer   |
++----------------------------+-----+-----+------------+---------------------+--------------+
+
+============================================================
++ Verbose Summary: Synthesis Manager
+============================================================
+InlineROM: 1
+ExposeGlobal: 0
+============================================================
++ Verbose Summary: CDFG Model
+============================================================
+IsTopModel: 0
+ResetActiveHigh: 1
+IsCombinational: 2
+IsDatapathOnly: 2
+HasWiredReturn: 1
+HasMFsm: 0
+HasVarLatency: 1
+IsPipeline: 0
+IsRtlPipelined: 0
+IsInstanceOverlapped: 0
+IsDontTouch: 0
+HasImplIP: 0
+IsGatedGlobalClock: 0
+
+
+============================================================
++ Verbose Summary: Schedule
+============================================================
+* Number of FSM states : 108
+* Pipeline : 0
+* Dataflow Pipeline: 0
+
+* FSM state transitions: 
+1 --> 
+	2  / true
+2 --> 
+	3  / (!exitcond1)
+3 --> 
+	4  / (!exitcond)
+	2  / (exitcond)
+4 --> 
+	5  / true
+5 --> 
+	6  / true
+6 --> 
+	7  / true
+7 --> 
+	8  / true
+8 --> 
+	9  / true
+9 --> 
+	10  / true
+10 --> 
+	11  / true
+11 --> 
+	12  / true
+12 --> 
+	13  / true
+13 --> 
+	14  / true
+14 --> 
+	15  / true
+15 --> 
+	16  / true
+16 --> 
+	17  / true
+17 --> 
+	18  / true
+18 --> 
+	19  / true
+19 --> 
+	20  / true
+20 --> 
+	21  / true
+21 --> 
+	22  / true
+22 --> 
+	23  / true
+23 --> 
+	24  / true
+24 --> 
+	25  / true
+25 --> 
+	26  / true
+26 --> 
+	27  / true
+27 --> 
+	28  / true
+28 --> 
+	29  / true
+29 --> 
+	30  / true
+30 --> 
+	31  / true
+31 --> 
+	32  / true
+32 --> 
+	33  / true
+33 --> 
+	34  / true
+34 --> 
+	35  / true
+35 --> 
+	36  / true
+36 --> 
+	37  / true
+37 --> 
+	38  / true
+38 --> 
+	39  / true
+39 --> 
+	40  / true
+40 --> 
+	41  / true
+41 --> 
+	42  / true
+42 --> 
+	43  / true
+43 --> 
+	44  / true
+44 --> 
+	45  / true
+45 --> 
+	46  / true
+46 --> 
+	47  / true
+47 --> 
+	48  / true
+48 --> 
+	49  / true
+49 --> 
+	50  / true
+50 --> 
+	51  / true
+51 --> 
+	52  / true
+52 --> 
+	53  / true
+53 --> 
+	54  / true
+54 --> 
+	55  / true
+55 --> 
+	56  / true
+56 --> 
+	57  / true
+57 --> 
+	58  / true
+58 --> 
+	59  / true
+59 --> 
+	60  / true
+60 --> 
+	61  / true
+61 --> 
+	62  / true
+62 --> 
+	63  / true
+63 --> 
+	64  / true
+64 --> 
+	65  / true
+65 --> 
+	66  / true
+66 --> 
+	67  / true
+67 --> 
+	68  / true
+68 --> 
+	69  / true
+69 --> 
+	70  / true
+70 --> 
+	71  / true
+71 --> 
+	72  / true
+72 --> 
+	73  / true
+73 --> 
+	74  / true
+74 --> 
+	75  / true
+75 --> 
+	76  / true
+76 --> 
+	77  / true
+77 --> 
+	78  / true
+78 --> 
+	79  / true
+79 --> 
+	80  / true
+80 --> 
+	81  / true
+81 --> 
+	82  / true
+82 --> 
+	83  / true
+83 --> 
+	84  / true
+84 --> 
+	85  / true
+85 --> 
+	86  / true
+86 --> 
+	87  / true
+87 --> 
+	88  / true
+88 --> 
+	89  / true
+89 --> 
+	90  / true
+90 --> 
+	91  / true
+91 --> 
+	92  / true
+92 --> 
+	93  / true
+93 --> 
+	94  / true
+94 --> 
+	95  / true
+95 --> 
+	96  / true
+96 --> 
+	97  / true
+97 --> 
+	98  / true
+98 --> 
+	99  / true
+99 --> 
+	100  / true
+100 --> 
+	101  / true
+101 --> 
+	102  / true
+102 --> 
+	103  / true
+103 --> 
+	104  / true
+104 --> 
+	105  / true
+105 --> 
+	106  / true
+106 --> 
+	107  / true
+107 --> 
+	108  / true
+108 --> 
+	3  / true
+
+* FSM state operations: 
+
+State 1 <SV = 0> <Delay = 1.76>
+ST_1 : Operation 109 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecInterface(float* @fft_kernel_M_real, float* @fft_kernel_M_imag, [8 x i8]* @p_str11, i32 0, i32 0, [1 x i8]* @p_str3, i32 0, i32 1024, [1 x i8]* @p_str3, [1 x i8]* @p_str3, [1 x i8]* @p_str3, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str3, [1 x i8]* @p_str3)"   --->   Operation 109 'specinterface' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 110 [1/1] (1.76ns)   --->   "br label %.loopexit" [WienerDeblur.cpp:472]   --->   Operation 110 'br' <Predicate = true> <Delay = 1.76>
+
+State 2 <SV = 1> <Delay = 1.82>
+ST_2 : Operation 111 [1/1] (0.00ns)   --->   "%r = phi i9 [ 0, %0 ], [ %r_2, %.loopexit.loopexit ]"   --->   Operation 111 'phi' 'r' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 112 [1/1] (1.66ns)   --->   "%exitcond1 = icmp eq i9 %r, -256" [WienerDeblur.cpp:472]   --->   Operation 112 'icmp' 'exitcond1' <Predicate = true> <Delay = 1.66> <Core = "Cmp">   --->   Core 25 'Cmp' <Latency = 0> <II = 1> <Delay = 1.77> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 113 [1/1] (0.00ns)   --->   "%empty = call i32 (...)* @_ssdm_op_SpecLoopTripCount(i64 256, i64 256, i64 256)"   --->   Operation 113 'speclooptripcount' 'empty' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 114 [1/1] (1.82ns)   --->   "%r_2 = add i9 %r, 1" [WienerDeblur.cpp:472]   --->   Operation 114 'add' 'r_2' <Predicate = true> <Delay = 1.82> <Core = "AddSub">   --->   Core 14 'AddSub' <Latency = 0> <II = 1> <Delay = 1.82> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 115 [1/1] (0.00ns)   --->   "br i1 %exitcond1, label %2, label %.preheader.preheader" [WienerDeblur.cpp:472]   --->   Operation 115 'br' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 116 [1/1] (1.76ns)   --->   "br label %.preheader" [WienerDeblur.cpp:473]   --->   Operation 116 'br' <Predicate = (!exitcond1)> <Delay = 1.76>
+ST_2 : Operation 117 [1/1] (0.00ns)   --->   "ret void" [WienerDeblur.cpp:479]   --->   Operation 117 'ret' <Predicate = (exitcond1)> <Delay = 0.00>
+
+State 3 <SV = 2> <Delay = 3.63>
+ST_3 : Operation 118 [1/1] (0.00ns)   --->   "%c = phi i9 [ %c_2, %1 ], [ 0, %.preheader.preheader ]"   --->   Operation 118 'phi' 'c' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 119 [1/1] (1.66ns)   --->   "%exitcond = icmp eq i9 %c, -256" [WienerDeblur.cpp:473]   --->   Operation 119 'icmp' 'exitcond' <Predicate = true> <Delay = 1.66> <Core = "Cmp">   --->   Core 25 'Cmp' <Latency = 0> <II = 1> <Delay = 1.77> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_3 : Operation 120 [1/1] (0.00ns)   --->   "%empty_68 = call i32 (...)* @_ssdm_op_SpecLoopTripCount(i64 256, i64 256, i64 256)"   --->   Operation 120 'speclooptripcount' 'empty_68' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 121 [1/1] (1.82ns)   --->   "%c_2 = add i9 %c, 1" [WienerDeblur.cpp:473]   --->   Operation 121 'add' 'c_2' <Predicate = true> <Delay = 1.82> <Core = "AddSub">   --->   Core 14 'AddSub' <Latency = 0> <II = 1> <Delay = 1.82> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_3 : Operation 122 [1/1] (0.00ns)   --->   "br i1 %exitcond, label %.loopexit.loopexit, label %1" [WienerDeblur.cpp:473]   --->   Operation 122 'br' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 123 [1/1] (3.63ns)   --->   "%fft_kernel_M_real_r = call float @_ssdm_op_Read.ap_fifo.volatile.floatP(float* @fft_kernel_M_real)" [WienerDeblur.cpp:475]   --->   Operation 123 'read' 'fft_kernel_M_real_r' <Predicate = (!exitcond)> <Delay = 3.63> <Core = "FIFO">   --->   Core 32 'FIFO' <Latency = 0> <II = 1> <Delay = 3.61> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = 64> <Depth = 256> <FIFO>
+ST_3 : Operation 124 [1/1] (3.63ns)   --->   "%fft_kernel_M_imag_r = call float @_ssdm_op_Read.ap_fifo.volatile.floatP(float* @fft_kernel_M_imag)" [WienerDeblur.cpp:476]   --->   Operation 124 'read' 'fft_kernel_M_imag_r' <Predicate = (!exitcond)> <Delay = 3.63> <Core = "FIFO">   --->   Core 32 'FIFO' <Latency = 0> <II = 1> <Delay = 3.61> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = 64> <Depth = 256> <FIFO>
+ST_3 : Operation 125 [1/1] (0.00ns)   --->   "br label %.loopexit"   --->   Operation 125 'br' <Predicate = (exitcond)> <Delay = 0.00>
+
+State 4 <SV = 3> <Delay = 5.54>
+ST_4 : Operation 126 [1/1] (5.54ns)   --->   "%x_assign = fpext float %fft_kernel_M_real_r to double" [WienerDeblur.cpp:475]   --->   Operation 126 'fpext' 'x_assign' <Predicate = true> <Delay = 5.54> <Core = "Float2Double">   --->   Core 113 'Float2Double' <Latency = 0> <II = 1> <Delay = 5.54> <FuncUnit> <Opcode : 'fpext'> <InPorts = 1> <OutPorts = 1>
+ST_4 : Operation 127 [1/1] (5.54ns)   --->   "%x_assign_1 = fpext float %fft_kernel_M_imag_r to double" [WienerDeblur.cpp:476]   --->   Operation 127 'fpext' 'x_assign_1' <Predicate = true> <Delay = 5.54> <Core = "Float2Double">   --->   Core 113 'Float2Double' <Latency = 0> <II = 1> <Delay = 5.54> <FuncUnit> <Opcode : 'fpext'> <InPorts = 1> <OutPorts = 1>
+
+State 5 <SV = 4> <Delay = 8.75>
+ST_5 : Operation 128 [67/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 128 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_5 : Operation 129 [67/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 129 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 6 <SV = 5> <Delay = 8.75>
+ST_6 : Operation 130 [66/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 130 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_6 : Operation 131 [66/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 131 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 7 <SV = 6> <Delay = 8.75>
+ST_7 : Operation 132 [65/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 132 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_7 : Operation 133 [65/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 133 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 8 <SV = 7> <Delay = 8.75>
+ST_8 : Operation 134 [64/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 134 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_8 : Operation 135 [64/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 135 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 9 <SV = 8> <Delay = 8.75>
+ST_9 : Operation 136 [63/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 136 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_9 : Operation 137 [63/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 137 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 10 <SV = 9> <Delay = 8.75>
+ST_10 : Operation 138 [62/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 138 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_10 : Operation 139 [62/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 139 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 11 <SV = 10> <Delay = 8.75>
+ST_11 : Operation 140 [61/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 140 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_11 : Operation 141 [61/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 141 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 12 <SV = 11> <Delay = 8.75>
+ST_12 : Operation 142 [60/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 142 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_12 : Operation 143 [60/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 143 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 13 <SV = 12> <Delay = 8.75>
+ST_13 : Operation 144 [59/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 144 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_13 : Operation 145 [59/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 145 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 14 <SV = 13> <Delay = 8.75>
+ST_14 : Operation 146 [58/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 146 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_14 : Operation 147 [58/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 147 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 15 <SV = 14> <Delay = 8.75>
+ST_15 : Operation 148 [57/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 148 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_15 : Operation 149 [57/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 149 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 16 <SV = 15> <Delay = 8.75>
+ST_16 : Operation 150 [56/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 150 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_16 : Operation 151 [56/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 151 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 17 <SV = 16> <Delay = 8.75>
+ST_17 : Operation 152 [55/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 152 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_17 : Operation 153 [55/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 153 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 18 <SV = 17> <Delay = 8.75>
+ST_18 : Operation 154 [54/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 154 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_18 : Operation 155 [54/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 155 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 19 <SV = 18> <Delay = 8.75>
+ST_19 : Operation 156 [53/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 156 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_19 : Operation 157 [53/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 157 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 20 <SV = 19> <Delay = 8.75>
+ST_20 : Operation 158 [52/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 158 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_20 : Operation 159 [52/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 159 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 21 <SV = 20> <Delay = 8.75>
+ST_21 : Operation 160 [51/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 160 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_21 : Operation 161 [51/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 161 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 22 <SV = 21> <Delay = 8.75>
+ST_22 : Operation 162 [50/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 162 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_22 : Operation 163 [50/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 163 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 23 <SV = 22> <Delay = 8.75>
+ST_23 : Operation 164 [49/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 164 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_23 : Operation 165 [49/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 165 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 24 <SV = 23> <Delay = 8.75>
+ST_24 : Operation 166 [48/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 166 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_24 : Operation 167 [48/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 167 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 25 <SV = 24> <Delay = 8.75>
+ST_25 : Operation 168 [47/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 168 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_25 : Operation 169 [47/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 169 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 26 <SV = 25> <Delay = 8.75>
+ST_26 : Operation 170 [46/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 170 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_26 : Operation 171 [46/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 171 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 27 <SV = 26> <Delay = 8.75>
+ST_27 : Operation 172 [45/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 172 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_27 : Operation 173 [45/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 173 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 28 <SV = 27> <Delay = 8.75>
+ST_28 : Operation 174 [44/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 174 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_28 : Operation 175 [44/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 175 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 29 <SV = 28> <Delay = 8.75>
+ST_29 : Operation 176 [43/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 176 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_29 : Operation 177 [43/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 177 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 30 <SV = 29> <Delay = 8.75>
+ST_30 : Operation 178 [42/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 178 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_30 : Operation 179 [42/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 179 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 31 <SV = 30> <Delay = 8.75>
+ST_31 : Operation 180 [41/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 180 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_31 : Operation 181 [41/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 181 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 32 <SV = 31> <Delay = 8.75>
+ST_32 : Operation 182 [40/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 182 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_32 : Operation 183 [40/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 183 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 33 <SV = 32> <Delay = 8.75>
+ST_33 : Operation 184 [39/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 184 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_33 : Operation 185 [39/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 185 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 34 <SV = 33> <Delay = 8.75>
+ST_34 : Operation 186 [38/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 186 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_34 : Operation 187 [38/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 187 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 35 <SV = 34> <Delay = 8.75>
+ST_35 : Operation 188 [37/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 188 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_35 : Operation 189 [37/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 189 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 36 <SV = 35> <Delay = 8.75>
+ST_36 : Operation 190 [36/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 190 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_36 : Operation 191 [36/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 191 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 37 <SV = 36> <Delay = 8.75>
+ST_37 : Operation 192 [35/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 192 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_37 : Operation 193 [35/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 193 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 38 <SV = 37> <Delay = 8.75>
+ST_38 : Operation 194 [34/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 194 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_38 : Operation 195 [34/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 195 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 39 <SV = 38> <Delay = 8.75>
+ST_39 : Operation 196 [33/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 196 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_39 : Operation 197 [33/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 197 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 40 <SV = 39> <Delay = 8.75>
+ST_40 : Operation 198 [32/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 198 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_40 : Operation 199 [32/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 199 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 41 <SV = 40> <Delay = 8.75>
+ST_41 : Operation 200 [31/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 200 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_41 : Operation 201 [31/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 201 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 42 <SV = 41> <Delay = 8.75>
+ST_42 : Operation 202 [30/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 202 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_42 : Operation 203 [30/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 203 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 43 <SV = 42> <Delay = 8.75>
+ST_43 : Operation 204 [29/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 204 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_43 : Operation 205 [29/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 205 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 44 <SV = 43> <Delay = 8.75>
+ST_44 : Operation 206 [28/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 206 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_44 : Operation 207 [28/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 207 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 45 <SV = 44> <Delay = 8.75>
+ST_45 : Operation 208 [27/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 208 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_45 : Operation 209 [27/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 209 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 46 <SV = 45> <Delay = 8.75>
+ST_46 : Operation 210 [26/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 210 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_46 : Operation 211 [26/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 211 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 47 <SV = 46> <Delay = 8.75>
+ST_47 : Operation 212 [25/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 212 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_47 : Operation 213 [25/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 213 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 48 <SV = 47> <Delay = 8.75>
+ST_48 : Operation 214 [24/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 214 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_48 : Operation 215 [24/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 215 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 49 <SV = 48> <Delay = 8.75>
+ST_49 : Operation 216 [23/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 216 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_49 : Operation 217 [23/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 217 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 50 <SV = 49> <Delay = 8.75>
+ST_50 : Operation 218 [22/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 218 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_50 : Operation 219 [22/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 219 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 51 <SV = 50> <Delay = 8.75>
+ST_51 : Operation 220 [21/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 220 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_51 : Operation 221 [21/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 221 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 52 <SV = 51> <Delay = 8.75>
+ST_52 : Operation 222 [20/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 222 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_52 : Operation 223 [20/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 223 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 53 <SV = 52> <Delay = 8.75>
+ST_53 : Operation 224 [19/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 224 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_53 : Operation 225 [19/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 225 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 54 <SV = 53> <Delay = 8.75>
+ST_54 : Operation 226 [18/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 226 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_54 : Operation 227 [18/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 227 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 55 <SV = 54> <Delay = 8.75>
+ST_55 : Operation 228 [17/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 228 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_55 : Operation 229 [17/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 229 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 56 <SV = 55> <Delay = 8.75>
+ST_56 : Operation 230 [16/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 230 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_56 : Operation 231 [16/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 231 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 57 <SV = 56> <Delay = 8.75>
+ST_57 : Operation 232 [15/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 232 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_57 : Operation 233 [15/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 233 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 58 <SV = 57> <Delay = 8.75>
+ST_58 : Operation 234 [14/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 234 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_58 : Operation 235 [14/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 235 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 59 <SV = 58> <Delay = 8.75>
+ST_59 : Operation 236 [13/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 236 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_59 : Operation 237 [13/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 237 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 60 <SV = 59> <Delay = 8.75>
+ST_60 : Operation 238 [12/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 238 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_60 : Operation 239 [12/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 239 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 61 <SV = 60> <Delay = 8.75>
+ST_61 : Operation 240 [11/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 240 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_61 : Operation 241 [11/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 241 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 62 <SV = 61> <Delay = 8.75>
+ST_62 : Operation 242 [10/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 242 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_62 : Operation 243 [10/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 243 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 63 <SV = 62> <Delay = 8.75>
+ST_63 : Operation 244 [9/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 244 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_63 : Operation 245 [9/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 245 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 64 <SV = 63> <Delay = 8.75>
+ST_64 : Operation 246 [8/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 246 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_64 : Operation 247 [8/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 247 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 65 <SV = 64> <Delay = 8.75>
+ST_65 : Operation 248 [7/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 248 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_65 : Operation 249 [7/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 249 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 66 <SV = 65> <Delay = 8.75>
+ST_66 : Operation 250 [6/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 250 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_66 : Operation 251 [6/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 251 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 67 <SV = 66> <Delay = 8.75>
+ST_67 : Operation 252 [5/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 252 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_67 : Operation 253 [5/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 253 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 68 <SV = 67> <Delay = 8.75>
+ST_68 : Operation 254 [4/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 254 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_68 : Operation 255 [4/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 255 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 69 <SV = 68> <Delay = 8.75>
+ST_69 : Operation 256 [3/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 256 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_69 : Operation 257 [3/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 257 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 70 <SV = 69> <Delay = 8.75>
+ST_70 : Operation 258 [2/67] (8.75ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 258 'call' 'tmp_i' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_70 : Operation 259 [2/67] (8.75ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 259 'call' 'tmp_i1' <Predicate = true> <Delay = 8.75> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 71 <SV = 70> <Delay = 3.59>
+ST_71 : Operation 260 [1/67] (3.59ns)   --->   "%tmp_i = call fastcc double @"pow_generic<double>"(double %x_assign) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:475]   --->   Operation 260 'call' 'tmp_i' <Predicate = true> <Delay = 3.59> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_71 : Operation 261 [1/67] (3.59ns)   --->   "%tmp_i1 = call fastcc double @"pow_generic<double>"(double %x_assign_1) nounwind" [r:/builds/2018.3/continuous/2018_12_06_2405991/src/products/hls/hls_lib/hlsmath/src/c/powdouble.cpp:6->WienerDeblur.cpp:476]   --->   Operation 261 'call' 'tmp_i1' <Predicate = true> <Delay = 3.59> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 72 <SV = 71> <Delay = 8.23>
+ST_72 : Operation 262 [5/5] (8.23ns)   --->   "%tmp_s = fadd double %tmp_i, %tmp_i1" [WienerDeblur.cpp:476]   --->   Operation 262 'dadd' 'tmp_s' <Predicate = true> <Delay = 8.23> <Core = "DAddSub">   --->   Core 114 'DAddSub' <Latency = 4> <II = 1> <Delay = 8.23> <FuncUnit> <Opcode : 'dadd' 'dsub'> <InPorts = 2> <OutPorts = 1>
+
+State 73 <SV = 72> <Delay = 8.23>
+ST_73 : Operation 263 [4/5] (8.23ns)   --->   "%tmp_s = fadd double %tmp_i, %tmp_i1" [WienerDeblur.cpp:476]   --->   Operation 263 'dadd' 'tmp_s' <Predicate = true> <Delay = 8.23> <Core = "DAddSub">   --->   Core 114 'DAddSub' <Latency = 4> <II = 1> <Delay = 8.23> <FuncUnit> <Opcode : 'dadd' 'dsub'> <InPorts = 2> <OutPorts = 1>
+
+State 74 <SV = 73> <Delay = 8.23>
+ST_74 : Operation 264 [3/5] (8.23ns)   --->   "%tmp_s = fadd double %tmp_i, %tmp_i1" [WienerDeblur.cpp:476]   --->   Operation 264 'dadd' 'tmp_s' <Predicate = true> <Delay = 8.23> <Core = "DAddSub">   --->   Core 114 'DAddSub' <Latency = 4> <II = 1> <Delay = 8.23> <FuncUnit> <Opcode : 'dadd' 'dsub'> <InPorts = 2> <OutPorts = 1>
+
+State 75 <SV = 74> <Delay = 8.23>
+ST_75 : Operation 265 [2/5] (8.23ns)   --->   "%tmp_s = fadd double %tmp_i, %tmp_i1" [WienerDeblur.cpp:476]   --->   Operation 265 'dadd' 'tmp_s' <Predicate = true> <Delay = 8.23> <Core = "DAddSub">   --->   Core 114 'DAddSub' <Latency = 4> <II = 1> <Delay = 8.23> <FuncUnit> <Opcode : 'dadd' 'dsub'> <InPorts = 2> <OutPorts = 1>
+
+State 76 <SV = 75> <Delay = 8.23>
+ST_76 : Operation 266 [1/5] (8.23ns)   --->   "%tmp_s = fadd double %tmp_i, %tmp_i1" [WienerDeblur.cpp:476]   --->   Operation 266 'dadd' 'tmp_s' <Predicate = true> <Delay = 8.23> <Core = "DAddSub">   --->   Core 114 'DAddSub' <Latency = 4> <II = 1> <Delay = 8.23> <FuncUnit> <Opcode : 'dadd' 'dsub'> <InPorts = 2> <OutPorts = 1>
+
+State 77 <SV = 76> <Delay = 8.62>
+ST_77 : Operation 267 [31/31] (8.62ns)   --->   "%tmp_39 = call double @llvm.sqrt.f64(double %tmp_s)" [WienerDeblur.cpp:476]   --->   Operation 267 'dsqrt' 'tmp_39' <Predicate = true> <Delay = 8.62> <Core = "DSqrt">   --->   Core 117 'DSqrt' <Latency = 30> <II = 1> <Delay = 8.62> <FuncUnit> <Opcode : 'dsqrt'> <InPorts = 1> <OutPorts = 1>
+
+State 78 <SV = 77> <Delay = 8.62>
+ST_78 : Operation 268 [30/31] (8.62ns)   --->   "%tmp_39 = call double @llvm.sqrt.f64(double %tmp_s)" [WienerDeblur.cpp:476]   --->   Operation 268 'dsqrt' 'tmp_39' <Predicate = true> <Delay = 8.62> <Core = "DSqrt">   --->   Core 117 'DSqrt' <Latency = 30> <II = 1> <Delay = 8.62> <FuncUnit> <Opcode : 'dsqrt'> <InPorts = 1> <OutPorts = 1>
+
+State 79 <SV = 78> <Delay = 8.62>
+ST_79 : Operation 269 [29/31] (8.62ns)   --->   "%tmp_39 = call double @llvm.sqrt.f64(double %tmp_s)" [WienerDeblur.cpp:476]   --->   Operation 269 'dsqrt' 'tmp_39' <Predicate = true> <Delay = 8.62> <Core = "DSqrt">   --->   Core 117 'DSqrt' <Latency = 30> <II = 1> <Delay = 8.62> <FuncUnit> <Opcode : 'dsqrt'> <InPorts = 1> <OutPorts = 1>
+
+State 80 <SV = 79> <Delay = 8.62>
+ST_80 : Operation 270 [28/31] (8.62ns)   --->   "%tmp_39 = call double @llvm.sqrt.f64(double %tmp_s)" [WienerDeblur.cpp:476]   --->   Operation 270 'dsqrt' 'tmp_39' <Predicate = true> <Delay = 8.62> <Core = "DSqrt">   --->   Core 117 'DSqrt' <Latency = 30> <II = 1> <Delay = 8.62> <FuncUnit> <Opcode : 'dsqrt'> <InPorts = 1> <OutPorts = 1>
+
+State 81 <SV = 80> <Delay = 8.62>
+ST_81 : Operation 271 [27/31] (8.62ns)   --->   "%tmp_39 = call double @llvm.sqrt.f64(double %tmp_s)" [WienerDeblur.cpp:476]   --->   Operation 271 'dsqrt' 'tmp_39' <Predicate = true> <Delay = 8.62> <Core = "DSqrt">   --->   Core 117 'DSqrt' <Latency = 30> <II = 1> <Delay = 8.62> <FuncUnit> <Opcode : 'dsqrt'> <InPorts = 1> <OutPorts = 1>
+
+State 82 <SV = 81> <Delay = 8.62>
+ST_82 : Operation 272 [26/31] (8.62ns)   --->   "%tmp_39 = call double @llvm.sqrt.f64(double %tmp_s)" [WienerDeblur.cpp:476]   --->   Operation 272 'dsqrt' 'tmp_39' <Predicate = true> <Delay = 8.62> <Core = "DSqrt">   --->   Core 117 'DSqrt' <Latency = 30> <II = 1> <Delay = 8.62> <FuncUnit> <Opcode : 'dsqrt'> <InPorts = 1> <OutPorts = 1>
+
+State 83 <SV = 82> <Delay = 8.62>
+ST_83 : Operation 273 [25/31] (8.62ns)   --->   "%tmp_39 = call double @llvm.sqrt.f64(double %tmp_s)" [WienerDeblur.cpp:476]   --->   Operation 273 'dsqrt' 'tmp_39' <Predicate = true> <Delay = 8.62> <Core = "DSqrt">   --->   Core 117 'DSqrt' <Latency = 30> <II = 1> <Delay = 8.62> <FuncUnit> <Opcode : 'dsqrt'> <InPorts = 1> <OutPorts = 1>
+
+State 84 <SV = 83> <Delay = 8.62>
+ST_84 : Operation 274 [24/31] (8.62ns)   --->   "%tmp_39 = call double @llvm.sqrt.f64(double %tmp_s)" [WienerDeblur.cpp:476]   --->   Operation 274 'dsqrt' 'tmp_39' <Predicate = true> <Delay = 8.62> <Core = "DSqrt">   --->   Core 117 'DSqrt' <Latency = 30> <II = 1> <Delay = 8.62> <FuncUnit> <Opcode : 'dsqrt'> <InPorts = 1> <OutPorts = 1>
+
+State 85 <SV = 84> <Delay = 8.62>
+ST_85 : Operation 275 [23/31] (8.62ns)   --->   "%tmp_39 = call double @llvm.sqrt.f64(double %tmp_s)" [WienerDeblur.cpp:476]   --->   Operation 275 'dsqrt' 'tmp_39' <Predicate = true> <Delay = 8.62> <Core = "DSqrt">   --->   Core 117 'DSqrt' <Latency = 30> <II = 1> <Delay = 8.62> <FuncUnit> <Opcode : 'dsqrt'> <InPorts = 1> <OutPorts = 1>
+
+State 86 <SV = 85> <Delay = 8.62>
+ST_86 : Operation 276 [22/31] (8.62ns)   --->   "%tmp_39 = call double @llvm.sqrt.f64(double %tmp_s)" [WienerDeblur.cpp:476]   --->   Operation 276 'dsqrt' 'tmp_39' <Predicate = true> <Delay = 8.62> <Core = "DSqrt">   --->   Core 117 'DSqrt' <Latency = 30> <II = 1> <Delay = 8.62> <FuncUnit> <Opcode : 'dsqrt'> <InPorts = 1> <OutPorts = 1>
+
+State 87 <SV = 86> <Delay = 8.62>
+ST_87 : Operation 277 [21/31] (8.62ns)   --->   "%tmp_39 = call double @llvm.sqrt.f64(double %tmp_s)" [WienerDeblur.cpp:476]   --->   Operation 277 'dsqrt' 'tmp_39' <Predicate = true> <Delay = 8.62> <Core = "DSqrt">   --->   Core 117 'DSqrt' <Latency = 30> <II = 1> <Delay = 8.62> <FuncUnit> <Opcode : 'dsqrt'> <InPorts = 1> <OutPorts = 1>
+
+State 88 <SV = 87> <Delay = 8.62>
+ST_88 : Operation 278 [20/31] (8.62ns)   --->   "%tmp_39 = call double @llvm.sqrt.f64(double %tmp_s)" [WienerDeblur.cpp:476]   --->   Operation 278 'dsqrt' 'tmp_39' <Predicate = true> <Delay = 8.62> <Core = "DSqrt">   --->   Core 117 'DSqrt' <Latency = 30> <II = 1> <Delay = 8.62> <FuncUnit> <Opcode : 'dsqrt'> <InPorts = 1> <OutPorts = 1>
+
+State 89 <SV = 88> <Delay = 8.62>
+ST_89 : Operation 279 [19/31] (8.62ns)   --->   "%tmp_39 = call double @llvm.sqrt.f64(double %tmp_s)" [WienerDeblur.cpp:476]   --->   Operation 279 'dsqrt' 'tmp_39' <Predicate = true> <Delay = 8.62> <Core = "DSqrt">   --->   Core 117 'DSqrt' <Latency = 30> <II = 1> <Delay = 8.62> <FuncUnit> <Opcode : 'dsqrt'> <InPorts = 1> <OutPorts = 1>
+
+State 90 <SV = 89> <Delay = 8.62>
+ST_90 : Operation 280 [18/31] (8.62ns)   --->   "%tmp_39 = call double @llvm.sqrt.f64(double %tmp_s)" [WienerDeblur.cpp:476]   --->   Operation 280 'dsqrt' 'tmp_39' <Predicate = true> <Delay = 8.62> <Core = "DSqrt">   --->   Core 117 'DSqrt' <Latency = 30> <II = 1> <Delay = 8.62> <FuncUnit> <Opcode : 'dsqrt'> <InPorts = 1> <OutPorts = 1>
+
+State 91 <SV = 90> <Delay = 8.62>
+ST_91 : Operation 281 [17/31] (8.62ns)   --->   "%tmp_39 = call double @llvm.sqrt.f64(double %tmp_s)" [WienerDeblur.cpp:476]   --->   Operation 281 'dsqrt' 'tmp_39' <Predicate = true> <Delay = 8.62> <Core = "DSqrt">   --->   Core 117 'DSqrt' <Latency = 30> <II = 1> <Delay = 8.62> <FuncUnit> <Opcode : 'dsqrt'> <InPorts = 1> <OutPorts = 1>
+
+State 92 <SV = 91> <Delay = 8.62>
+ST_92 : Operation 282 [16/31] (8.62ns)   --->   "%tmp_39 = call double @llvm.sqrt.f64(double %tmp_s)" [WienerDeblur.cpp:476]   --->   Operation 282 'dsqrt' 'tmp_39' <Predicate = true> <Delay = 8.62> <Core = "DSqrt">   --->   Core 117 'DSqrt' <Latency = 30> <II = 1> <Delay = 8.62> <FuncUnit> <Opcode : 'dsqrt'> <InPorts = 1> <OutPorts = 1>
+
+State 93 <SV = 92> <Delay = 8.62>
+ST_93 : Operation 283 [15/31] (8.62ns)   --->   "%tmp_39 = call double @llvm.sqrt.f64(double %tmp_s)" [WienerDeblur.cpp:476]   --->   Operation 283 'dsqrt' 'tmp_39' <Predicate = true> <Delay = 8.62> <Core = "DSqrt">   --->   Core 117 'DSqrt' <Latency = 30> <II = 1> <Delay = 8.62> <FuncUnit> <Opcode : 'dsqrt'> <InPorts = 1> <OutPorts = 1>
+
+State 94 <SV = 93> <Delay = 8.62>
+ST_94 : Operation 284 [14/31] (8.62ns)   --->   "%tmp_39 = call double @llvm.sqrt.f64(double %tmp_s)" [WienerDeblur.cpp:476]   --->   Operation 284 'dsqrt' 'tmp_39' <Predicate = true> <Delay = 8.62> <Core = "DSqrt">   --->   Core 117 'DSqrt' <Latency = 30> <II = 1> <Delay = 8.62> <FuncUnit> <Opcode : 'dsqrt'> <InPorts = 1> <OutPorts = 1>
+
+State 95 <SV = 94> <Delay = 8.62>
+ST_95 : Operation 285 [13/31] (8.62ns)   --->   "%tmp_39 = call double @llvm.sqrt.f64(double %tmp_s)" [WienerDeblur.cpp:476]   --->   Operation 285 'dsqrt' 'tmp_39' <Predicate = true> <Delay = 8.62> <Core = "DSqrt">   --->   Core 117 'DSqrt' <Latency = 30> <II = 1> <Delay = 8.62> <FuncUnit> <Opcode : 'dsqrt'> <InPorts = 1> <OutPorts = 1>
+
+State 96 <SV = 95> <Delay = 8.62>
+ST_96 : Operation 286 [12/31] (8.62ns)   --->   "%tmp_39 = call double @llvm.sqrt.f64(double %tmp_s)" [WienerDeblur.cpp:476]   --->   Operation 286 'dsqrt' 'tmp_39' <Predicate = true> <Delay = 8.62> <Core = "DSqrt">   --->   Core 117 'DSqrt' <Latency = 30> <II = 1> <Delay = 8.62> <FuncUnit> <Opcode : 'dsqrt'> <InPorts = 1> <OutPorts = 1>
+
+State 97 <SV = 96> <Delay = 8.62>
+ST_97 : Operation 287 [11/31] (8.62ns)   --->   "%tmp_39 = call double @llvm.sqrt.f64(double %tmp_s)" [WienerDeblur.cpp:476]   --->   Operation 287 'dsqrt' 'tmp_39' <Predicate = true> <Delay = 8.62> <Core = "DSqrt">   --->   Core 117 'DSqrt' <Latency = 30> <II = 1> <Delay = 8.62> <FuncUnit> <Opcode : 'dsqrt'> <InPorts = 1> <OutPorts = 1>
+
+State 98 <SV = 97> <Delay = 8.62>
+ST_98 : Operation 288 [10/31] (8.62ns)   --->   "%tmp_39 = call double @llvm.sqrt.f64(double %tmp_s)" [WienerDeblur.cpp:476]   --->   Operation 288 'dsqrt' 'tmp_39' <Predicate = true> <Delay = 8.62> <Core = "DSqrt">   --->   Core 117 'DSqrt' <Latency = 30> <II = 1> <Delay = 8.62> <FuncUnit> <Opcode : 'dsqrt'> <InPorts = 1> <OutPorts = 1>
+
+State 99 <SV = 98> <Delay = 8.62>
+ST_99 : Operation 289 [9/31] (8.62ns)   --->   "%tmp_39 = call double @llvm.sqrt.f64(double %tmp_s)" [WienerDeblur.cpp:476]   --->   Operation 289 'dsqrt' 'tmp_39' <Predicate = true> <Delay = 8.62> <Core = "DSqrt">   --->   Core 117 'DSqrt' <Latency = 30> <II = 1> <Delay = 8.62> <FuncUnit> <Opcode : 'dsqrt'> <InPorts = 1> <OutPorts = 1>
+
+State 100 <SV = 99> <Delay = 8.62>
+ST_100 : Operation 290 [8/31] (8.62ns)   --->   "%tmp_39 = call double @llvm.sqrt.f64(double %tmp_s)" [WienerDeblur.cpp:476]   --->   Operation 290 'dsqrt' 'tmp_39' <Predicate = true> <Delay = 8.62> <Core = "DSqrt">   --->   Core 117 'DSqrt' <Latency = 30> <II = 1> <Delay = 8.62> <FuncUnit> <Opcode : 'dsqrt'> <InPorts = 1> <OutPorts = 1>
+
+State 101 <SV = 100> <Delay = 8.62>
+ST_101 : Operation 291 [7/31] (8.62ns)   --->   "%tmp_39 = call double @llvm.sqrt.f64(double %tmp_s)" [WienerDeblur.cpp:476]   --->   Operation 291 'dsqrt' 'tmp_39' <Predicate = true> <Delay = 8.62> <Core = "DSqrt">   --->   Core 117 'DSqrt' <Latency = 30> <II = 1> <Delay = 8.62> <FuncUnit> <Opcode : 'dsqrt'> <InPorts = 1> <OutPorts = 1>
+
+State 102 <SV = 101> <Delay = 8.62>
+ST_102 : Operation 292 [6/31] (8.62ns)   --->   "%tmp_39 = call double @llvm.sqrt.f64(double %tmp_s)" [WienerDeblur.cpp:476]   --->   Operation 292 'dsqrt' 'tmp_39' <Predicate = true> <Delay = 8.62> <Core = "DSqrt">   --->   Core 117 'DSqrt' <Latency = 30> <II = 1> <Delay = 8.62> <FuncUnit> <Opcode : 'dsqrt'> <InPorts = 1> <OutPorts = 1>
+
+State 103 <SV = 102> <Delay = 8.62>
+ST_103 : Operation 293 [5/31] (8.62ns)   --->   "%tmp_39 = call double @llvm.sqrt.f64(double %tmp_s)" [WienerDeblur.cpp:476]   --->   Operation 293 'dsqrt' 'tmp_39' <Predicate = true> <Delay = 8.62> <Core = "DSqrt">   --->   Core 117 'DSqrt' <Latency = 30> <II = 1> <Delay = 8.62> <FuncUnit> <Opcode : 'dsqrt'> <InPorts = 1> <OutPorts = 1>
+
+State 104 <SV = 103> <Delay = 8.62>
+ST_104 : Operation 294 [4/31] (8.62ns)   --->   "%tmp_39 = call double @llvm.sqrt.f64(double %tmp_s)" [WienerDeblur.cpp:476]   --->   Operation 294 'dsqrt' 'tmp_39' <Predicate = true> <Delay = 8.62> <Core = "DSqrt">   --->   Core 117 'DSqrt' <Latency = 30> <II = 1> <Delay = 8.62> <FuncUnit> <Opcode : 'dsqrt'> <InPorts = 1> <OutPorts = 1>
+
+State 105 <SV = 104> <Delay = 8.62>
+ST_105 : Operation 295 [3/31] (8.62ns)   --->   "%tmp_39 = call double @llvm.sqrt.f64(double %tmp_s)" [WienerDeblur.cpp:476]   --->   Operation 295 'dsqrt' 'tmp_39' <Predicate = true> <Delay = 8.62> <Core = "DSqrt">   --->   Core 117 'DSqrt' <Latency = 30> <II = 1> <Delay = 8.62> <FuncUnit> <Opcode : 'dsqrt'> <InPorts = 1> <OutPorts = 1>
+
+State 106 <SV = 105> <Delay = 8.62>
+ST_106 : Operation 296 [2/31] (8.62ns)   --->   "%tmp_39 = call double @llvm.sqrt.f64(double %tmp_s)" [WienerDeblur.cpp:476]   --->   Operation 296 'dsqrt' 'tmp_39' <Predicate = true> <Delay = 8.62> <Core = "DSqrt">   --->   Core 117 'DSqrt' <Latency = 30> <II = 1> <Delay = 8.62> <FuncUnit> <Opcode : 'dsqrt'> <InPorts = 1> <OutPorts = 1>
+
+State 107 <SV = 106> <Delay = 8.62>
+ST_107 : Operation 297 [1/31] (8.62ns)   --->   "%tmp_39 = call double @llvm.sqrt.f64(double %tmp_s)" [WienerDeblur.cpp:476]   --->   Operation 297 'dsqrt' 'tmp_39' <Predicate = true> <Delay = 8.62> <Core = "DSqrt">   --->   Core 117 'DSqrt' <Latency = 30> <II = 1> <Delay = 8.62> <FuncUnit> <Opcode : 'dsqrt'> <InPorts = 1> <OutPorts = 1>
+
+State 108 <SV = 107> <Delay = 10.1>
+ST_108 : Operation 298 [1/1] (6.50ns)   --->   "%tmp_40 = fptrunc double %tmp_39 to float" [WienerDeblur.cpp:476]   --->   Operation 298 'fptrunc' 'tmp_40' <Predicate = true> <Delay = 6.50> <Core = "Double2Float">   --->   Core 122 'Double2Float' <Latency = 0> <II = 1> <Delay = 6.50> <FuncUnit> <Opcode : 'fptrunc'> <InPorts = 1> <OutPorts = 1>
+ST_108 : Operation 299 [1/1] (3.63ns)   --->   "call fastcc void @real(float %tmp_40)" [WienerDeblur.cpp:476]   --->   Operation 299 'call' <Predicate = true> <Delay = 3.63> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_108 : Operation 300 [1/1] (0.00ns)   --->   "call fastcc void @imag()" [WienerDeblur.cpp:477]   --->   Operation 300 'call' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_108 : Operation 301 [1/1] (0.00ns)   --->   "br label %.preheader" [WienerDeblur.cpp:473]   --->   Operation 301 'br' <Predicate = true> <Delay = 0.00>
+
+
+============================================================
++ Verbose Summary: Binding
+============================================================
+STG Binding: 
+---------------- STG Properties BEGIN ----------------
+- Is combinational: 0
+- Is one-state seq: 0
+- Is datapath-only: 0
+- Is pipelined: 0
+- Is top level: 0
+Port [ Return ] is wired: 1; IO mode=ap_ctrl_hs:ce=0
+Port [ fft_kernel_M_real]:  wired=1; compound=1; hidden=0; nouse=0; global=1; static=1; extern=0; dir=0; type=3; pingpong=0; private_global=0; linkage=7; visibility=0; IO mode=ap_fifo:ce=0
+Port [ pow_reduce_anonymo_20]:  wired=0; compound=1; hidden=1; nouse=1; global=1; static=1; extern=0; dir=0; type=1; pingpong=0; private_global=0; linkage=7; visibility=0; MemPort=[1]; IO mode=ap_memory:ce=0
+Port [ pow_reduce_anonymo_19]:  wired=0; compound=1; hidden=1; nouse=1; global=1; static=1; extern=0; dir=0; type=1; pingpong=0; private_global=0; linkage=7; visibility=0; MemPort=[1]; IO mode=ap_memory:ce=0
+Port [ pow_reduce_anonymo_16]:  wired=0; compound=1; hidden=1; nouse=1; global=1; static=1; extern=0; dir=0; type=1; pingpong=0; private_global=0; linkage=7; visibility=0; MemPort=[1]; IO mode=ap_memory:ce=0
+Port [ pow_reduce_anonymo_17]:  wired=0; compound=1; hidden=1; nouse=1; global=1; static=1; extern=0; dir=0; type=1; pingpong=0; private_global=0; linkage=7; visibility=0; MemPort=[1]; IO mode=ap_memory:ce=0
+Port [ pow_reduce_anonymo_9]:  wired=0; compound=1; hidden=1; nouse=1; global=1; static=1; extern=0; dir=0; type=1; pingpong=0; private_global=0; linkage=7; visibility=0; MemPort=[1]; IO mode=ap_memory:ce=0
+Port [ pow_reduce_anonymo_12]:  wired=0; compound=1; hidden=1; nouse=1; global=1; static=1; extern=0; dir=0; type=1; pingpong=0; private_global=0; linkage=7; visibility=0; MemPort=[1]; IO mode=ap_memory:ce=0
+Port [ pow_reduce_anonymo_13]:  wired=0; compound=1; hidden=1; nouse=1; global=1; static=1; extern=0; dir=0; type=1; pingpong=0; private_global=0; linkage=7; visibility=0; MemPort=[1]; IO mode=ap_memory:ce=0
+Port [ pow_reduce_anonymo_14]:  wired=0; compound=1; hidden=1; nouse=1; global=1; static=1; extern=0; dir=0; type=1; pingpong=0; private_global=0; linkage=7; visibility=0; MemPort=[1]; IO mode=ap_memory:ce=0
+Port [ pow_reduce_anonymo_15]:  wired=0; compound=1; hidden=1; nouse=1; global=1; static=1; extern=0; dir=0; type=1; pingpong=0; private_global=0; linkage=7; visibility=0; MemPort=[1]; IO mode=ap_memory:ce=0
+Port [ pow_reduce_anonymo_18]:  wired=0; compound=1; hidden=1; nouse=1; global=1; static=1; extern=0; dir=0; type=1; pingpong=0; private_global=0; linkage=7; visibility=0; MemPort=[1]; IO mode=ap_memory:ce=0
+Port [ pow_reduce_anonymo]:  wired=0; compound=1; hidden=1; nouse=1; global=1; static=1; extern=0; dir=0; type=1; pingpong=0; private_global=0; linkage=7; visibility=0; MemPort=[11]; IO mode=ap_memory:ce=0
+Port [ pow_reduce_anonymo_21]:  wired=0; compound=1; hidden=1; nouse=1; global=1; static=1; extern=0; dir=0; type=1; pingpong=0; private_global=0; linkage=7; visibility=0; MemPort=[1]; IO mode=ap_memory:ce=0
+Port [ fft_kernel_M_imag]:  wired=1; compound=1; hidden=0; nouse=0; global=1; static=1; extern=0; dir=0; type=3; pingpong=0; private_global=0; linkage=7; visibility=0; IO mode=ap_fifo:ce=0
+Port [ fft_kernel_modu_M_r]:  wired=1; compound=1; hidden=0; nouse=0; global=1; static=1; extern=0; dir=1; type=3; pingpong=0; private_global=0; linkage=7; visibility=0; IO mode=ap_fifo:ce=0
+Port [ fft_kernel_modu_M_i]:  wired=1; compound=1; hidden=0; nouse=0; global=1; static=1; extern=0; dir=1; type=3; pingpong=0; private_global=0; linkage=7; visibility=0; IO mode=ap_fifo:ce=0
+---------------- STG Properties END ------------------
+
+---------------- Datapath Model BEGIN ----------------
+
+<LifeTime>
+<method=bitvector/>
+StgValue_109        (specinterface    ) [ 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000]
+StgValue_110        (br               ) [ 0111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111]
+r                   (phi              ) [ 0010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000]
+exitcond1           (icmp             ) [ 0011111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111]
+empty               (speclooptripcount) [ 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000]
+r_2                 (add              ) [ 0111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111]
+StgValue_115        (br               ) [ 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000]
+StgValue_116        (br               ) [ 0011111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111]
+StgValue_117        (ret              ) [ 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000]
+c                   (phi              ) [ 0001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000]
+exitcond            (icmp             ) [ 0011111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111]
+empty_68            (speclooptripcount) [ 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000]
+c_2                 (add              ) [ 0011111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111]
+StgValue_122        (br               ) [ 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000]
+fft_kernel_M_real_r (read             ) [ 0000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000]
+fft_kernel_M_imag_r (read             ) [ 0000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000]
+StgValue_125        (br               ) [ 0111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111]
+x_assign            (fpext            ) [ 0000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000]
+x_assign_1          (fpext            ) [ 0000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000]
+tmp_i               (call             ) [ 0000000000000000000000000000000000000000000000000000000000000000000000001111100000000000000000000000000000000]
+tmp_i1              (call             ) [ 0000000000000000000000000000000000000000000000000000000000000000000000001111100000000000000000000000000000000]
+tmp_s               (dadd             ) [ 0000000000000000000000000000000000000000000000000000000000000000000000000000011111111111111111111111111111110]
+tmp_39              (dsqrt            ) [ 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001]
+tmp_40              (fptrunc          ) [ 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000]
+StgValue_299        (call             ) [ 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000]
+StgValue_300        (call             ) [ 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000]
+StgValue_301        (br               ) [ 0011111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111]
+</LifeTime>
+
+<model>
+
+<comp_list>
+<comp id="0" class="1000" name="fft_kernel_M_real">
+<pin_list>
+<pin id="1" dir="1" index="0" bw="1" slack="0"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name="fft_kernel_M_real"/></StgValue>
+</bind>
+</comp>
+
+<comp id="2" class="1000" name="pow_reduce_anonymo_20">
+<pin_list>
+<pin id="3" dir="1" index="0" bw="1" slack="0"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name="pow_reduce_anonymo_20"/><MemPortTyVec>1 </MemPortTyVec>
+</StgValue>
+</bind>
+</comp>
+
+<comp id="4" class="1000" name="pow_reduce_anonymo_19">
+<pin_list>
+<pin id="5" dir="1" index="0" bw="1" slack="0"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name="pow_reduce_anonymo_19"/><MemPortTyVec>1 </MemPortTyVec>
+</StgValue>
+</bind>
+</comp>
+
+<comp id="6" class="1000" name="pow_reduce_anonymo_16">
+<pin_list>
+<pin id="7" dir="1" index="0" bw="1" slack="0"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name="pow_reduce_anonymo_16"/><MemPortTyVec>1 </MemPortTyVec>
+</StgValue>
+</bind>
+</comp>
+
+<comp id="8" class="1000" name="pow_reduce_anonymo_17">
+<pin_list>
+<pin id="9" dir="1" index="0" bw="1" slack="0"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name="pow_reduce_anonymo_17"/><MemPortTyVec>1 </MemPortTyVec>
+</StgValue>
+</bind>
+</comp>
+
+<comp id="10" class="1000" name="pow_reduce_anonymo_9">
+<pin_list>
+<pin id="11" dir="1" index="0" bw="1" slack="0"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name="pow_reduce_anonymo_9"/><MemPortTyVec>1 </MemPortTyVec>
+</StgValue>
+</bind>
+</comp>
+
+<comp id="12" class="1000" name="pow_reduce_anonymo_12">
+<pin_list>
+<pin id="13" dir="1" index="0" bw="1" slack="0"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name="pow_reduce_anonymo_12"/><MemPortTyVec>1 </MemPortTyVec>
+</StgValue>
+</bind>
+</comp>
+
+<comp id="14" class="1000" name="pow_reduce_anonymo_13">
+<pin_list>
+<pin id="15" dir="1" index="0" bw="1" slack="0"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name="pow_reduce_anonymo_13"/><MemPortTyVec>1 </MemPortTyVec>
+</StgValue>
+</bind>
+</comp>
+
+<comp id="16" class="1000" name="pow_reduce_anonymo_14">
+<pin_list>
+<pin id="17" dir="1" index="0" bw="1" slack="0"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name="pow_reduce_anonymo_14"/><MemPortTyVec>1 </MemPortTyVec>
+</StgValue>
+</bind>
+</comp>
+
+<comp id="18" class="1000" name="pow_reduce_anonymo_15">
+<pin_list>
+<pin id="19" dir="1" index="0" bw="1" slack="0"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name="pow_reduce_anonymo_15"/><MemPortTyVec>1 </MemPortTyVec>
+</StgValue>
+</bind>
+</comp>
+
+<comp id="20" class="1000" name="pow_reduce_anonymo_18">
+<pin_list>
+<pin id="21" dir="1" index="0" bw="1" slack="0"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name="pow_reduce_anonymo_18"/><MemPortTyVec>1 </MemPortTyVec>
+</StgValue>
+</bind>
+</comp>
+
+<comp id="22" class="1000" name="pow_reduce_anonymo">
+<pin_list>
+<pin id="23" dir="1" index="0" bw="1" slack="0"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name="pow_reduce_anonymo"/><MemPortTyVec>1 1 </MemPortTyVec>
+</StgValue>
+</bind>
+</comp>
+
+<comp id="24" class="1000" name="pow_reduce_anonymo_21">
+<pin_list>
+<pin id="25" dir="1" index="0" bw="1" slack="0"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name="pow_reduce_anonymo_21"/><MemPortTyVec>1 </MemPortTyVec>
+</StgValue>
+</bind>
+</comp>
+
+<comp id="26" class="1000" name="fft_kernel_M_imag">
+<pin_list>
+<pin id="27" dir="1" index="0" bw="1" slack="0"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name="fft_kernel_M_imag"/></StgValue>
+</bind>
+</comp>
+
+<comp id="28" class="1000" name="fft_kernel_modu_M_r">
+<pin_list>
+<pin id="29" dir="1" index="0" bw="1" slack="0"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name="fft_kernel_modu_M_r"/></StgValue>
+</bind>
+</comp>
+
+<comp id="30" class="1000" name="fft_kernel_modu_M_i">
+<pin_list>
+<pin id="31" dir="1" index="0" bw="1" slack="0"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name="fft_kernel_modu_M_i"/></StgValue>
+</bind>
+</comp>
+
+<comp id="32" class="1001" name="const_32">
+<pin_list>
+<pin id="33" dir="1" index="0" bw="1" slack="2147483647"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name="_ssdm_op_SpecInterface"/></StgValue>
+</bind>
+</comp>
+
+<comp id="34" class="1001" name="const_34">
+<pin_list>
+<pin id="35" dir="1" index="0" bw="1" slack="2147483647"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name="p_str11"/></StgValue>
+</bind>
+</comp>
+
+<comp id="36" class="1001" name="const_36">
+<pin_list>
+<pin id="37" dir="1" index="0" bw="1" slack="2147483647"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name=""/></StgValue>
+</bind>
+</comp>
+
+<comp id="38" class="1001" name="const_38">
+<pin_list>
+<pin id="39" dir="1" index="0" bw="1" slack="2147483647"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name="p_str3"/></StgValue>
+</bind>
+</comp>
+
+<comp id="40" class="1001" name="const_40">
+<pin_list>
+<pin id="41" dir="1" index="0" bw="1" slack="2147483647"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name=""/></StgValue>
+</bind>
+</comp>
+
+<comp id="42" class="1001" name="const_42">
+<pin_list>
+<pin id="43" dir="1" index="0" bw="1" slack="1"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name=""/></StgValue>
+</bind>
+</comp>
+
+<comp id="44" class="1001" name="const_44">
+<pin_list>
+<pin id="45" dir="1" index="0" bw="1" slack="0"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name=""/></StgValue>
+</bind>
+</comp>
+
+<comp id="46" class="1001" name="const_46">
+<pin_list>
+<pin id="47" dir="1" index="0" bw="1" slack="2147483647"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name="_ssdm_op_SpecLoopTripCount"/></StgValue>
+</bind>
+</comp>
+
+<comp id="48" class="1001" name="const_48">
+<pin_list>
+<pin id="49" dir="1" index="0" bw="1" slack="2147483647"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name=""/></StgValue>
+</bind>
+</comp>
+
+<comp id="50" class="1001" name="const_50">
+<pin_list>
+<pin id="51" dir="1" index="0" bw="1" slack="0"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name=""/></StgValue>
+</bind>
+</comp>
+
+<comp id="52" class="1001" name="const_52">
+<pin_list>
+<pin id="53" dir="1" index="0" bw="1" slack="0"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name="_ssdm_op_Read.ap_fifo.volatile.floatP"/></StgValue>
+</bind>
+</comp>
+
+<comp id="54" class="1001" name="const_54">
+<pin_list>
+<pin id="55" dir="1" index="0" bw="1" slack="0"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name="pow_generic<double>"/></StgValue>
+</bind>
+</comp>
+
+<comp id="56" class="1001" name="const_56">
+<pin_list>
+<pin id="57" dir="1" index="0" bw="1" slack="0"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name="llvm.sqrt.f64"/></StgValue>
+</bind>
+</comp>
+
+<comp id="58" class="1001" name="const_58">
+<pin_list>
+<pin id="59" dir="1" index="0" bw="1" slack="0"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name="real"/></StgValue>
+</bind>
+</comp>
+
+<comp id="60" class="1001" name="const_60">
+<pin_list>
+<pin id="61" dir="1" index="0" bw="1" slack="0"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name="imag"/></StgValue>
+</bind>
+</comp>
+
+<comp id="62" class="1004" name="fft_kernel_M_real_r_read_fu_62">
+<pin_list>
+<pin id="63" dir="0" index="0" bw="32" slack="0"/>
+<pin id="64" dir="0" index="1" bw="32" slack="0"/>
+<pin id="65" dir="1" index="2" bw="32" slack="1"/>
+</pin_list>
+<bind>
+<opcode="read(1150) " fcode="read"/>
+<opset="fft_kernel_M_real_r/3 "/>
+</bind>
+</comp>
+
+<comp id="68" class="1004" name="fft_kernel_M_imag_r_read_fu_68">
+<pin_list>
+<pin id="69" dir="0" index="0" bw="32" slack="0"/>
+<pin id="70" dir="0" index="1" bw="32" slack="0"/>
+<pin id="71" dir="1" index="2" bw="32" slack="1"/>
+</pin_list>
+<bind>
+<opcode="read(1150) " fcode="read"/>
+<opset="fft_kernel_M_imag_r/3 "/>
+</bind>
+</comp>
+
+<comp id="74" class="1005" name="r_reg_74">
+<pin_list>
+<pin id="75" dir="0" index="0" bw="9" slack="1"/>
+<pin id="76" dir="1" index="1" bw="9" slack="1"/>
+</pin_list>
+<bind>
+<opset="r (phireg) "/>
+</bind>
+</comp>
+
+<comp id="78" class="1004" name="r_phi_fu_78">
+<pin_list>
+<pin id="79" dir="0" index="0" bw="1" slack="1"/>
+<pin id="80" dir="0" index="1" bw="0" slack="2147483647"/>
+<pin id="81" dir="0" index="2" bw="9" slack="0"/>
+<pin id="82" dir="0" index="3" bw="0" slack="2147483647"/>
+<pin id="83" dir="1" index="4" bw="9" slack="0"/>
+</pin_list>
+<bind>
+<opcode="phi(47) " fcode="phi"/>
+<opset="r/2 "/>
+</bind>
+</comp>
+
+<comp id="85" class="1005" name="c_reg_85">
+<pin_list>
+<pin id="86" dir="0" index="0" bw="9" slack="1"/>
+<pin id="87" dir="1" index="1" bw="9" slack="1"/>
+</pin_list>
+<bind>
+<opset="c (phireg) "/>
+</bind>
+</comp>
+
+<comp id="89" class="1004" name="c_phi_fu_89">
+<pin_list>
+<pin id="90" dir="0" index="0" bw="9" slack="0"/>
+<pin id="91" dir="0" index="1" bw="0" slack="2147483647"/>
+<pin id="92" dir="0" index="2" bw="1" slack="1"/>
+<pin id="93" dir="0" index="3" bw="0" slack="2147483647"/>
+<pin id="94" dir="1" index="4" bw="9" slack="0"/>
+</pin_list>
+<bind>
+<opcode="phi(47) " fcode="phi"/>
+<opset="c/3 "/>
+</bind>
+</comp>
+
+<comp id="96" class="1004" name="grp_pow_generic_double_s_fu_96">
+<pin_list>
+<pin id="97" dir="0" index="0" bw="64" slack="0"/>
+<pin id="98" dir="0" index="1" bw="64" slack="1"/>
+<pin id="99" dir="0" index="2" bw="6" slack="0"/>
+<pin id="100" dir="0" index="3" bw="109" slack="0"/>
+<pin id="101" dir="0" index="4" bw="105" slack="0"/>
+<pin id="102" dir="0" index="5" bw="102" slack="0"/>
+<pin id="103" dir="0" index="6" bw="97" slack="0"/>
+<pin id="104" dir="0" index="7" bw="92" slack="0"/>
+<pin id="105" dir="0" index="8" bw="87" slack="0"/>
+<pin id="106" dir="0" index="9" bw="82" slack="0"/>
+<pin id="107" dir="0" index="10" bw="77" slack="0"/>
+<pin id="108" dir="0" index="11" bw="58" slack="0"/>
+<pin id="109" dir="0" index="12" bw="26" slack="0"/>
+<pin id="110" dir="0" index="13" bw="42" slack="0"/>
+<pin id="111" dir="1" index="14" bw="64" slack="1"/>
+</pin_list>
+<bind>
+<opcode="call(48) " fcode="call"/>
+<opset="tmp_i/5 "/>
+</bind>
+</comp>
+
+<comp id="125" class="1004" name="grp_pow_generic_double_s_fu_125">
+<pin_list>
+<pin id="126" dir="0" index="0" bw="64" slack="0"/>
+<pin id="127" dir="0" index="1" bw="64" slack="1"/>
+<pin id="128" dir="0" index="2" bw="6" slack="0"/>
+<pin id="129" dir="0" index="3" bw="109" slack="0"/>
+<pin id="130" dir="0" index="4" bw="105" slack="0"/>
+<pin id="131" dir="0" index="5" bw="102" slack="0"/>
+<pin id="132" dir="0" index="6" bw="97" slack="0"/>
+<pin id="133" dir="0" index="7" bw="92" slack="0"/>
+<pin id="134" dir="0" index="8" bw="87" slack="0"/>
+<pin id="135" dir="0" index="9" bw="82" slack="0"/>
+<pin id="136" dir="0" index="10" bw="77" slack="0"/>
+<pin id="137" dir="0" index="11" bw="58" slack="0"/>
+<pin id="138" dir="0" index="12" bw="26" slack="0"/>
+<pin id="139" dir="0" index="13" bw="42" slack="0"/>
+<pin id="140" dir="1" index="14" bw="64" slack="1"/>
+</pin_list>
+<bind>
+<opcode="call(48) " fcode="call"/>
+<opset="tmp_i1/5 "/>
+</bind>
+</comp>
+
+<comp id="154" class="1004" name="StgValue_299_real_r_fu_154">
+<pin_list>
+<pin id="155" dir="0" index="0" bw="0" slack="0"/>
+<pin id="156" dir="0" index="1" bw="32" slack="0"/>
+<pin id="157" dir="0" index="2" bw="32" slack="0"/>
+<pin id="158" dir="1" index="3" bw="0" slack="2147483647"/>
+</pin_list>
+<bind>
+<opcode="call(48) " fcode="call"/>
+<opset="StgValue_299/108 "/>
+</bind>
+</comp>
+
+<comp id="161" class="1004" name="StgValue_300_imag_fu_161">
+<pin_list>
+<pin id="162" dir="0" index="0" bw="0" slack="0"/>
+<pin id="163" dir="0" index="1" bw="32" slack="0"/>
+<pin id="164" dir="1" index="2" bw="0" slack="2147483647"/>
+</pin_list>
+<bind>
+<opcode="call(48) " fcode="call"/>
+<opset="StgValue_300/108 "/>
+</bind>
+</comp>
+
+<comp id="167" class="1004" name="tmp_40_fu_167">
+<pin_list>
+<pin id="168" dir="0" index="0" bw="64" slack="1"/>
+<pin id="169" dir="1" index="1" bw="32" slack="0"/>
+</pin_list>
+<bind>
+<opcode="fptrunc(40) " fcode="fptrunc"/>
+<opset="tmp_40/108 "/>
+</bind>
+</comp>
+
+<comp id="171" class="1004" name="x_assign_fu_171">
+<pin_list>
+<pin id="172" dir="0" index="0" bw="32" slack="1"/>
+<pin id="173" dir="1" index="1" bw="64" slack="1"/>
+</pin_list>
+<bind>
+<opcode="fpext(41) " fcode="fpext"/>
+<opset="x_assign/4 "/>
+</bind>
+</comp>
+
+<comp id="174" class="1004" name="x_assign_1_fu_174">
+<pin_list>
+<pin id="175" dir="0" index="0" bw="32" slack="1"/>
+<pin id="176" dir="1" index="1" bw="64" slack="1"/>
+</pin_list>
+<bind>
+<opcode="fpext(41) " fcode="fpext"/>
+<opset="x_assign_1/4 "/>
+</bind>
+</comp>
+
+<comp id="177" class="1004" name="grp_fu_177">
+<pin_list>
+<pin id="178" dir="0" index="0" bw="64" slack="1"/>
+<pin id="179" dir="0" index="1" bw="64" slack="1"/>
+<pin id="180" dir="1" index="2" bw="64" slack="1"/>
+</pin_list>
+<bind>
+<opcode="dadd(508) " fcode="dadd"/>
+<opset="tmp_s/72 "/>
+</bind>
+</comp>
+
+<comp id="181" class="1004" name="grp_fu_181">
+<pin_list>
+<pin id="182" dir="0" index="0" bw="64" slack="0"/>
+<pin id="183" dir="0" index="1" bw="64" slack="1"/>
+<pin id="184" dir="1" index="2" bw="64" slack="1"/>
+</pin_list>
+<bind>
+<opcode="dsqrt(518) " fcode="dsqrt"/>
+<opset="tmp_39/77 "/>
+</bind>
+</comp>
+
+<comp id="186" class="1004" name="exitcond1_fu_186">
+<pin_list>
+<pin id="187" dir="0" index="0" bw="9" slack="0"/>
+<pin id="188" dir="0" index="1" bw="9" slack="0"/>
+<pin id="189" dir="1" index="2" bw="1" slack="2147483647"/>
+</pin_list>
+<bind>
+<opcode="icmp(45) " fcode="icmp"/>
+<opset="exitcond1/2 "/>
+</bind>
+</comp>
+
+<comp id="192" class="1004" name="r_2_fu_192">
+<pin_list>
+<pin id="193" dir="0" index="0" bw="9" slack="0"/>
+<pin id="194" dir="0" index="1" bw="1" slack="0"/>
+<pin id="195" dir="1" index="2" bw="9" slack="0"/>
+</pin_list>
+<bind>
+<opcode="add(8) " fcode="add"/>
+<opset="r_2/2 "/>
+</bind>
+</comp>
+
+<comp id="198" class="1004" name="exitcond_fu_198">
+<pin_list>
+<pin id="199" dir="0" index="0" bw="9" slack="0"/>
+<pin id="200" dir="0" index="1" bw="9" slack="0"/>
+<pin id="201" dir="1" index="2" bw="1" slack="2147483647"/>
+</pin_list>
+<bind>
+<opcode="icmp(45) " fcode="icmp"/>
+<opset="exitcond/3 "/>
+</bind>
+</comp>
+
+<comp id="204" class="1004" name="c_2_fu_204">
+<pin_list>
+<pin id="205" dir="0" index="0" bw="9" slack="0"/>
+<pin id="206" dir="0" index="1" bw="1" slack="0"/>
+<pin id="207" dir="1" index="2" bw="9" slack="0"/>
+</pin_list>
+<bind>
+<opcode="add(8) " fcode="add"/>
+<opset="c_2/3 "/>
+</bind>
+</comp>
+
+<comp id="213" class="1005" name="r_2_reg_213">
+<pin_list>
+<pin id="214" dir="0" index="0" bw="9" slack="0"/>
+<pin id="215" dir="1" index="1" bw="9" slack="0"/>
+</pin_list>
+<bind>
+<opset="r_2 "/>
+</bind>
+</comp>
+
+<comp id="221" class="1005" name="c_2_reg_221">
+<pin_list>
+<pin id="222" dir="0" index="0" bw="9" slack="0"/>
+<pin id="223" dir="1" index="1" bw="9" slack="0"/>
+</pin_list>
+<bind>
+<opset="c_2 "/>
+</bind>
+</comp>
+
+<comp id="226" class="1005" name="fft_kernel_M_real_r_reg_226">
+<pin_list>
+<pin id="227" dir="0" index="0" bw="32" slack="1"/>
+<pin id="228" dir="1" index="1" bw="32" slack="1"/>
+</pin_list>
+<bind>
+<opset="fft_kernel_M_real_r "/>
+</bind>
+</comp>
+
+<comp id="231" class="1005" name="fft_kernel_M_imag_r_reg_231">
+<pin_list>
+<pin id="232" dir="0" index="0" bw="32" slack="1"/>
+<pin id="233" dir="1" index="1" bw="32" slack="1"/>
+</pin_list>
+<bind>
+<opset="fft_kernel_M_imag_r "/>
+</bind>
+</comp>
+
+<comp id="236" class="1005" name="x_assign_reg_236">
+<pin_list>
+<pin id="237" dir="0" index="0" bw="64" slack="1"/>
+<pin id="238" dir="1" index="1" bw="64" slack="1"/>
+</pin_list>
+<bind>
+<opset="x_assign "/>
+</bind>
+</comp>
+
+<comp id="241" class="1005" name="x_assign_1_reg_241">
+<pin_list>
+<pin id="242" dir="0" index="0" bw="64" slack="1"/>
+<pin id="243" dir="1" index="1" bw="64" slack="1"/>
+</pin_list>
+<bind>
+<opset="x_assign_1 "/>
+</bind>
+</comp>
+
+<comp id="246" class="1005" name="tmp_i_reg_246">
+<pin_list>
+<pin id="247" dir="0" index="0" bw="64" slack="1"/>
+<pin id="248" dir="1" index="1" bw="64" slack="1"/>
+</pin_list>
+<bind>
+<opset="tmp_i "/>
+</bind>
+</comp>
+
+<comp id="251" class="1005" name="tmp_i1_reg_251">
+<pin_list>
+<pin id="252" dir="0" index="0" bw="64" slack="1"/>
+<pin id="253" dir="1" index="1" bw="64" slack="1"/>
+</pin_list>
+<bind>
+<opset="tmp_i1 "/>
+</bind>
+</comp>
+
+<comp id="256" class="1005" name="tmp_s_reg_256">
+<pin_list>
+<pin id="257" dir="0" index="0" bw="64" slack="1"/>
+<pin id="258" dir="1" index="1" bw="64" slack="1"/>
+</pin_list>
+<bind>
+<opset="tmp_s "/>
+</bind>
+</comp>
+
+<comp id="261" class="1005" name="tmp_39_reg_261">
+<pin_list>
+<pin id="262" dir="0" index="0" bw="64" slack="1"/>
+<pin id="263" dir="1" index="1" bw="64" slack="1"/>
+</pin_list>
+<bind>
+<opset="tmp_39 "/>
+</bind>
+</comp>
+
+</comp_list>
+
+<net_list>
+<net id="66"><net_src comp="52" pin="0"/><net_sink comp="62" pin=0"/></net>
+
+<net id="67"><net_src comp="0" pin="0"/><net_sink comp="62" pin=1"/></net>
+
+<net id="72"><net_src comp="52" pin="0"/><net_sink comp="68" pin=0"/></net>
+
+<net id="73"><net_src comp="26" pin="0"/><net_sink comp="68" pin=1"/></net>
+
+<net id="77"><net_src comp="42" pin="0"/><net_sink comp="74" pin=0"/></net>
+
+<net id="84"><net_src comp="74" pin="1"/><net_sink comp="78" pin=0"/></net>
+
+<net id="88"><net_src comp="42" pin="0"/><net_sink comp="85" pin=0"/></net>
+
+<net id="95"><net_src comp="85" pin="1"/><net_sink comp="89" pin=2"/></net>
+
+<net id="112"><net_src comp="54" pin="0"/><net_sink comp="96" pin=0"/></net>
+
+<net id="113"><net_src comp="2" pin="0"/><net_sink comp="96" pin=2"/></net>
+
+<net id="114"><net_src comp="4" pin="0"/><net_sink comp="96" pin=3"/></net>
+
+<net id="115"><net_src comp="6" pin="0"/><net_sink comp="96" pin=4"/></net>
+
+<net id="116"><net_src comp="8" pin="0"/><net_sink comp="96" pin=5"/></net>
+
+<net id="117"><net_src comp="10" pin="0"/><net_sink comp="96" pin=6"/></net>
+
+<net id="118"><net_src comp="12" pin="0"/><net_sink comp="96" pin=7"/></net>
+
+<net id="119"><net_src comp="14" pin="0"/><net_sink comp="96" pin=8"/></net>
+
+<net id="120"><net_src comp="16" pin="0"/><net_sink comp="96" pin=9"/></net>
+
+<net id="121"><net_src comp="18" pin="0"/><net_sink comp="96" pin=10"/></net>
+
+<net id="122"><net_src comp="20" pin="0"/><net_sink comp="96" pin=11"/></net>
+
+<net id="123"><net_src comp="22" pin="0"/><net_sink comp="96" pin=12"/></net>
+
+<net id="124"><net_src comp="24" pin="0"/><net_sink comp="96" pin=13"/></net>
+
+<net id="141"><net_src comp="54" pin="0"/><net_sink comp="125" pin=0"/></net>
+
+<net id="142"><net_src comp="2" pin="0"/><net_sink comp="125" pin=2"/></net>
+
+<net id="143"><net_src comp="4" pin="0"/><net_sink comp="125" pin=3"/></net>
+
+<net id="144"><net_src comp="6" pin="0"/><net_sink comp="125" pin=4"/></net>
+
+<net id="145"><net_src comp="8" pin="0"/><net_sink comp="125" pin=5"/></net>
+
+<net id="146"><net_src comp="10" pin="0"/><net_sink comp="125" pin=6"/></net>
+
+<net id="147"><net_src comp="12" pin="0"/><net_sink comp="125" pin=7"/></net>
+
+<net id="148"><net_src comp="14" pin="0"/><net_sink comp="125" pin=8"/></net>
+
+<net id="149"><net_src comp="16" pin="0"/><net_sink comp="125" pin=9"/></net>
+
+<net id="150"><net_src comp="18" pin="0"/><net_sink comp="125" pin=10"/></net>
+
+<net id="151"><net_src comp="20" pin="0"/><net_sink comp="125" pin=11"/></net>
+
+<net id="152"><net_src comp="22" pin="0"/><net_sink comp="125" pin=12"/></net>
+
+<net id="153"><net_src comp="24" pin="0"/><net_sink comp="125" pin=13"/></net>
+
+<net id="159"><net_src comp="58" pin="0"/><net_sink comp="154" pin=0"/></net>
+
+<net id="160"><net_src comp="28" pin="0"/><net_sink comp="154" pin=2"/></net>
+
+<net id="165"><net_src comp="60" pin="0"/><net_sink comp="161" pin=0"/></net>
+
+<net id="166"><net_src comp="30" pin="0"/><net_sink comp="161" pin=1"/></net>
+
+<net id="170"><net_src comp="167" pin="1"/><net_sink comp="154" pin=1"/></net>
+
+<net id="185"><net_src comp="56" pin="0"/><net_sink comp="181" pin=0"/></net>
+
+<net id="190"><net_src comp="78" pin="4"/><net_sink comp="186" pin=0"/></net>
+
+<net id="191"><net_src comp="44" pin="0"/><net_sink comp="186" pin=1"/></net>
+
+<net id="196"><net_src comp="78" pin="4"/><net_sink comp="192" pin=0"/></net>
+
+<net id="197"><net_src comp="50" pin="0"/><net_sink comp="192" pin=1"/></net>
+
+<net id="202"><net_src comp="89" pin="4"/><net_sink comp="198" pin=0"/></net>
+
+<net id="203"><net_src comp="44" pin="0"/><net_sink comp="198" pin=1"/></net>
+
+<net id="208"><net_src comp="89" pin="4"/><net_sink comp="204" pin=0"/></net>
+
+<net id="209"><net_src comp="50" pin="0"/><net_sink comp="204" pin=1"/></net>
+
+<net id="216"><net_src comp="192" pin="2"/><net_sink comp="213" pin=0"/></net>
+
+<net id="217"><net_src comp="213" pin="1"/><net_sink comp="78" pin=2"/></net>
+
+<net id="224"><net_src comp="204" pin="2"/><net_sink comp="221" pin=0"/></net>
+
+<net id="225"><net_src comp="221" pin="1"/><net_sink comp="89" pin=0"/></net>
+
+<net id="229"><net_src comp="62" pin="2"/><net_sink comp="226" pin=0"/></net>
+
+<net id="230"><net_src comp="226" pin="1"/><net_sink comp="171" pin=0"/></net>
+
+<net id="234"><net_src comp="68" pin="2"/><net_sink comp="231" pin=0"/></net>
+
+<net id="235"><net_src comp="231" pin="1"/><net_sink comp="174" pin=0"/></net>
+
+<net id="239"><net_src comp="171" pin="1"/><net_sink comp="236" pin=0"/></net>
+
+<net id="240"><net_src comp="236" pin="1"/><net_sink comp="96" pin=1"/></net>
+
+<net id="244"><net_src comp="174" pin="1"/><net_sink comp="241" pin=0"/></net>
+
+<net id="245"><net_src comp="241" pin="1"/><net_sink comp="125" pin=1"/></net>
+
+<net id="249"><net_src comp="96" pin="14"/><net_sink comp="246" pin=0"/></net>
+
+<net id="250"><net_src comp="246" pin="1"/><net_sink comp="177" pin=0"/></net>
+
+<net id="254"><net_src comp="125" pin="14"/><net_sink comp="251" pin=0"/></net>
+
+<net id="255"><net_src comp="251" pin="1"/><net_sink comp="177" pin=1"/></net>
+
+<net id="259"><net_src comp="177" pin="2"/><net_sink comp="256" pin=0"/></net>
+
+<net id="260"><net_src comp="256" pin="1"/><net_sink comp="181" pin=1"/></net>
+
+<net id="264"><net_src comp="181" pin="2"/><net_sink comp="261" pin=0"/></net>
+
+<net id="265"><net_src comp="261" pin="1"/><net_sink comp="167" pin=0"/></net>
+
+</net_list>
+
+</model> 
+---------------- Datapath Model END ------------------
+
+* FSMD analyzer results:
+  - Output states:
+	Port: fft_kernel_M_real | {}
+	Port: pow_reduce_anonymo_20 | {}
+	Port: pow_reduce_anonymo_19 | {}
+	Port: pow_reduce_anonymo_16 | {}
+	Port: pow_reduce_anonymo_17 | {}
+	Port: pow_reduce_anonymo_9 | {}
+	Port: pow_reduce_anonymo_12 | {}
+	Port: pow_reduce_anonymo_13 | {}
+	Port: pow_reduce_anonymo_14 | {}
+	Port: pow_reduce_anonymo_15 | {}
+	Port: pow_reduce_anonymo_18 | {}
+	Port: pow_reduce_anonymo | {}
+	Port: pow_reduce_anonymo_21 | {}
+	Port: fft_kernel_M_imag | {}
+	Port: fft_kernel_modu_M_r | {108 }
+	Port: fft_kernel_modu_M_i | {108 }
+ - Input state : 
+	Port: matrix_modulus : fft_kernel_M_real | {3 }
+	Port: matrix_modulus : pow_reduce_anonymo_20 | {5 6 }
+	Port: matrix_modulus : pow_reduce_anonymo_19 | {50 51 }
+	Port: matrix_modulus : pow_reduce_anonymo_16 | {50 51 }
+	Port: matrix_modulus : pow_reduce_anonymo_17 | {50 51 }
+	Port: matrix_modulus : pow_reduce_anonymo_9 | {50 51 }
+	Port: matrix_modulus : pow_reduce_anonymo_12 | {49 50 }
+	Port: matrix_modulus : pow_reduce_anonymo_13 | {49 50 }
+	Port: matrix_modulus : pow_reduce_anonymo_14 | {49 50 }
+	Port: matrix_modulus : pow_reduce_anonymo_15 | {49 50 }
+	Port: matrix_modulus : pow_reduce_anonymo_18 | {66 67 }
+	Port: matrix_modulus : pow_reduce_anonymo | {60 61 }
+	Port: matrix_modulus : pow_reduce_anonymo_21 | {63 64 }
+	Port: matrix_modulus : fft_kernel_M_imag | {3 }
+	Port: matrix_modulus : fft_kernel_modu_M_r | {}
+	Port: matrix_modulus : fft_kernel_modu_M_i | {}
+  - Chain level:
+	State 1
+	State 2
+		exitcond1 : 1
+		r_2 : 1
+		StgValue_115 : 2
+	State 3
+		exitcond : 1
+		c_2 : 1
+		StgValue_122 : 2
+	State 4
+	State 5
+	State 6
+	State 7
+	State 8
+	State 9
+	State 10
+	State 11
+	State 12
+	State 13
+	State 14
+	State 15
+	State 16
+	State 17
+	State 18
+	State 19
+	State 20
+	State 21
+	State 22
+	State 23
+	State 24
+	State 25
+	State 26
+	State 27
+	State 28
+	State 29
+	State 30
+	State 31
+	State 32
+	State 33
+	State 34
+	State 35
+	State 36
+	State 37
+	State 38
+	State 39
+	State 40
+	State 41
+	State 42
+	State 43
+	State 44
+	State 45
+	State 46
+	State 47
+	State 48
+	State 49
+	State 50
+	State 51
+	State 52
+	State 53
+	State 54
+	State 55
+	State 56
+	State 57
+	State 58
+	State 59
+	State 60
+	State 61
+	State 62
+	State 63
+	State 64
+	State 65
+	State 66
+	State 67
+	State 68
+	State 69
+	State 70
+	State 71
+	State 72
+	State 73
+	State 74
+	State 75
+	State 76
+	State 77
+	State 78
+	State 79
+	State 80
+	State 81
+	State 82
+	State 83
+	State 84
+	State 85
+	State 86
+	State 87
+	State 88
+	State 89
+	State 90
+	State 91
+	State 92
+	State 93
+	State 94
+	State 95
+	State 96
+	State 97
+	State 98
+	State 99
+	State 100
+	State 101
+	State 102
+	State 103
+	State 104
+	State 105
+	State 106
+	State 107
+	State 108
+		StgValue_299 : 1
+
+
+============================================================
++ Verbose Summary: Datapath Resource usage 
+============================================================
+
+* Functional unit list:
+|----------|---------------------------------|---------|---------|---------|---------|
+| Operation|         Functional Unit         |  DSP48E |  Delay  |    FF   |   LUT   |
+|----------|---------------------------------|---------|---------|---------|---------|
+|          |  grp_pow_generic_double_s_fu_96 |    33   | 65.4987 |  11734  |   7302  |
+|   call   | grp_pow_generic_double_s_fu_125 |    33   | 65.4987 |  11734  |   7302  |
+|          |    StgValue_299_real_r_fu_154   |    0    |    0    |    0    |    0    |
+|          |     StgValue_300_imag_fu_161    |    0    |    0    |    0    |    0    |
+|----------|---------------------------------|---------|---------|---------|---------|
+|   dsqrt  |            grp_fu_181           |    0    |    0    |   1832  |   2180  |
+|----------|---------------------------------|---------|---------|---------|---------|
+|   dadd   |            grp_fu_177           |    3    |    0    |   445   |   1149  |
+|----------|---------------------------------|---------|---------|---------|---------|
+|   fpext  |         x_assign_fu_171         |    0    |    0    |   100   |   138   |
+|          |        x_assign_1_fu_174        |    0    |    0    |   100   |   138   |
+|----------|---------------------------------|---------|---------|---------|---------|
+|  fptrunc |          tmp_40_fu_167          |    0    |    0    |   128   |   277   |
+|----------|---------------------------------|---------|---------|---------|---------|
+|    add   |            r_2_fu_192           |    0    |    0    |    0    |    15   |
+|          |            c_2_fu_204           |    0    |    0    |    0    |    15   |
+|----------|---------------------------------|---------|---------|---------|---------|
+|   icmp   |         exitcond1_fu_186        |    0    |    0    |    0    |    13   |
+|          |         exitcond_fu_198         |    0    |    0    |    0    |    13   |
+|----------|---------------------------------|---------|---------|---------|---------|
+|   read   |  fft_kernel_M_real_r_read_fu_62 |    0    |    0    |    0    |    0    |
+|          |  fft_kernel_M_imag_r_read_fu_68 |    0    |    0    |    0    |    0    |
+|----------|---------------------------------|---------|---------|---------|---------|
+|   Total  |                                 |    69   | 130.997 |  26073  |  18542  |
+|----------|---------------------------------|---------|---------|---------|---------|
+
+Memories:
+N/A
+
+* Register list:
++---------------------------+--------+
+|                           |   FF   |
++---------------------------+--------+
+|        c_2_reg_221        |    9   |
+|          c_reg_85         |    9   |
+|fft_kernel_M_imag_r_reg_231|   32   |
+|fft_kernel_M_real_r_reg_226|   32   |
+|        r_2_reg_213        |    9   |
+|          r_reg_74         |    9   |
+|       tmp_39_reg_261      |   64   |
+|       tmp_i1_reg_251      |   64   |
+|       tmp_i_reg_246       |   64   |
+|       tmp_s_reg_256       |   64   |
+|     x_assign_1_reg_241    |   64   |
+|      x_assign_reg_236     |   64   |
++---------------------------+--------+
+|           Total           |   484  |
++---------------------------+--------+
+
+* Multiplexer (MUX) list: 
+|--------|------|------|------|--------|
+|  Comp  |  Pin | Size |  BW  | S x BW |
+|--------|------|------|------|--------|
+|  Total |      |      |      |    0   |
+|--------|------|------|------|--------|
+
+
+
+* Summary:
++-----------+--------+--------+--------+--------+
+|           | DSP48E |  Delay |   FF   |   LUT  |
++-----------+--------+--------+--------+--------+
+|  Function |   69   |   130  |  26073 |  18542 |
+|   Memory  |    -   |    -   |    -   |    -   |
+|Multiplexer|    -   |    -   |    -   |    -   |
+|  Register |    -   |    -   |   484  |    -   |
++-----------+--------+--------+--------+--------+
+|   Total   |   69   |   130  |  26557 |  18542 |
++-----------+--------+--------+--------+--------+

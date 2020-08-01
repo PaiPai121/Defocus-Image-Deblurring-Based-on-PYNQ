@@ -1,0 +1,152 @@
+<profile>
+
+<section name = "Vivado HLS Report for 'KernelMaker'" level="0">
+<item name = "Date">Sat Aug  1 17:19:53 2020
+</item>
+<item name = "Version">2018.3 (Build 2405991 on Thu Dec 06 23:56:15 MST 2018)</item>
+<item name = "Project">deblur_IP</item>
+<item name = "Solution">solution1</item>
+<item name = "Product family">zynq</item>
+<item name = "Target device">xc7z020clg400-1</item>
+</section>
+
+<section name = "Performance Estimates" level="0">
+<item name = "Timing (ns)">
+<section name = "" level="1">
+<item name = "Summary"><table name="" hasTotal="0">
+<keys size="4">Clock, Target, Estimated, Uncertainty</keys>
+<column name="ap_clk">10.00, 10.136, 1.25</column>
+</table>
+</item>
+</section>
+</item>
+<item name = "Latency (clock cycles)">
+<section name = "" level="1">
+<item name = "Summary"><table name="" hasTotal="0">
+<keys size="6">, min, max, min, max, Type</keys>
+<column name="">1769985, 1769985, 1769985, 1769985, none</column>
+</table>
+</item>
+<item name = "Detail">
+<section name = "" level="1">
+<item name = "Instance"><table name="" hasTotal="0">
+<keys size="7">Instance, Module, min, max, min, max, Type</keys>
+<column name="StgValue_88_real379_fu_68">real379, 0, 0, 0, 0, none</column>
+<column name="StgValue_89_imag380_fu_75">imag380, 0, 0, 0, 0, none</column>
+</table>
+</item>
+<item name = "Loop"><table name="" hasTotal="0">
+<keys size="8">Loop Name, min, max, Latency, achieved, target, Count, Pipelined</keys>
+<column name="- Loop 1">1769984, 1769984, 6914, -, -, 256, no</column>
+<column name=" + Loop 1.1">6912, 6912, 27, -, -, 256, no</column>
+</table>
+</item>
+</section>
+</item>
+</section>
+</item>
+</section>
+
+<section name = "Utilization Estimates" level="0">
+<item name = "Summary"><table name="" hasTotal="1">
+<keys size="5">Name, BRAM_18K, DSP48E, FF, LUT</keys>
+<column name="DSP">-, 1, -, -</column>
+<column name="Expression">-, 0, 0, 180</column>
+<column name="FIFO">-, -, -, -</column>
+<column name="Instance">-, 26, 2091, 3543</column>
+<column name="Memory">-, -, -, -</column>
+<column name="Multiplexer">-, -, -, 191</column>
+<column name="Register">-, -, 234, -</column>
+<specialColumn name="Available">280, 220, 106400, 53200</specialColumn>
+<specialColumn name="Utilization (%)">0, 12, 2, 7</specialColumn>
+</table>
+</item>
+<item name = "Detail">
+<section name = "" level="1">
+<item name = "Instance"><table name="" hasTotal="1">
+<keys size="6">Instance, Module, BRAM_18K, DSP48E, FF, LUT</keys>
+<column name="WienerDeblur_dexpg8j_U34">WienerDeblur_dexpg8j, 0, 26, 1549, 2599</column>
+<column name="WienerDeblur_fptreOg_U32">WienerDeblur_fptreOg, 0, 0, 128, 277</column>
+<column name="WienerDeblur_sitofYi_U33">WienerDeblur_sitofYi, 0, 0, 412, 645</column>
+<column name="StgValue_89_imag380_fu_75">imag380, 0, 0, 1, 11</column>
+<column name="StgValue_88_real379_fu_68">real379, 0, 0, 1, 11</column>
+</table>
+</item>
+<item name = "DSP48"><table name="" hasTotal="0">
+<keys size="3">Instance, Module, Expression</keys>
+<column name="WienerDeblur_mac_hbi_U35">WienerDeblur_mac_hbi, i0 * i0 + i1</column>
+</table>
+</item>
+<item name = "Memory"><table name="" hasTotal="1">
+<keys size="9">Memory, Module, BRAM_18K, FF, LUT, Words, Bits, Banks, W*Bits*Banks</keys>
+</table>
+</item>
+<item name = "FIFO"><table name="" hasTotal="1">
+<keys size="7">Name, BRAM_18K, FF, LUT, Depth, Bits, Size:D*B</keys>
+</table>
+</item>
+<item name = "Expression"><table name="" hasTotal="1">
+<keys size="7">Variable Name, Operation, DSP48E, FF, LUT, Bitwidth P0, Bitwidth P1</keys>
+<column name="tmp_138_cast_fu_117_p2">*, 0, 0, 51, 9, 9</column>
+<column name="i_3_fu_101_p2">+, 0, 0, 15, 9, 1</column>
+<column name="j_1_fu_129_p2">+, 0, 0, 15, 9, 1</column>
+<column name="tmp_92_fu_135_p2">+, 0, 0, 15, 9, 9</column>
+<column name="tmp_s_fu_107_p2">+, 0, 0, 15, 9, 9</column>
+<column name="p_neg_f_fu_191_p2">-, 0, 0, 13, 1, 4</column>
+<column name="p_neg_fu_161_p2">-, 0, 0, 24, 1, 17</column>
+<column name="exitcond1_fu_123_p2">icmp, 0, 0, 13, 9, 10</column>
+<column name="exitcond_fu_95_p2">icmp, 0, 0, 13, 9, 10</column>
+<column name="ap_block_state29">or, 0, 0, 2, 1, 1</column>
+<column name="tmp_99_fu_197_p3">select, 0, 0, 4, 1, 4</column>
+</table>
+</item>
+<item name = "Multiplexer"><table name="" hasTotal="1">
+<keys size="5">Name, LUT, Input Size, Bits, Total Bits</keys>
+<column name="ap_NS_fsm">137, 30, 1, 30</column>
+<column name="i_reg_46">9, 2, 9, 18</column>
+<column name="j_reg_57">9, 2, 9, 18</column>
+<column name="kernel_M_imag_blk_n">9, 2, 1, 2</column>
+<column name="kernel_M_imag_write">9, 2, 1, 2</column>
+<column name="kernel_M_real_blk_n">9, 2, 1, 2</column>
+<column name="kernel_M_real_write">9, 2, 1, 2</column>
+</table>
+</item>
+<item name = "Register"><table name="" hasTotal="1">
+<keys size="5">Name, FF, LUT, Bits, Const Bits</keys>
+<column name="ap_CS_fsm">29, 0, 29, 0</column>
+<column name="i_3_reg_220">9, 0, 9, 0</column>
+<column name="i_reg_46">9, 0, 9, 0</column>
+<column name="j_1_reg_233">9, 0, 9, 0</column>
+<column name="j_reg_57">9, 0, 9, 0</column>
+<column name="tmp_100_reg_263">64, 0, 64, 0</column>
+<column name="tmp_101_reg_268">64, 0, 64, 0</column>
+<column name="tmp_113_reg_243">1, 0, 1, 0</column>
+<column name="tmp_138_cast_reg_225">17, 0, 17, 0</column>
+<column name="tmp_93_reg_238">17, 0, 17, 0</column>
+<column name="tmp_97_reg_248">2, 0, 2, 0</column>
+<column name="tmp_99_reg_253">4, 0, 4, 0</column>
+</table>
+</item>
+</section>
+</item>
+</section>
+
+<section name = "Interface" level="0">
+<item name = "Summary"><table name="" hasTotal="0">
+<keys size="6">RTL Ports, Dir, Bits, Protocol, Source Object, C Type</keys>
+<column name="ap_clk">in, 1, ap_ctrl_hs, KernelMaker, return value</column>
+<column name="ap_rst">in, 1, ap_ctrl_hs, KernelMaker, return value</column>
+<column name="ap_start">in, 1, ap_ctrl_hs, KernelMaker, return value</column>
+<column name="ap_done">out, 1, ap_ctrl_hs, KernelMaker, return value</column>
+<column name="ap_idle">out, 1, ap_ctrl_hs, KernelMaker, return value</column>
+<column name="ap_ready">out, 1, ap_ctrl_hs, KernelMaker, return value</column>
+<column name="kernel_M_real_din">out, 32, ap_fifo, kernel_M_real, pointer</column>
+<column name="kernel_M_real_full_n">in, 1, ap_fifo, kernel_M_real, pointer</column>
+<column name="kernel_M_real_write">out, 1, ap_fifo, kernel_M_real, pointer</column>
+<column name="kernel_M_imag_din">out, 32, ap_fifo, kernel_M_imag, pointer</column>
+<column name="kernel_M_imag_full_n">in, 1, ap_fifo, kernel_M_imag, pointer</column>
+<column name="kernel_M_imag_write">out, 1, ap_fifo, kernel_M_imag, pointer</column>
+</table>
+</item>
+</section>
+</profile>

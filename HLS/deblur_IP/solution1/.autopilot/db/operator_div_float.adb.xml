@@ -1,0 +1,261 @@
+<stg><name>operator/<float></name>
+
+
+<trans_list>
+
+<trans id="11" from="1" to="2">
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+</trans>
+
+<trans id="12" from="2" to="3">
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+</trans>
+</trans_list>
+
+
+
+<state_list>
+
+<state id="1" st_id="1">
+
+<operation id="4" st_id="1" stage="1" lat="1">
+<core>FIFO</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+
+<Node id="7" bw="32" op_0_bw="32" op_1_bw="32">
+<![CDATA[
+:2  %p_r_M_real = call float @_ssdm_op_Read.ap_fifo.volatile.floatP(float* %p_x_M_real)
+
+]]></Node>
+<StgValue><ssdm name="p_r_M_real"/></StgValue>
+</operation>
+
+<operation id="5" st_id="1" stage="1" lat="1">
+<core>FIFO</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+
+<Node id="8" bw="32" op_0_bw="32" op_1_bw="32">
+<![CDATA[
+:3  %p_r_M_imag = call float @_ssdm_op_Read.ap_fifo.volatile.floatP(float* %p_x_M_imag)
+
+]]></Node>
+<StgValue><ssdm name="p_r_M_imag"/></StgValue>
+</operation>
+</state>
+
+<state id="2" st_id="2">
+
+<operation id="6" st_id="2" stage="2" lat="2">
+<core></core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+
+<Node id="9" bw="64" op_0_bw="64" op_1_bw="32" op_2_bw="32" op_3_bw="32" op_4_bw="32">
+<![CDATA[
+:4  %tmp1 = call fastcc { float, float } @"operator/=<float>"(float %p_r_M_real, float %p_r_M_imag, float* %p_y_M_real, float* %p_y_M_imag)
+
+]]></Node>
+<StgValue><ssdm name="tmp1"/></StgValue>
+</operation>
+</state>
+
+<state id="3" st_id="3">
+
+<operation id="7" st_id="3" stage="1" lat="1">
+<core>NULL</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+
+<Node id="5" bw="0" op_0_bw="0" op_1_bw="32" op_2_bw="32" op_3_bw="0" op_4_bw="32" op_5_bw="32" op_6_bw="0" op_7_bw="32" op_8_bw="32" op_9_bw="0" op_10_bw="0" op_11_bw="0" op_12_bw="32" op_13_bw="32" op_14_bw="32" op_15_bw="32" op_16_bw="0" op_17_bw="0">
+<![CDATA[
+:0  call void (...)* @_ssdm_op_SpecInterface(float* %p_y_M_real, float* %p_y_M_imag, [8 x i8]* @p_str11, i32 0, i32 0, [1 x i8]* @p_str3, i32 0, i32 1024, [1 x i8]* @p_str3, [1 x i8]* @p_str3, [1 x i8]* @p_str3, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str3, [1 x i8]* @p_str3)
+
+]]></Node>
+<StgValue><ssdm name=""/></StgValue>
+</operation>
+
+<operation id="8" st_id="3" stage="1" lat="1">
+<core>NULL</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+
+<Node id="6" bw="0" op_0_bw="0" op_1_bw="32" op_2_bw="32" op_3_bw="0" op_4_bw="32" op_5_bw="32" op_6_bw="0" op_7_bw="32" op_8_bw="32" op_9_bw="0" op_10_bw="0" op_11_bw="0" op_12_bw="32" op_13_bw="32" op_14_bw="32" op_15_bw="32" op_16_bw="0" op_17_bw="0">
+<![CDATA[
+:1  call void (...)* @_ssdm_op_SpecInterface(float* %p_x_M_real, float* %p_x_M_imag, [8 x i8]* @p_str11, i32 0, i32 0, [1 x i8]* @p_str3, i32 0, i32 1024, [1 x i8]* @p_str3, [1 x i8]* @p_str3, [1 x i8]* @p_str3, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str3, [1 x i8]* @p_str3)
+
+]]></Node>
+<StgValue><ssdm name=""/></StgValue>
+</operation>
+
+<operation id="9" st_id="3" stage="1" lat="2">
+<core></core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+
+<Node id="9" bw="64" op_0_bw="64" op_1_bw="32" op_2_bw="32" op_3_bw="32" op_4_bw="32">
+<![CDATA[
+:4  %tmp1 = call fastcc { float, float } @"operator/=<float>"(float %p_r_M_real, float %p_r_M_imag, float* %p_y_M_real, float* %p_y_M_imag)
+
+]]></Node>
+<StgValue><ssdm name="tmp1"/></StgValue>
+</operation>
+
+<operation id="10" st_id="3" stage="1" lat="1">
+<core>NULL</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+
+<Node id="10" bw="0" op_0_bw="64">
+<![CDATA[
+:5  ret { float, float } %tmp1
+
+]]></Node>
+<StgValue><ssdm name=""/></StgValue>
+</operation>
+</state>
+</state_list>
+
+
+<ports>
+<port id="13" name="p_x_M_real" dir="0" iftype="3">
+<core>FIFO</core><StgValue><ssdm name="p_x_M_real"/></StgValue>
+</port>
+<port id="14" name="p_x_M_imag" dir="0" iftype="3">
+<core>FIFO</core><StgValue><ssdm name="p_x_M_imag"/></StgValue>
+</port>
+<port id="15" name="p_y_M_real" dir="0" iftype="3">
+<core>FIFO</core><StgValue><ssdm name="p_y_M_real"/></StgValue>
+</port>
+<port id="16" name="p_y_M_imag" dir="0" iftype="3">
+<core>FIFO</core><StgValue><ssdm name="p_y_M_imag"/></StgValue>
+</port>
+</ports>
+
+
+<dataflows>
+<dataflow id="18" from="_ssdm_op_Read.ap_fifo.volatile.floatP" to="p_r_M_real" fromId="17" toId="4">
+</dataflow>
+<dataflow id="19" from="p_x_M_real" to="p_r_M_real" fromId="13" toId="4">
+</dataflow>
+<dataflow id="20" from="_ssdm_op_Read.ap_fifo.volatile.floatP" to="p_r_M_imag" fromId="17" toId="5">
+</dataflow>
+<dataflow id="21" from="p_x_M_imag" to="p_r_M_imag" fromId="14" toId="5">
+</dataflow>
+<dataflow id="23" from="operator/=<float>" to="tmp1" fromId="22" toId="6">
+</dataflow>
+<dataflow id="24" from="p_r_M_real" to="tmp1" fromId="4" toId="6">
+</dataflow>
+<dataflow id="25" from="p_r_M_imag" to="tmp1" fromId="5" toId="6">
+</dataflow>
+<dataflow id="26" from="p_y_M_real" to="tmp1" fromId="15" toId="6">
+</dataflow>
+<dataflow id="27" from="p_y_M_imag" to="tmp1" fromId="16" toId="6">
+</dataflow>
+<dataflow id="29" from="_ssdm_op_SpecInterface" to="StgValue_7" fromId="28" toId="7">
+</dataflow>
+<dataflow id="30" from="p_y_M_real" to="StgValue_7" fromId="15" toId="7">
+</dataflow>
+<dataflow id="31" from="p_y_M_imag" to="StgValue_7" fromId="16" toId="7">
+</dataflow>
+<dataflow id="33" from="p_str11" to="StgValue_7" fromId="32" toId="7">
+</dataflow>
+<dataflow id="35" from="StgValue_34" to="StgValue_7" fromId="34" toId="7">
+</dataflow>
+<dataflow id="36" from="StgValue_34" to="StgValue_7" fromId="34" toId="7">
+</dataflow>
+<dataflow id="38" from="p_str3" to="StgValue_7" fromId="37" toId="7">
+</dataflow>
+<dataflow id="39" from="StgValue_34" to="StgValue_7" fromId="34" toId="7">
+</dataflow>
+<dataflow id="41" from="StgValue_40" to="StgValue_7" fromId="40" toId="7">
+</dataflow>
+<dataflow id="42" from="p_str3" to="StgValue_7" fromId="37" toId="7">
+</dataflow>
+<dataflow id="43" from="p_str3" to="StgValue_7" fromId="37" toId="7">
+</dataflow>
+<dataflow id="44" from="p_str3" to="StgValue_7" fromId="37" toId="7">
+</dataflow>
+<dataflow id="45" from="StgValue_34" to="StgValue_7" fromId="34" toId="7">
+</dataflow>
+<dataflow id="46" from="StgValue_34" to="StgValue_7" fromId="34" toId="7">
+</dataflow>
+<dataflow id="47" from="StgValue_34" to="StgValue_7" fromId="34" toId="7">
+</dataflow>
+<dataflow id="48" from="StgValue_34" to="StgValue_7" fromId="34" toId="7">
+</dataflow>
+<dataflow id="49" from="p_str3" to="StgValue_7" fromId="37" toId="7">
+</dataflow>
+<dataflow id="50" from="p_str3" to="StgValue_7" fromId="37" toId="7">
+</dataflow>
+<dataflow id="51" from="_ssdm_op_SpecInterface" to="StgValue_8" fromId="28" toId="8">
+</dataflow>
+<dataflow id="52" from="p_x_M_real" to="StgValue_8" fromId="13" toId="8">
+</dataflow>
+<dataflow id="53" from="p_x_M_imag" to="StgValue_8" fromId="14" toId="8">
+</dataflow>
+<dataflow id="54" from="p_str11" to="StgValue_8" fromId="32" toId="8">
+</dataflow>
+<dataflow id="55" from="StgValue_34" to="StgValue_8" fromId="34" toId="8">
+</dataflow>
+<dataflow id="56" from="StgValue_34" to="StgValue_8" fromId="34" toId="8">
+</dataflow>
+<dataflow id="57" from="p_str3" to="StgValue_8" fromId="37" toId="8">
+</dataflow>
+<dataflow id="58" from="StgValue_34" to="StgValue_8" fromId="34" toId="8">
+</dataflow>
+<dataflow id="59" from="StgValue_40" to="StgValue_8" fromId="40" toId="8">
+</dataflow>
+<dataflow id="60" from="p_str3" to="StgValue_8" fromId="37" toId="8">
+</dataflow>
+<dataflow id="61" from="p_str3" to="StgValue_8" fromId="37" toId="8">
+</dataflow>
+<dataflow id="62" from="p_str3" to="StgValue_8" fromId="37" toId="8">
+</dataflow>
+<dataflow id="63" from="StgValue_34" to="StgValue_8" fromId="34" toId="8">
+</dataflow>
+<dataflow id="64" from="StgValue_34" to="StgValue_8" fromId="34" toId="8">
+</dataflow>
+<dataflow id="65" from="StgValue_34" to="StgValue_8" fromId="34" toId="8">
+</dataflow>
+<dataflow id="66" from="StgValue_34" to="StgValue_8" fromId="34" toId="8">
+</dataflow>
+<dataflow id="67" from="p_str3" to="StgValue_8" fromId="37" toId="8">
+</dataflow>
+<dataflow id="68" from="p_str3" to="StgValue_8" fromId="37" toId="8">
+</dataflow>
+<dataflow id="69" from="operator/=<float>" to="tmp1" fromId="22" toId="9">
+</dataflow>
+<dataflow id="70" from="p_r_M_real" to="tmp1" fromId="4" toId="9">
+</dataflow>
+<dataflow id="71" from="p_r_M_imag" to="tmp1" fromId="5" toId="9">
+</dataflow>
+<dataflow id="72" from="p_y_M_real" to="tmp1" fromId="15" toId="9">
+</dataflow>
+<dataflow id="73" from="p_y_M_imag" to="tmp1" fromId="16" toId="9">
+</dataflow>
+<dataflow id="74" from="tmp1" to="StgValue_10" fromId="9" toId="10">
+</dataflow>
+</dataflows>
+
+
+</stg>

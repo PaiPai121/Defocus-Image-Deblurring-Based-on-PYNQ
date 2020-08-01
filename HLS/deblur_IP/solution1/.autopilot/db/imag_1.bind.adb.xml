@@ -1,0 +1,195 @@
+<stg><name>imag.1</name>
+
+
+<trans_list>
+</trans_list>
+
+
+
+<state_list>
+
+<state id="1" st_id="1">
+
+<operation id="2" st_id="1" stage="1" lat="1">
+<core>NULL</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+
+<Node id="3" bw="0" op_0_bw="0" op_1_bw="64" op_2_bw="0" op_3_bw="32" op_4_bw="32" op_5_bw="0" op_6_bw="32" op_7_bw="32" op_8_bw="0" op_9_bw="0" op_10_bw="0" op_11_bw="32" op_12_bw="32" op_13_bw="32" op_14_bw="32" op_15_bw="0" op_16_bw="0">
+<![CDATA[
+:0  call void (...)* @_ssdm_op_SpecInterface(i64* %complex_float_s, [8 x i8]* @p_str11, i32 0, i32 0, [1 x i8]* @p_str3, i32 0, i32 1024, [1 x i8]* @p_str3, [1 x i8]* @p_str3, [1 x i8]* @p_str3, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str3, [1 x i8]* @p_str3)
+
+]]></Node>
+<StgValue><ssdm name=""/></StgValue>
+</operation>
+
+<operation id="3" st_id="1" stage="1" lat="1">
+<core>NULL</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+
+<Node id="4" bw="32" op_0_bw="32" op_1_bw="32">
+<![CDATA[
+:1  %p_val_read = call float @_ssdm_op_Read.ap_auto.float(float %p_val)
+
+]]></Node>
+<StgValue><ssdm name="p_val_read"/></StgValue>
+</operation>
+
+<operation id="4" st_id="1" stage="1" lat="1">
+<core>NULL</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+
+<Node id="5" bw="32" op_0_bw="32">
+<![CDATA[
+:2  %p_val_toint = bitcast float %p_val_read to i32
+
+]]></Node>
+<StgValue><ssdm name="p_val_toint"/></StgValue>
+</operation>
+
+<operation id="5" st_id="1" stage="1" lat="1">
+<core>FIFO</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+
+<Node id="6" bw="64" op_0_bw="64" op_1_bw="64">
+<![CDATA[
+:3  %complex_float_read = call i64 @_ssdm_op_Read.ap_fifo.volatile.i64P(i64* %complex_float_s)
+
+]]></Node>
+<StgValue><ssdm name="complex_float_read"/></StgValue>
+</operation>
+
+<operation id="6" st_id="1" stage="1" lat="1">
+<core>NULL</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+
+<Node id="7" bw="64" op_0_bw="64" op_1_bw="64" op_2_bw="32" op_3_bw="32" op_4_bw="32">
+<![CDATA[
+:4  %gep167_part_set = call i64 @llvm.part.set.i64.i32(i64 %complex_float_read, i32 %p_val_toint, i32 32, i32 63)
+
+]]></Node>
+<StgValue><ssdm name="gep167_part_set"/></StgValue>
+</operation>
+
+<operation id="7" st_id="1" stage="1" lat="1">
+<core>FIFO</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+
+<Node id="8" bw="0" op_0_bw="0" op_1_bw="64" op_2_bw="64">
+<![CDATA[
+:5  call void @_ssdm_op_Write.ap_fifo.volatile.i64P(i64* %complex_float_s, i64 %gep167_part_set)
+
+]]></Node>
+<StgValue><ssdm name=""/></StgValue>
+</operation>
+
+<operation id="8" st_id="1" stage="1" lat="1">
+<core>NULL</core>
+<MemPortIdVec></MemPortIdVec>
+<condition id="-1">
+<or_exp><and_exp></and_exp></or_exp>
+</condition>
+
+<Node id="9" bw="0">
+<![CDATA[
+:6  ret void
+
+]]></Node>
+<StgValue><ssdm name=""/></StgValue>
+</operation>
+</state>
+</state_list>
+
+
+<ports>
+<port id="9" name="complex_float_s" dir="2" iftype="3">
+<core>FIFO</core><StgValue><ssdm name="complex_float_s"/></StgValue>
+</port>
+<port id="10" name="p_val" dir="0" iftype="0">
+<core>NULL</core><StgValue><ssdm name="p_val"/></StgValue>
+</port>
+</ports>
+
+
+<dataflows>
+<dataflow id="12" from="_ssdm_op_SpecInterface" to="StgValue_2" fromId="11" toId="2">
+</dataflow>
+<dataflow id="13" from="complex_float_s" to="StgValue_2" fromId="9" toId="2">
+</dataflow>
+<dataflow id="15" from="p_str11" to="StgValue_2" fromId="14" toId="2">
+</dataflow>
+<dataflow id="17" from="StgValue_16" to="StgValue_2" fromId="16" toId="2">
+</dataflow>
+<dataflow id="18" from="StgValue_16" to="StgValue_2" fromId="16" toId="2">
+</dataflow>
+<dataflow id="20" from="p_str3" to="StgValue_2" fromId="19" toId="2">
+</dataflow>
+<dataflow id="21" from="StgValue_16" to="StgValue_2" fromId="16" toId="2">
+</dataflow>
+<dataflow id="23" from="StgValue_22" to="StgValue_2" fromId="22" toId="2">
+</dataflow>
+<dataflow id="24" from="p_str3" to="StgValue_2" fromId="19" toId="2">
+</dataflow>
+<dataflow id="25" from="p_str3" to="StgValue_2" fromId="19" toId="2">
+</dataflow>
+<dataflow id="26" from="p_str3" to="StgValue_2" fromId="19" toId="2">
+</dataflow>
+<dataflow id="27" from="StgValue_16" to="StgValue_2" fromId="16" toId="2">
+</dataflow>
+<dataflow id="28" from="StgValue_16" to="StgValue_2" fromId="16" toId="2">
+</dataflow>
+<dataflow id="29" from="StgValue_16" to="StgValue_2" fromId="16" toId="2">
+</dataflow>
+<dataflow id="30" from="StgValue_16" to="StgValue_2" fromId="16" toId="2">
+</dataflow>
+<dataflow id="31" from="p_str3" to="StgValue_2" fromId="19" toId="2">
+</dataflow>
+<dataflow id="32" from="p_str3" to="StgValue_2" fromId="19" toId="2">
+</dataflow>
+<dataflow id="34" from="_ssdm_op_Read.ap_auto.float" to="p_val_read" fromId="33" toId="3">
+</dataflow>
+<dataflow id="35" from="p_val" to="p_val_read" fromId="10" toId="3">
+</dataflow>
+<dataflow id="36" from="p_val_read" to="p_val_toint" fromId="3" toId="4">
+</dataflow>
+<dataflow id="38" from="_ssdm_op_Read.ap_fifo.volatile.i64P" to="complex_float_read" fromId="37" toId="5">
+</dataflow>
+<dataflow id="39" from="complex_float_s" to="complex_float_read" fromId="9" toId="5">
+</dataflow>
+<dataflow id="41" from="llvm.part.set.i64.i32" to="gep167_part_set" fromId="40" toId="6">
+</dataflow>
+<dataflow id="42" from="complex_float_read" to="gep167_part_set" fromId="5" toId="6">
+</dataflow>
+<dataflow id="43" from="p_val_toint" to="gep167_part_set" fromId="4" toId="6">
+</dataflow>
+<dataflow id="45" from="StgValue_44" to="gep167_part_set" fromId="44" toId="6">
+</dataflow>
+<dataflow id="47" from="StgValue_46" to="gep167_part_set" fromId="46" toId="6">
+</dataflow>
+<dataflow id="49" from="_ssdm_op_Write.ap_fifo.volatile.i64P" to="StgValue_7" fromId="48" toId="7">
+</dataflow>
+<dataflow id="50" from="complex_float_s" to="StgValue_7" fromId="9" toId="7">
+</dataflow>
+<dataflow id="51" from="gep167_part_set" to="StgValue_7" fromId="6" toId="7">
+</dataflow>
+</dataflows>
+
+
+</stg>

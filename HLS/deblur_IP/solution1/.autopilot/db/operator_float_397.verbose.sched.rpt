@@ -1,0 +1,204 @@
+
+
+================================================================
+== Vivado HLS Report for 'operator_float_397'
+================================================================
+* Date:           Sat Aug  1 17:12:57 2020
+
+* Version:        2018.3 (Build 2405991 on Thu Dec 06 23:56:15 MST 2018)
+* Project:        deblur_IP
+* Solution:       solution1
+* Product family: zynq
+* Target device:  xc7z020clg400-1
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing (ns): 
+    * Summary: 
+    +--------+-------+----------+------------+
+    |  Clock | Target| Estimated| Uncertainty|
+    +--------+-------+----------+------------+
+    |ap_clk  |  10.00|     7.256|        1.25|
+    +--------+-------+----------+------------+
+
++ Latency (clock cycles): 
+    * Summary: 
+    +-----+-----+-----+-----+----------+
+    |  Latency  |  Interval | Pipeline |
+    | min | max | min | max |   Type   |
+    +-----+-----+-----+-----+----------+
+    |    9|    9|    1|    1| function |
+    +-----+-----+-----+-----+----------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        N/A
+
+============================================================
++ Verbose Summary: Synthesis Manager
+============================================================
+InlineROM: 1
+ExposeGlobal: 0
+============================================================
++ Verbose Summary: CDFG Model
+============================================================
+IsTopModel: 0
+ResetActiveHigh: 1
+IsCombinational: 0
+IsDatapathOnly: 0
+HasWiredReturn: 1
+HasMFsm: 2
+HasVarLatency: 0
+IsPipeline: 1
+IsRtlPipelined: 1
+IsInstanceOverlapped: 0
+IsDontTouch: 0
+HasImplIP: 0
+IsGatedGlobalClock: 0
+
++ Individual pipeline summary: 
+  * Pipeline-0: initiation interval (II) = 1, depth = 10
+
+
+============================================================
++ Verbose Summary: Schedule
+============================================================
+* Number of FSM states : 10
+* Pipeline : 1
+  Pipeline-0 : II = 1, D = 10, States = { 1 2 3 4 5 6 7 8 9 10 }
+* Dataflow Pipeline: 0
+
+* FSM state transitions: 
+1 --> 
+	2  / true
+2 --> 
+	3  / true
+3 --> 
+	4  / true
+4 --> 
+	5  / true
+5 --> 
+	6  / true
+6 --> 
+	7  / true
+7 --> 
+	8  / true
+8 --> 
+	9  / true
+9 --> 
+	10  / true
+10 --> 
+
+* FSM state operations: 
+
+State 1 <SV = 0> <Delay = 3.63>
+ST_1 : Operation 11 [1/1] (3.63ns)   --->   "%p_r_M_real = call float @_ssdm_op_Read.ap_fifo.volatile.floatP(float* @xk1_M_real)"   --->   Operation 11 'read' 'p_r_M_real' <Predicate = true> <Delay = 3.63> <Core = "FIFO">   --->   Core 32 'FIFO' <Latency = 0> <II = 1> <Delay = 3.63> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = 32> <Depth = 2> <FIFO>
+ST_1 : Operation 12 [1/1] (3.63ns)   --->   "%p_r_M_imag = call float @_ssdm_op_Read.ap_fifo.volatile.floatP(float* @xk1_M_imag)"   --->   Operation 12 'read' 'p_r_M_imag' <Predicate = true> <Delay = 3.63> <Core = "FIFO">   --->   Core 32 'FIFO' <Latency = 0> <II = 1> <Delay = 3.63> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = 32> <Depth = 2> <FIFO>
+ST_1 : Operation 13 [10/10] (0.00ns)   --->   "%tmp1 = call fastcc { float, float } @"operator*=<float>398"(float %p_r_M_real, float %p_r_M_imag)"   --->   Operation 13 'call' 'tmp1' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 2 <SV = 1> <Delay = 7.25>
+ST_2 : Operation 14 [9/10] (7.25ns)   --->   "%tmp1 = call fastcc { float, float } @"operator*=<float>398"(float %p_r_M_real, float %p_r_M_imag)"   --->   Operation 14 'call' 'tmp1' <Predicate = true> <Delay = 7.25> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 3 <SV = 2> <Delay = 7.25>
+ST_3 : Operation 15 [8/10] (7.25ns)   --->   "%tmp1 = call fastcc { float, float } @"operator*=<float>398"(float %p_r_M_real, float %p_r_M_imag)"   --->   Operation 15 'call' 'tmp1' <Predicate = true> <Delay = 7.25> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 4 <SV = 3> <Delay = 7.25>
+ST_4 : Operation 16 [7/10] (7.25ns)   --->   "%tmp1 = call fastcc { float, float } @"operator*=<float>398"(float %p_r_M_real, float %p_r_M_imag)"   --->   Operation 16 'call' 'tmp1' <Predicate = true> <Delay = 7.25> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 5 <SV = 4> <Delay = 7.25>
+ST_5 : Operation 17 [6/10] (7.25ns)   --->   "%tmp1 = call fastcc { float, float } @"operator*=<float>398"(float %p_r_M_real, float %p_r_M_imag)"   --->   Operation 17 'call' 'tmp1' <Predicate = true> <Delay = 7.25> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 6 <SV = 5> <Delay = 7.25>
+ST_6 : Operation 18 [5/10] (7.25ns)   --->   "%tmp1 = call fastcc { float, float } @"operator*=<float>398"(float %p_r_M_real, float %p_r_M_imag)"   --->   Operation 18 'call' 'tmp1' <Predicate = true> <Delay = 7.25> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 7 <SV = 6> <Delay = 7.25>
+ST_7 : Operation 19 [4/10] (7.25ns)   --->   "%tmp1 = call fastcc { float, float } @"operator*=<float>398"(float %p_r_M_real, float %p_r_M_imag)"   --->   Operation 19 'call' 'tmp1' <Predicate = true> <Delay = 7.25> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 8 <SV = 7> <Delay = 7.25>
+ST_8 : Operation 20 [3/10] (7.25ns)   --->   "%tmp1 = call fastcc { float, float } @"operator*=<float>398"(float %p_r_M_real, float %p_r_M_imag)"   --->   Operation 20 'call' 'tmp1' <Predicate = true> <Delay = 7.25> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 9 <SV = 8> <Delay = 7.25>
+ST_9 : Operation 21 [2/10] (7.25ns)   --->   "%tmp1 = call fastcc { float, float } @"operator*=<float>398"(float %p_r_M_real, float %p_r_M_imag)"   --->   Operation 21 'call' 'tmp1' <Predicate = true> <Delay = 7.25> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 10 <SV = 9> <Delay = 7.25>
+ST_10 : Operation 22 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecInterface(float* @xk1_M_real, float* @xk1_M_imag, [8 x i8]* @p_str11, i32 0, i32 0, [1 x i8]* @p_str3, i32 0, i32 1024, [1 x i8]* @p_str3, [1 x i8]* @p_str3, [1 x i8]* @p_str3, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str3, [1 x i8]* @p_str3)"   --->   Operation 22 'specinterface' <Predicate = true> <Delay = 0.00>
+ST_10 : Operation 23 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecInterface(float* @fft_kernel_M_real, float* @fft_kernel_M_imag, [8 x i8]* @p_str11, i32 0, i32 0, [1 x i8]* @p_str3, i32 0, i32 1024, [1 x i8]* @p_str3, [1 x i8]* @p_str3, [1 x i8]* @p_str3, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str3, [1 x i8]* @p_str3)"   --->   Operation 23 'specinterface' <Predicate = true> <Delay = 0.00>
+ST_10 : Operation 24 [1/10] (7.25ns)   --->   "%tmp1 = call fastcc { float, float } @"operator*=<float>398"(float %p_r_M_real, float %p_r_M_imag)"   --->   Operation 24 'call' 'tmp1' <Predicate = true> <Delay = 7.25> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_10 : Operation 25 [1/1] (0.00ns)   --->   "ret { float, float } %tmp1"   --->   Operation 25 'ret' <Predicate = true> <Delay = 0.00>
+
+
+============================================================
++ Verbose Summary: Timing violations
+============================================================
+Target clock period: 10ns, clock uncertainty: 1.25ns.
+
+ <State 1>: 3.63ns
+The critical path consists of the following:
+	fifo read on port 'xk1_M_real' [7]  (3.63 ns)
+
+ <State 2>: 7.26ns
+The critical path consists of the following:
+	'call' operation ('tmp1') to 'operator*=<float>398' [9]  (7.26 ns)
+
+ <State 3>: 7.26ns
+The critical path consists of the following:
+	'call' operation ('tmp1') to 'operator*=<float>398' [9]  (7.26 ns)
+
+ <State 4>: 7.26ns
+The critical path consists of the following:
+	'call' operation ('tmp1') to 'operator*=<float>398' [9]  (7.26 ns)
+
+ <State 5>: 7.26ns
+The critical path consists of the following:
+	'call' operation ('tmp1') to 'operator*=<float>398' [9]  (7.26 ns)
+
+ <State 6>: 7.26ns
+The critical path consists of the following:
+	'call' operation ('tmp1') to 'operator*=<float>398' [9]  (7.26 ns)
+
+ <State 7>: 7.26ns
+The critical path consists of the following:
+	'call' operation ('tmp1') to 'operator*=<float>398' [9]  (7.26 ns)
+
+ <State 8>: 7.26ns
+The critical path consists of the following:
+	'call' operation ('tmp1') to 'operator*=<float>398' [9]  (7.26 ns)
+
+ <State 9>: 7.26ns
+The critical path consists of the following:
+	'call' operation ('tmp1') to 'operator*=<float>398' [9]  (7.26 ns)
+
+ <State 10>: 7.26ns
+The critical path consists of the following:
+	'call' operation ('tmp1') to 'operator*=<float>398' [9]  (7.26 ns)
+
+
+============================================================
++ Verbose Summary: Binding
+============================================================
+N/A
+* FSMD analyzer results:
+  - Output states:
+ - Input state : 
+  - Chain level:
+	State 1
+	State 2
+	State 3
+	State 4
+	State 5
+	State 6
+	State 7
+	State 8
+	State 9
+	State 10
+
+
+============================================================
++ Verbose Summary: Datapath Resource usage 
+============================================================
+N/A

@@ -1,0 +1,74 @@
+{"sourceFile": [{
+      "name": "",
+      "directive": [
+        {
+          "functionName": "WienerDeblur",
+          "label": "",
+          "functionLabel": "",
+          "pragma": {
+            "name": "STREAM",
+            "option": [
+              {
+                "name": "variable",
+                "value": "src_bw",
+                "positionalBoolean": "4"
+              },
+              {
+                "name": "depth",
+                "value": "4"
+              },
+              {
+                "name": "dim",
+                "value": "1"
+              }
+            ]
+          }
+        },
+        {
+          "functionName": "WienerDeblur",
+          "label": "",
+          "functionLabel": "",
+          "pragma": {
+            "name": "STREAM",
+            "option": [
+              {
+                "name": "variable",
+                "value": "res",
+                "positionalBoolean": "4"
+              },
+              {
+                "name": "depth",
+                "value": "4"
+              },
+              {
+                "name": "dim",
+                "value": "1"
+              }
+            ]
+          }
+        },
+        {
+          "functionName": "WienerDeblur",
+          "label": "",
+          "functionLabel": "",
+          "pragma": {
+            "name": "STREAM",
+            "option": [
+              {
+                "name": "variable",
+                "value": "res_imag",
+                "positionalBoolean": "4"
+              },
+              {
+                "name": "depth",
+                "value": "4"
+              },
+              {
+                "name": "dim",
+                "value": "1"
+              }
+            ]
+          }
+        }
+      ]
+    }]}

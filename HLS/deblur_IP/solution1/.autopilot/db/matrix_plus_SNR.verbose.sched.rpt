@@ -1,0 +1,203 @@
+
+
+================================================================
+== Vivado HLS Report for 'matrix_plus_SNR'
+================================================================
+* Date:           Sat Aug  1 17:16:42 2020
+
+* Version:        2018.3 (Build 2405991 on Thu Dec 06 23:56:15 MST 2018)
+* Project:        deblur_IP
+* Solution:       solution1
+* Product family: zynq
+* Target device:  xc7z020clg400-1
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing (ns): 
+    * Summary: 
+    +--------+-------+----------+------------+
+    |  Clock | Target| Estimated| Uncertainty|
+    +--------+-------+----------+------------+
+    |ap_clk  |  10.00|    10.890|        1.25|
+    +--------+-------+----------+------------+
+
++ Latency (clock cycles): 
+    * Summary: 
+    +--------+--------+--------+--------+---------+
+    |     Latency     |     Interval    | Pipeline|
+    |   min  |   max  |   min  |   max  |   Type  |
+    +--------+--------+--------+--------+---------+
+    |  393729|  393729|  393729|  393729|   none  |
+    +--------+--------+--------+--------+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +-------------+--------+--------+----------+-----------+-----------+------+----------+
+        |             |     Latency     | Iteration|  Initiation Interval  | Trip |          |
+        |  Loop Name  |   min  |   max  |  Latency |  achieved |   target  | Count| Pipelined|
+        +-------------+--------+--------+----------+-----------+-----------+------+----------+
+        |- Loop 1     |  393728|  393728|      1538|          -|          -|   256|    no    |
+        | + Loop 1.1  |    1536|    1536|         6|          -|          -|   256|    no    |
+        +-------------+--------+--------+----------+-----------+-----------+------+----------+
+
+============================================================
++ Verbose Summary: Synthesis Manager
+============================================================
+InlineROM: 1
+ExposeGlobal: 0
+============================================================
++ Verbose Summary: CDFG Model
+============================================================
+IsTopModel: 0
+ResetActiveHigh: 1
+IsCombinational: 0
+IsDatapathOnly: 0
+HasWiredReturn: 1
+HasMFsm: 0
+HasVarLatency: 1
+IsPipeline: 0
+IsRtlPipelined: 0
+IsInstanceOverlapped: 0
+IsDontTouch: 0
+HasImplIP: 0
+IsGatedGlobalClock: 0
+
+
+============================================================
++ Verbose Summary: Schedule
+============================================================
+* Number of FSM states : 8
+* Pipeline : 0
+* Dataflow Pipeline: 0
+
+* FSM state transitions: 
+1 --> 
+	2  / true
+2 --> 
+	3  / (!exitcond1)
+3 --> 
+	4  / (!exitcond)
+	2  / (exitcond)
+4 --> 
+	5  / true
+5 --> 
+	6  / true
+6 --> 
+	7  / true
+7 --> 
+	8  / true
+8 --> 
+	3  / true
+
+* FSM state operations: 
+
+State 1 <SV = 0> <Delay = 1.76>
+ST_1 : Operation 9 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecInterface(float* @fft_kernel_modu2_M_s, float* @fft_kernel_modu2_M_1, [8 x i8]* @p_str11, i32 0, i32 0, [1 x i8]* @p_str3, i32 0, i32 1024, [1 x i8]* @p_str3, [1 x i8]* @p_str3, [1 x i8]* @p_str3, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str3, [1 x i8]* @p_str3)"   --->   Operation 9 'specinterface' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 10 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecInterface(float* @G1_M_real, float* @G1_M_imag, [8 x i8]* @p_str11, i32 0, i32 0, [1 x i8]* @p_str3, i32 0, i32 1024, [1 x i8]* @p_str3, [1 x i8]* @p_str3, [1 x i8]* @p_str3, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str3, [1 x i8]* @p_str3)"   --->   Operation 10 'specinterface' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 11 [1/1] (1.76ns)   --->   "br label %.loopexit" [WienerDeblur.cpp:486]   --->   Operation 11 'br' <Predicate = true> <Delay = 1.76>
+
+State 2 <SV = 1> <Delay = 1.82>
+ST_2 : Operation 12 [1/1] (0.00ns)   --->   "%r = phi i9 [ 0, %0 ], [ %r_1, %.loopexit.loopexit ]"   --->   Operation 12 'phi' 'r' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 13 [1/1] (1.66ns)   --->   "%exitcond1 = icmp eq i9 %r, -256" [WienerDeblur.cpp:486]   --->   Operation 13 'icmp' 'exitcond1' <Predicate = true> <Delay = 1.66> <Core = "Cmp">   --->   Core 25 'Cmp' <Latency = 0> <II = 1> <Delay = 1.66> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 14 [1/1] (0.00ns)   --->   "%empty = call i32 (...)* @_ssdm_op_SpecLoopTripCount(i64 256, i64 256, i64 256)"   --->   Operation 14 'speclooptripcount' 'empty' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 15 [1/1] (1.82ns)   --->   "%r_1 = add i9 %r, 1" [WienerDeblur.cpp:486]   --->   Operation 15 'add' 'r_1' <Predicate = true> <Delay = 1.82> <Core = "AddSub">   --->   Core 14 'AddSub' <Latency = 0> <II = 1> <Delay = 1.82> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 16 [1/1] (0.00ns)   --->   "br i1 %exitcond1, label %2, label %.preheader.preheader" [WienerDeblur.cpp:486]   --->   Operation 16 'br' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 17 [1/1] (1.76ns)   --->   "br label %.preheader" [WienerDeblur.cpp:487]   --->   Operation 17 'br' <Predicate = (!exitcond1)> <Delay = 1.76>
+ST_2 : Operation 18 [1/1] (0.00ns)   --->   "ret void" [WienerDeblur.cpp:492]   --->   Operation 18 'ret' <Predicate = (exitcond1)> <Delay = 0.00>
+
+State 3 <SV = 2> <Delay = 3.63>
+ST_3 : Operation 19 [1/1] (0.00ns)   --->   "%c = phi i9 [ %c_1, %1 ], [ 0, %.preheader.preheader ]"   --->   Operation 19 'phi' 'c' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 20 [1/1] (1.66ns)   --->   "%exitcond = icmp eq i9 %c, -256" [WienerDeblur.cpp:487]   --->   Operation 20 'icmp' 'exitcond' <Predicate = true> <Delay = 1.66> <Core = "Cmp">   --->   Core 25 'Cmp' <Latency = 0> <II = 1> <Delay = 1.66> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_3 : Operation 21 [1/1] (0.00ns)   --->   "%empty_67 = call i32 (...)* @_ssdm_op_SpecLoopTripCount(i64 256, i64 256, i64 256)"   --->   Operation 21 'speclooptripcount' 'empty_67' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 22 [1/1] (1.82ns)   --->   "%c_1 = add i9 %c, 1" [WienerDeblur.cpp:487]   --->   Operation 22 'add' 'c_1' <Predicate = true> <Delay = 1.82> <Core = "AddSub">   --->   Core 14 'AddSub' <Latency = 0> <II = 1> <Delay = 1.82> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_3 : Operation 23 [1/1] (0.00ns)   --->   "br i1 %exitcond, label %.loopexit.loopexit, label %1" [WienerDeblur.cpp:487]   --->   Operation 23 'br' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 24 [1/1] (3.63ns)   --->   "%fft_kernel_modu2_M_2 = call float @_ssdm_op_Read.ap_fifo.volatile.floatP(float* @fft_kernel_modu2_M_s)" [WienerDeblur.cpp:489]   --->   Operation 24 'read' 'fft_kernel_modu2_M_2' <Predicate = (!exitcond)> <Delay = 3.63> <Core = "FIFO">   --->   Core 32 'FIFO' <Latency = 0> <II = 1> <Delay = 3.63> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = 32> <Depth = 2> <FIFO>
+ST_3 : Operation 25 [1/1] (3.63ns)   --->   "%fft_kernel_modu2_M_3 = call float @_ssdm_op_Read.ap_fifo.volatile.floatP(float* @fft_kernel_modu2_M_1)" [WienerDeblur.cpp:490]   --->   Operation 25 'read' 'fft_kernel_modu2_M_3' <Predicate = (!exitcond)> <Delay = 3.63> <Core = "FIFO">   --->   Core 32 'FIFO' <Latency = 0> <II = 1> <Delay = 3.63> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = 32> <Depth = 2> <FIFO>
+ST_3 : Operation 26 [1/1] (0.00ns)   --->   "br label %.loopexit"   --->   Operation 26 'br' <Predicate = (exitcond)> <Delay = 0.00>
+
+State 4 <SV = 3> <Delay = 7.25>
+ST_4 : Operation 27 [5/5] (7.25ns)   --->   "%tmp_s = fadd float %fft_kernel_modu2_M_2, 0.000000e+00" [WienerDeblur.cpp:489]   --->   Operation 27 'fadd' 'tmp_s' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 104 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_4 : Operation 28 [1/1] (3.63ns)   --->   "call fastcc void @imag380(float* @G1_M_imag, float %fft_kernel_modu2_M_3)" [WienerDeblur.cpp:490]   --->   Operation 28 'call' <Predicate = true> <Delay = 3.63> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 5 <SV = 4> <Delay = 7.25>
+ST_5 : Operation 29 [4/5] (7.25ns)   --->   "%tmp_s = fadd float %fft_kernel_modu2_M_2, 0.000000e+00" [WienerDeblur.cpp:489]   --->   Operation 29 'fadd' 'tmp_s' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 104 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+
+State 6 <SV = 5> <Delay = 7.25>
+ST_6 : Operation 30 [3/5] (7.25ns)   --->   "%tmp_s = fadd float %fft_kernel_modu2_M_2, 0.000000e+00" [WienerDeblur.cpp:489]   --->   Operation 30 'fadd' 'tmp_s' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 104 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+
+State 7 <SV = 6> <Delay = 7.25>
+ST_7 : Operation 31 [2/5] (7.25ns)   --->   "%tmp_s = fadd float %fft_kernel_modu2_M_2, 0.000000e+00" [WienerDeblur.cpp:489]   --->   Operation 31 'fadd' 'tmp_s' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 104 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+
+State 8 <SV = 7> <Delay = 10.8>
+ST_8 : Operation 32 [1/5] (7.25ns)   --->   "%tmp_s = fadd float %fft_kernel_modu2_M_2, 0.000000e+00" [WienerDeblur.cpp:489]   --->   Operation 32 'fadd' 'tmp_s' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 104 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_8 : Operation 33 [1/1] (3.63ns)   --->   "call fastcc void @real379(float* @G1_M_real, float %tmp_s)" [WienerDeblur.cpp:489]   --->   Operation 33 'call' <Predicate = true> <Delay = 3.63> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_8 : Operation 34 [1/1] (0.00ns)   --->   "br label %.preheader" [WienerDeblur.cpp:487]   --->   Operation 34 'br' <Predicate = true> <Delay = 0.00>
+
+
+============================================================
++ Verbose Summary: Timing violations
+============================================================
+Target clock period: 10ns, clock uncertainty: 1.25ns.
+
+ <State 1>: 1.77ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation ('r') with incoming values : ('r', WienerDeblur.cpp:486) [9]  (1.77 ns)
+
+ <State 2>: 1.82ns
+The critical path consists of the following:
+	'phi' operation ('r') with incoming values : ('r', WienerDeblur.cpp:486) [9]  (0 ns)
+	'add' operation ('r', WienerDeblur.cpp:486) [12]  (1.82 ns)
+
+ <State 3>: 3.63ns
+The critical path consists of the following:
+	fifo read on port 'fft_kernel_modu2_M_s' (WienerDeblur.cpp:489) [23]  (3.63 ns)
+
+ <State 4>: 7.26ns
+The critical path consists of the following:
+	'fadd' operation ('tmp_s', WienerDeblur.cpp:489) [24]  (7.26 ns)
+
+ <State 5>: 7.26ns
+The critical path consists of the following:
+	'fadd' operation ('tmp_s', WienerDeblur.cpp:489) [24]  (7.26 ns)
+
+ <State 6>: 7.26ns
+The critical path consists of the following:
+	'fadd' operation ('tmp_s', WienerDeblur.cpp:489) [24]  (7.26 ns)
+
+ <State 7>: 7.26ns
+The critical path consists of the following:
+	'fadd' operation ('tmp_s', WienerDeblur.cpp:489) [24]  (7.26 ns)
+
+ <State 8>: 10.9ns
+The critical path consists of the following:
+	'fadd' operation ('tmp_s', WienerDeblur.cpp:489) [24]  (7.26 ns)
+	'call' operation (WienerDeblur.cpp:489) to 'real379' [25]  (3.63 ns)
+
+
+============================================================
++ Verbose Summary: Binding
+============================================================
+N/A
+* FSMD analyzer results:
+  - Output states:
+ - Input state : 
+  - Chain level:
+	State 1
+	State 2
+	State 3
+	State 4
+	State 5
+	State 6
+	State 7
+	State 8
+
+
+============================================================
++ Verbose Summary: Datapath Resource usage 
+============================================================
+N/A

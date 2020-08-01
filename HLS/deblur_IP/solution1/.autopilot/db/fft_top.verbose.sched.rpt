@@ -1,0 +1,170 @@
+
+
+================================================================
+== Vivado HLS Report for 'fft_top'
+================================================================
+* Date:           Sat Aug  1 17:12:54 2020
+
+* Version:        2018.3 (Build 2405991 on Thu Dec 06 23:56:15 MST 2018)
+* Project:        deblur_IP
+* Solution:       solution1
+* Product family: zynq
+* Target device:  xc7z020clg400-1
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing (ns): 
+    * Summary: 
+    +--------+-------+----------+------------+
+    |  Clock | Target| Estimated| Uncertainty|
+    +--------+-------+----------+------------+
+    |ap_clk  |  10.00|     8.750|        1.25|
+    +--------+-------+----------+------------+
+
++ Latency (clock cycles): 
+    * Summary: 
+    +------+------+------+------+---------+
+    |   Latency   |   Interval  | Pipeline|
+    |  min |  max |  min |  max |   Type  |
+    +------+------+------+------+---------+
+    |  4721|  4721|  4721|  4721|   none  |
+    +------+------+------+------+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        N/A
+
+============================================================
++ Verbose Summary: Synthesis Manager
+============================================================
+InlineROM: 1
+ExposeGlobal: 0
+============================================================
++ Verbose Summary: CDFG Model
+============================================================
+IsTopModel: 0
+ResetActiveHigh: 1
+IsCombinational: 0
+IsDatapathOnly: 0
+HasWiredReturn: 1
+HasMFsm: 0
+HasVarLatency: 1
+IsPipeline: 0
+IsRtlPipelined: 0
+IsInstanceOverlapped: 0
+IsDontTouch: 0
+HasImplIP: 0
+IsGatedGlobalClock: 0
+
+
+============================================================
++ Verbose Summary: Schedule
+============================================================
+* Number of FSM states : 6
+* Pipeline : 0
+* Dataflow Pipeline: 0
+
+* FSM state transitions: 
+1 --> 
+	2  / true
+2 --> 
+	3  / true
+3 --> 
+	4  / true
+4 --> 
+	5  / true
+5 --> 
+	6  / true
+6 --> 
+
+* FSM state operations: 
+
+State 1 <SV = 0> <Delay = 0.00>
+ST_1 : Operation 7 [1/1] (0.00ns)   --->   "%direction_read = call i1 @_ssdm_op_Read.ap_hs.i1(i1 %direction)"   --->   Operation 7 'read' 'direction_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 8 [1/1] (0.00ns)   --->   "%fft_status1_data_V = alloca i8, align 1" [WienerDeblur.cpp:360]   --->   Operation 8 'alloca' 'fft_status1_data_V' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 9 [1/1] (0.00ns)   --->   "%fft_config1_data_V = alloca i16, align 2" [WienerDeblur.cpp:361]   --->   Operation 9 'alloca' 'fft_config1_data_V' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 10 [2/2] (0.00ns)   --->   "%fft_config1_data_V_1 = call fastcc i16 @dummy_proc_fe.1395(i1 %direction_read, i64* %in_r)"   --->   Operation 10 'call' 'fft_config1_data_V_1' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 2 <SV = 1> <Delay = 3.63>
+ST_2 : Operation 11 [1/2] (0.00ns)   --->   "%fft_config1_data_V_1 = call fastcc i16 @dummy_proc_fe.1395(i1 %direction_read, i64* %in_r)"   --->   Operation 11 'call' 'fft_config1_data_V_1' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_2 : Operation 12 [1/1] (3.63ns)   --->   "call void @_ssdm_op_Write.ap_fifo.i16P(i16* %fft_config1_data_V, i16 %fft_config1_data_V_1)" [WienerDeblur.cpp:371]   --->   Operation 12 'write' <Predicate = true> <Delay = 3.63> <Core = "FIFO">   --->   Core 32 'FIFO' <Latency = 0> <II = 1> <Delay = 3.63> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = 8> <Depth = 2> <FIFO>
+
+State 3 <SV = 2> <Delay = 8.75>
+ST_3 : Operation 13 [2/2] (8.75ns)   --->   "call fastcc void @"fft<config1>"(i64* @xn1, i64* @xk1, i8* %fft_status1_data_V, i16* %fft_config1_data_V)"   --->   Operation 13 'call' <Predicate = true> <Delay = 8.75> <Core = "Vivado_FFT">   --->   Core 12 'Vivado_FFT' <Latency = 874> <II = 0> <Delay = 2.00> <IPBlock> <Opcode : > <InPorts = 2> <OutPorts = 1> <Async> <VivadoIP> <CReg>
+
+State 4 <SV = 3> <Delay = 8.75>
+ST_4 : Operation 14 [1/2] (8.75ns)   --->   "call fastcc void @"fft<config1>"(i64* @xn1, i64* @xk1, i8* %fft_status1_data_V, i16* %fft_config1_data_V)"   --->   Operation 14 'call' <Predicate = true> <Delay = 8.75> <Core = "Vivado_FFT">   --->   Core 12 'Vivado_FFT' <Latency = 874> <II = 0> <Delay = 2.00> <IPBlock> <Opcode : > <InPorts = 2> <OutPorts = 1> <Async> <VivadoIP> <CReg>
+
+State 5 <SV = 4> <Delay = 4.61>
+ST_5 : Operation 15 [1/1] (3.63ns)   --->   "%fft_status1_data_V_r = call i8 @_ssdm_op_Read.ap_fifo.i8P(i8* %fft_status1_data_V)" [WienerDeblur.cpp:377]   --->   Operation 15 'read' 'fft_status1_data_V_r' <Predicate = true> <Delay = 3.63> <Core = "FIFO">   --->   Core 32 'FIFO' <Latency = 0> <II = 1> <Delay = 3.63> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = 8> <Depth = 2> <FIFO>
+ST_5 : Operation 16 [2/2] (0.97ns)   --->   "call fastcc void @dummy_proc_middle.1394(i8 %fft_status1_data_V_r, i64* %out_r)" [WienerDeblur.cpp:377]   --->   Operation 16 'call' <Predicate = true> <Delay = 0.97> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 6 <SV = 5> <Delay = 0.00>
+ST_6 : Operation 17 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecInterface(i1 %direction, [6 x i8]* @p_str14, i32 0, i32 0, [1 x i8]* @p_str3, i32 0, i32 0, [1 x i8]* @p_str3, [1 x i8]* @p_str3, [1 x i8]* @p_str3, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str3, [1 x i8]* @p_str3) nounwind" [WienerDeblur.cpp:351]   --->   Operation 17 'specinterface' <Predicate = true> <Delay = 0.00>
+ST_6 : Operation 18 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecInterface(i64* %in_r, [8 x i8]* @p_str11, i32 0, i32 0, [1 x i8]* @p_str3, i32 0, i32 1024, [1 x i8]* @p_str3, [1 x i8]* @p_str3, [1 x i8]* @p_str3, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str3, [1 x i8]* @p_str3)"   --->   Operation 18 'specinterface' <Predicate = true> <Delay = 0.00>
+ST_6 : Operation 19 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecInterface(i64* %out_r, [8 x i8]* @p_str11, i32 0, i32 0, [1 x i8]* @p_str3, i32 0, i32 1024, [1 x i8]* @p_str3, [1 x i8]* @p_str3, [1 x i8]* @p_str3, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str3, [1 x i8]* @p_str3)"   --->   Operation 19 'specinterface' <Predicate = true> <Delay = 0.00>
+ST_6 : Operation 20 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecInterface(i64* @xn1, [8 x i8]* @p_str11, i32 0, i32 0, [1 x i8]* @p_str3, i32 0, i32 1024, [1 x i8]* @p_str3, [1 x i8]* @p_str3, [1 x i8]* @p_str3, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str3, [1 x i8]* @p_str3)"   --->   Operation 20 'specinterface' <Predicate = true> <Delay = 0.00>
+ST_6 : Operation 21 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecInterface(i64* @xk1, [8 x i8]* @p_str11, i32 0, i32 0, [1 x i8]* @p_str3, i32 0, i32 1024, [1 x i8]* @p_str3, [1 x i8]* @p_str3, [1 x i8]* @p_str3, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str3, [1 x i8]* @p_str3)"   --->   Operation 21 'specinterface' <Predicate = true> <Delay = 0.00>
+ST_6 : Operation 22 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecInterface(i8* %fft_status1_data_V, [8 x i8]* @p_str11, i32 0, i32 0, [1 x i8]* @p_str3, i32 0, i32 1024, [1 x i8]* @p_str3, [1 x i8]* @p_str3, [1 x i8]* @p_str3, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str3, [1 x i8]* @p_str3) nounwind" [WienerDeblur.cpp:368]   --->   Operation 22 'specinterface' <Predicate = true> <Delay = 0.00>
+ST_6 : Operation 23 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecInterface(i16* %fft_config1_data_V, [8 x i8]* @p_str11, i32 0, i32 0, [1 x i8]* @p_str3, i32 0, i32 1024, [1 x i8]* @p_str3, [1 x i8]* @p_str3, [1 x i8]* @p_str3, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str3, [1 x i8]* @p_str3) nounwind" [WienerDeblur.cpp:368]   --->   Operation 23 'specinterface' <Predicate = true> <Delay = 0.00>
+ST_6 : Operation 24 [1/2] (0.00ns)   --->   "call fastcc void @dummy_proc_middle.1394(i8 %fft_status1_data_V_r, i64* %out_r)" [WienerDeblur.cpp:377]   --->   Operation 24 'call' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_6 : Operation 25 [1/1] (0.00ns)   --->   "%empty = call i32 (...)* @_ssdm_op_SpecChannel([7 x i8]* @xk1305_str, i32 1, [1 x i8]* @p_str306, [1 x i8]* @p_str306, i32 256, i32 256, i64* @xk1, i64* @xk1)"   --->   Operation 25 'specchannel' 'empty' <Predicate = true> <Delay = 0.00>
+ST_6 : Operation 26 [1/1] (0.00ns)   --->   "%empty_71 = call i32 (...)* @_ssdm_op_SpecChannel([7 x i8]* @xn1290_str, i32 1, [1 x i8]* @p_str291, [1 x i8]* @p_str291, i32 256, i32 256, i64* @xn1, i64* @xn1)"   --->   Operation 26 'specchannel' 'empty_71' <Predicate = true> <Delay = 0.00>
+ST_6 : Operation 27 [1/1] (0.00ns)   --->   "ret void" [WienerDeblur.cpp:379]   --->   Operation 27 'ret' <Predicate = true> <Delay = 0.00>
+
+
+============================================================
++ Verbose Summary: Timing violations
+============================================================
+Target clock period: 10ns, clock uncertainty: 1.25ns.
+
+ <State 1>: 0ns
+The critical path consists of the following:
+
+ <State 2>: 3.63ns
+The critical path consists of the following:
+	'call' operation ('fft_config1.data.V') to 'dummy_proc_fe.1395' [16]  (0 ns)
+	fifo write on port 'fft_config1.data.V', WienerDeblur.cpp:361 (WienerDeblur.cpp:371) [17]  (3.63 ns)
+
+ <State 3>: 8.75ns
+The critical path consists of the following:
+	'call' operation to 'fft<config1>' [18]  (8.75 ns)
+
+ <State 4>: 8.75ns
+The critical path consists of the following:
+	'call' operation to 'fft<config1>' [18]  (8.75 ns)
+
+ <State 5>: 4.61ns
+The critical path consists of the following:
+	fifo read on port 'fft_status1.data.V', WienerDeblur.cpp:360 (WienerDeblur.cpp:377) [19]  (3.63 ns)
+	'call' operation (WienerDeblur.cpp:377) to 'dummy_proc_middle.1394' [20]  (0.978 ns)
+
+ <State 6>: 0ns
+The critical path consists of the following:
+
+
+============================================================
++ Verbose Summary: Binding
+============================================================
+N/A
+* FSMD analyzer results:
+  - Output states:
+ - Input state : 
+  - Chain level:
+	State 1
+	State 2
+	State 3
+	State 4
+	State 5
+	State 6
+
+
+============================================================
++ Verbose Summary: Datapath Resource usage 
+============================================================
+N/A

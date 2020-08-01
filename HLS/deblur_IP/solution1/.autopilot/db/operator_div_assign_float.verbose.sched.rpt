@@ -1,0 +1,409 @@
+
+
+================================================================
+== Vivado HLS Report for 'operator_div_assign_float'
+================================================================
+* Date:           Sat Aug  1 17:16:44 2020
+
+* Version:        2018.3 (Build 2405991 on Thu Dec 06 23:56:15 MST 2018)
+* Project:        deblur_IP
+* Solution:       solution1
+* Product family: zynq
+* Target device:  xc7z020clg400-1
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing (ns): 
+    * Summary: 
+    +--------+-------+----------+------------+
+    |  Clock | Target| Estimated| Uncertainty|
+    +--------+-------+----------+------------+
+    |ap_clk  |  10.00|     7.256|        1.25|
+    +--------+-------+----------+------------+
+
++ Latency (clock cycles): 
+    * Summary: 
+    +-----+-----+-----+-----+---------+
+    |  Latency  |  Interval | Pipeline|
+    | min | max | min | max |   Type  |
+    +-----+-----+-----+-----+---------+
+    |   25|   25|   25|   25|   none  |
+    +-----+-----+-----+-----+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        N/A
+
+============================================================
++ Verbose Summary: Synthesis Manager
+============================================================
+InlineROM: 1
+ExposeGlobal: 0
+============================================================
++ Verbose Summary: CDFG Model
+============================================================
+IsTopModel: 0
+ResetActiveHigh: 1
+IsCombinational: 0
+IsDatapathOnly: 0
+HasWiredReturn: 1
+HasMFsm: 0
+HasVarLatency: 1
+IsPipeline: 0
+IsRtlPipelined: 0
+IsInstanceOverlapped: 0
+IsDontTouch: 0
+HasImplIP: 0
+IsGatedGlobalClock: 0
+
+
+============================================================
++ Verbose Summary: Schedule
+============================================================
+* Number of FSM states : 26
+* Pipeline : 0
+* Dataflow Pipeline: 0
+
+* FSM state transitions: 
+1 --> 
+	2  / true
+2 --> 
+	3  / true
+3 --> 
+	4  / true
+4 --> 
+	5  / true
+5 --> 
+	6  / true
+6 --> 
+	7  / true
+7 --> 
+	8  / true
+8 --> 
+	9  / true
+9 --> 
+	10  / true
+10 --> 
+	11  / true
+11 --> 
+	12  / true
+12 --> 
+	13  / true
+13 --> 
+	14  / true
+14 --> 
+	15  / true
+15 --> 
+	16  / true
+16 --> 
+	17  / true
+17 --> 
+	18  / true
+18 --> 
+	19  / true
+19 --> 
+	20  / true
+20 --> 
+	21  / true
+21 --> 
+	22  / true
+22 --> 
+	23  / true
+23 --> 
+	24  / true
+24 --> 
+	25  / true
+25 --> 
+	26  / true
+26 --> 
+
+* FSM state operations: 
+
+State 1 <SV = 0> <Delay = 3.63>
+ST_1 : Operation 27 [1/1] (3.63ns)   --->   "%p_t_real = call float @_ssdm_op_Read.ap_fifo.volatile.floatP(float* %p_z_M_real)"   --->   Operation 27 'read' 'p_t_real' <Predicate = true> <Delay = 3.63> <Core = "FIFO">   --->   Core 32 'FIFO' <Latency = 0> <II = 1> <Delay = 3.63> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = 32> <Depth = 2> <FIFO>
+ST_1 : Operation 28 [1/1] (3.63ns)   --->   "%p_t_imag = call float @_ssdm_op_Read.ap_fifo.volatile.floatP(float* %p_z_M_imag)"   --->   Operation 28 'read' 'p_t_imag' <Predicate = true> <Delay = 3.63> <Core = "FIFO">   --->   Core 32 'FIFO' <Latency = 0> <II = 1> <Delay = 3.63> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = 32> <Depth = 2> <FIFO>
+
+State 2 <SV = 1> <Delay = 5.70>
+ST_2 : Operation 29 [1/1] (0.00ns)   --->   "%complex_M_imag_read = call float @_ssdm_op_Read.ap_auto.float(float %complex_float_M_imag_read)"   --->   Operation 29 'read' 'complex_M_imag_read' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 30 [1/1] (0.00ns)   --->   "%complex_M_real_read = call float @_ssdm_op_Read.ap_auto.float(float %complex_float_M_real_read)"   --->   Operation 30 'read' 'complex_M_real_read' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 31 [4/4] (5.70ns)   --->   "%tmp = fmul float %p_t_real, %complex_M_real_read"   --->   Operation 31 'fmul' 'tmp' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 105 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 32 [4/4] (5.70ns)   --->   "%tmp_1 = fmul float %p_t_imag, %complex_M_imag_read"   --->   Operation 32 'fmul' 'tmp_1' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 105 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 33 [4/4] (5.70ns)   --->   "%tmp_3 = fmul float %p_t_real, %p_t_real"   --->   Operation 33 'fmul' 'tmp_3' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 105 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 34 [4/4] (5.70ns)   --->   "%tmp_4 = fmul float %p_t_imag, %p_t_imag"   --->   Operation 34 'fmul' 'tmp_4' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 105 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 35 [4/4] (5.70ns)   --->   "%tmp_6 = fmul float %p_t_real, %complex_M_imag_read"   --->   Operation 35 'fmul' 'tmp_6' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 105 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 36 [4/4] (5.70ns)   --->   "%tmp_7 = fmul float %p_t_imag, %complex_M_real_read"   --->   Operation 36 'fmul' 'tmp_7' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 105 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+
+State 3 <SV = 2> <Delay = 5.70>
+ST_3 : Operation 37 [3/4] (5.70ns)   --->   "%tmp = fmul float %p_t_real, %complex_M_real_read"   --->   Operation 37 'fmul' 'tmp' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 105 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_3 : Operation 38 [3/4] (5.70ns)   --->   "%tmp_1 = fmul float %p_t_imag, %complex_M_imag_read"   --->   Operation 38 'fmul' 'tmp_1' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 105 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_3 : Operation 39 [3/4] (5.70ns)   --->   "%tmp_3 = fmul float %p_t_real, %p_t_real"   --->   Operation 39 'fmul' 'tmp_3' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 105 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_3 : Operation 40 [3/4] (5.70ns)   --->   "%tmp_4 = fmul float %p_t_imag, %p_t_imag"   --->   Operation 40 'fmul' 'tmp_4' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 105 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_3 : Operation 41 [3/4] (5.70ns)   --->   "%tmp_6 = fmul float %p_t_real, %complex_M_imag_read"   --->   Operation 41 'fmul' 'tmp_6' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 105 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_3 : Operation 42 [3/4] (5.70ns)   --->   "%tmp_7 = fmul float %p_t_imag, %complex_M_real_read"   --->   Operation 42 'fmul' 'tmp_7' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 105 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+
+State 4 <SV = 3> <Delay = 5.70>
+ST_4 : Operation 43 [2/4] (5.70ns)   --->   "%tmp = fmul float %p_t_real, %complex_M_real_read"   --->   Operation 43 'fmul' 'tmp' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 105 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_4 : Operation 44 [2/4] (5.70ns)   --->   "%tmp_1 = fmul float %p_t_imag, %complex_M_imag_read"   --->   Operation 44 'fmul' 'tmp_1' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 105 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_4 : Operation 45 [2/4] (5.70ns)   --->   "%tmp_3 = fmul float %p_t_real, %p_t_real"   --->   Operation 45 'fmul' 'tmp_3' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 105 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_4 : Operation 46 [2/4] (5.70ns)   --->   "%tmp_4 = fmul float %p_t_imag, %p_t_imag"   --->   Operation 46 'fmul' 'tmp_4' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 105 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_4 : Operation 47 [2/4] (5.70ns)   --->   "%tmp_6 = fmul float %p_t_real, %complex_M_imag_read"   --->   Operation 47 'fmul' 'tmp_6' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 105 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_4 : Operation 48 [2/4] (5.70ns)   --->   "%tmp_7 = fmul float %p_t_imag, %complex_M_real_read"   --->   Operation 48 'fmul' 'tmp_7' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 105 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+
+State 5 <SV = 4> <Delay = 5.70>
+ST_5 : Operation 49 [1/4] (5.70ns)   --->   "%tmp = fmul float %p_t_real, %complex_M_real_read"   --->   Operation 49 'fmul' 'tmp' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 105 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_5 : Operation 50 [1/4] (5.70ns)   --->   "%tmp_1 = fmul float %p_t_imag, %complex_M_imag_read"   --->   Operation 50 'fmul' 'tmp_1' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 105 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_5 : Operation 51 [1/4] (5.70ns)   --->   "%tmp_3 = fmul float %p_t_real, %p_t_real"   --->   Operation 51 'fmul' 'tmp_3' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 105 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_5 : Operation 52 [1/4] (5.70ns)   --->   "%tmp_4 = fmul float %p_t_imag, %p_t_imag"   --->   Operation 52 'fmul' 'tmp_4' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 105 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_5 : Operation 53 [1/4] (5.70ns)   --->   "%tmp_6 = fmul float %p_t_real, %complex_M_imag_read"   --->   Operation 53 'fmul' 'tmp_6' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 105 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+ST_5 : Operation 54 [1/4] (5.70ns)   --->   "%tmp_7 = fmul float %p_t_imag, %complex_M_real_read"   --->   Operation 54 'fmul' 'tmp_7' <Predicate = true> <Delay = 5.70> <Core = "FMul">   --->   Core 105 'FMul' <Latency = 3> <II = 1> <Delay = 5.70> <FuncUnit> <Opcode : 'fmul'> <InPorts = 2> <OutPorts = 1>
+
+State 6 <SV = 5> <Delay = 7.25>
+ST_6 : Operation 55 [5/5] (7.25ns)   --->   "%tmp_2 = fadd float %tmp, %tmp_1"   --->   Operation 55 'fadd' 'tmp_2' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 104 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_6 : Operation 56 [5/5] (7.25ns)   --->   "%tmp_5 = fadd float %tmp_3, %tmp_4"   --->   Operation 56 'fadd' 'tmp_5' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 104 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_6 : Operation 57 [5/5] (7.25ns)   --->   "%tmp_8 = fsub float %tmp_6, %tmp_7"   --->   Operation 57 'fsub' 'tmp_8' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 104 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+
+State 7 <SV = 6> <Delay = 7.25>
+ST_7 : Operation 58 [4/5] (7.25ns)   --->   "%tmp_2 = fadd float %tmp, %tmp_1"   --->   Operation 58 'fadd' 'tmp_2' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 104 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_7 : Operation 59 [4/5] (7.25ns)   --->   "%tmp_5 = fadd float %tmp_3, %tmp_4"   --->   Operation 59 'fadd' 'tmp_5' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 104 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_7 : Operation 60 [4/5] (7.25ns)   --->   "%tmp_8 = fsub float %tmp_6, %tmp_7"   --->   Operation 60 'fsub' 'tmp_8' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 104 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+
+State 8 <SV = 7> <Delay = 7.25>
+ST_8 : Operation 61 [3/5] (7.25ns)   --->   "%tmp_2 = fadd float %tmp, %tmp_1"   --->   Operation 61 'fadd' 'tmp_2' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 104 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_8 : Operation 62 [3/5] (7.25ns)   --->   "%tmp_5 = fadd float %tmp_3, %tmp_4"   --->   Operation 62 'fadd' 'tmp_5' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 104 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_8 : Operation 63 [3/5] (7.25ns)   --->   "%tmp_8 = fsub float %tmp_6, %tmp_7"   --->   Operation 63 'fsub' 'tmp_8' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 104 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+
+State 9 <SV = 8> <Delay = 7.25>
+ST_9 : Operation 64 [2/5] (7.25ns)   --->   "%tmp_2 = fadd float %tmp, %tmp_1"   --->   Operation 64 'fadd' 'tmp_2' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 104 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_9 : Operation 65 [2/5] (7.25ns)   --->   "%tmp_5 = fadd float %tmp_3, %tmp_4"   --->   Operation 65 'fadd' 'tmp_5' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 104 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_9 : Operation 66 [2/5] (7.25ns)   --->   "%tmp_8 = fsub float %tmp_6, %tmp_7"   --->   Operation 66 'fsub' 'tmp_8' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 104 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+
+State 10 <SV = 9> <Delay = 7.25>
+ST_10 : Operation 67 [1/5] (7.25ns)   --->   "%tmp_2 = fadd float %tmp, %tmp_1"   --->   Operation 67 'fadd' 'tmp_2' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 104 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_10 : Operation 68 [1/5] (7.25ns)   --->   "%tmp_5 = fadd float %tmp_3, %tmp_4"   --->   Operation 68 'fadd' 'tmp_5' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 104 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+ST_10 : Operation 69 [1/5] (7.25ns)   --->   "%tmp_8 = fsub float %tmp_6, %tmp_7"   --->   Operation 69 'fsub' 'tmp_8' <Predicate = true> <Delay = 7.25> <Core = "FAddSub">   --->   Core 104 'FAddSub' <Latency = 4> <II = 1> <Delay = 7.25> <FuncUnit> <Opcode : 'fadd' 'fsub'> <InPorts = 2> <OutPorts = 1>
+
+State 11 <SV = 10> <Delay = 6.07>
+ST_11 : Operation 70 [16/16] (6.07ns)   --->   "%complex_M_real_writ = fdiv float %tmp_2, %tmp_5"   --->   Operation 70 'fdiv' 'complex_M_real_writ' <Predicate = true> <Delay = 6.07> <Core = "FDiv">   --->   Core 106 'FDiv' <Latency = 15> <II = 1> <Delay = 6.07> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+ST_11 : Operation 71 [16/16] (6.07ns)   --->   "%complex_M_imag_writ = fdiv float %tmp_8, %tmp_5"   --->   Operation 71 'fdiv' 'complex_M_imag_writ' <Predicate = true> <Delay = 6.07> <Core = "FDiv">   --->   Core 106 'FDiv' <Latency = 15> <II = 1> <Delay = 6.07> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+
+State 12 <SV = 11> <Delay = 6.07>
+ST_12 : Operation 72 [15/16] (6.07ns)   --->   "%complex_M_real_writ = fdiv float %tmp_2, %tmp_5"   --->   Operation 72 'fdiv' 'complex_M_real_writ' <Predicate = true> <Delay = 6.07> <Core = "FDiv">   --->   Core 106 'FDiv' <Latency = 15> <II = 1> <Delay = 6.07> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+ST_12 : Operation 73 [15/16] (6.07ns)   --->   "%complex_M_imag_writ = fdiv float %tmp_8, %tmp_5"   --->   Operation 73 'fdiv' 'complex_M_imag_writ' <Predicate = true> <Delay = 6.07> <Core = "FDiv">   --->   Core 106 'FDiv' <Latency = 15> <II = 1> <Delay = 6.07> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+
+State 13 <SV = 12> <Delay = 6.07>
+ST_13 : Operation 74 [14/16] (6.07ns)   --->   "%complex_M_real_writ = fdiv float %tmp_2, %tmp_5"   --->   Operation 74 'fdiv' 'complex_M_real_writ' <Predicate = true> <Delay = 6.07> <Core = "FDiv">   --->   Core 106 'FDiv' <Latency = 15> <II = 1> <Delay = 6.07> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+ST_13 : Operation 75 [14/16] (6.07ns)   --->   "%complex_M_imag_writ = fdiv float %tmp_8, %tmp_5"   --->   Operation 75 'fdiv' 'complex_M_imag_writ' <Predicate = true> <Delay = 6.07> <Core = "FDiv">   --->   Core 106 'FDiv' <Latency = 15> <II = 1> <Delay = 6.07> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+
+State 14 <SV = 13> <Delay = 6.07>
+ST_14 : Operation 76 [13/16] (6.07ns)   --->   "%complex_M_real_writ = fdiv float %tmp_2, %tmp_5"   --->   Operation 76 'fdiv' 'complex_M_real_writ' <Predicate = true> <Delay = 6.07> <Core = "FDiv">   --->   Core 106 'FDiv' <Latency = 15> <II = 1> <Delay = 6.07> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+ST_14 : Operation 77 [13/16] (6.07ns)   --->   "%complex_M_imag_writ = fdiv float %tmp_8, %tmp_5"   --->   Operation 77 'fdiv' 'complex_M_imag_writ' <Predicate = true> <Delay = 6.07> <Core = "FDiv">   --->   Core 106 'FDiv' <Latency = 15> <II = 1> <Delay = 6.07> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+
+State 15 <SV = 14> <Delay = 6.07>
+ST_15 : Operation 78 [12/16] (6.07ns)   --->   "%complex_M_real_writ = fdiv float %tmp_2, %tmp_5"   --->   Operation 78 'fdiv' 'complex_M_real_writ' <Predicate = true> <Delay = 6.07> <Core = "FDiv">   --->   Core 106 'FDiv' <Latency = 15> <II = 1> <Delay = 6.07> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+ST_15 : Operation 79 [12/16] (6.07ns)   --->   "%complex_M_imag_writ = fdiv float %tmp_8, %tmp_5"   --->   Operation 79 'fdiv' 'complex_M_imag_writ' <Predicate = true> <Delay = 6.07> <Core = "FDiv">   --->   Core 106 'FDiv' <Latency = 15> <II = 1> <Delay = 6.07> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+
+State 16 <SV = 15> <Delay = 6.07>
+ST_16 : Operation 80 [11/16] (6.07ns)   --->   "%complex_M_real_writ = fdiv float %tmp_2, %tmp_5"   --->   Operation 80 'fdiv' 'complex_M_real_writ' <Predicate = true> <Delay = 6.07> <Core = "FDiv">   --->   Core 106 'FDiv' <Latency = 15> <II = 1> <Delay = 6.07> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+ST_16 : Operation 81 [11/16] (6.07ns)   --->   "%complex_M_imag_writ = fdiv float %tmp_8, %tmp_5"   --->   Operation 81 'fdiv' 'complex_M_imag_writ' <Predicate = true> <Delay = 6.07> <Core = "FDiv">   --->   Core 106 'FDiv' <Latency = 15> <II = 1> <Delay = 6.07> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+
+State 17 <SV = 16> <Delay = 6.07>
+ST_17 : Operation 82 [10/16] (6.07ns)   --->   "%complex_M_real_writ = fdiv float %tmp_2, %tmp_5"   --->   Operation 82 'fdiv' 'complex_M_real_writ' <Predicate = true> <Delay = 6.07> <Core = "FDiv">   --->   Core 106 'FDiv' <Latency = 15> <II = 1> <Delay = 6.07> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+ST_17 : Operation 83 [10/16] (6.07ns)   --->   "%complex_M_imag_writ = fdiv float %tmp_8, %tmp_5"   --->   Operation 83 'fdiv' 'complex_M_imag_writ' <Predicate = true> <Delay = 6.07> <Core = "FDiv">   --->   Core 106 'FDiv' <Latency = 15> <II = 1> <Delay = 6.07> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+
+State 18 <SV = 17> <Delay = 6.07>
+ST_18 : Operation 84 [9/16] (6.07ns)   --->   "%complex_M_real_writ = fdiv float %tmp_2, %tmp_5"   --->   Operation 84 'fdiv' 'complex_M_real_writ' <Predicate = true> <Delay = 6.07> <Core = "FDiv">   --->   Core 106 'FDiv' <Latency = 15> <II = 1> <Delay = 6.07> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+ST_18 : Operation 85 [9/16] (6.07ns)   --->   "%complex_M_imag_writ = fdiv float %tmp_8, %tmp_5"   --->   Operation 85 'fdiv' 'complex_M_imag_writ' <Predicate = true> <Delay = 6.07> <Core = "FDiv">   --->   Core 106 'FDiv' <Latency = 15> <II = 1> <Delay = 6.07> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+
+State 19 <SV = 18> <Delay = 6.07>
+ST_19 : Operation 86 [8/16] (6.07ns)   --->   "%complex_M_real_writ = fdiv float %tmp_2, %tmp_5"   --->   Operation 86 'fdiv' 'complex_M_real_writ' <Predicate = true> <Delay = 6.07> <Core = "FDiv">   --->   Core 106 'FDiv' <Latency = 15> <II = 1> <Delay = 6.07> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+ST_19 : Operation 87 [8/16] (6.07ns)   --->   "%complex_M_imag_writ = fdiv float %tmp_8, %tmp_5"   --->   Operation 87 'fdiv' 'complex_M_imag_writ' <Predicate = true> <Delay = 6.07> <Core = "FDiv">   --->   Core 106 'FDiv' <Latency = 15> <II = 1> <Delay = 6.07> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+
+State 20 <SV = 19> <Delay = 6.07>
+ST_20 : Operation 88 [7/16] (6.07ns)   --->   "%complex_M_real_writ = fdiv float %tmp_2, %tmp_5"   --->   Operation 88 'fdiv' 'complex_M_real_writ' <Predicate = true> <Delay = 6.07> <Core = "FDiv">   --->   Core 106 'FDiv' <Latency = 15> <II = 1> <Delay = 6.07> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+ST_20 : Operation 89 [7/16] (6.07ns)   --->   "%complex_M_imag_writ = fdiv float %tmp_8, %tmp_5"   --->   Operation 89 'fdiv' 'complex_M_imag_writ' <Predicate = true> <Delay = 6.07> <Core = "FDiv">   --->   Core 106 'FDiv' <Latency = 15> <II = 1> <Delay = 6.07> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+
+State 21 <SV = 20> <Delay = 6.07>
+ST_21 : Operation 90 [6/16] (6.07ns)   --->   "%complex_M_real_writ = fdiv float %tmp_2, %tmp_5"   --->   Operation 90 'fdiv' 'complex_M_real_writ' <Predicate = true> <Delay = 6.07> <Core = "FDiv">   --->   Core 106 'FDiv' <Latency = 15> <II = 1> <Delay = 6.07> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+ST_21 : Operation 91 [6/16] (6.07ns)   --->   "%complex_M_imag_writ = fdiv float %tmp_8, %tmp_5"   --->   Operation 91 'fdiv' 'complex_M_imag_writ' <Predicate = true> <Delay = 6.07> <Core = "FDiv">   --->   Core 106 'FDiv' <Latency = 15> <II = 1> <Delay = 6.07> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+
+State 22 <SV = 21> <Delay = 6.07>
+ST_22 : Operation 92 [5/16] (6.07ns)   --->   "%complex_M_real_writ = fdiv float %tmp_2, %tmp_5"   --->   Operation 92 'fdiv' 'complex_M_real_writ' <Predicate = true> <Delay = 6.07> <Core = "FDiv">   --->   Core 106 'FDiv' <Latency = 15> <II = 1> <Delay = 6.07> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+ST_22 : Operation 93 [5/16] (6.07ns)   --->   "%complex_M_imag_writ = fdiv float %tmp_8, %tmp_5"   --->   Operation 93 'fdiv' 'complex_M_imag_writ' <Predicate = true> <Delay = 6.07> <Core = "FDiv">   --->   Core 106 'FDiv' <Latency = 15> <II = 1> <Delay = 6.07> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+
+State 23 <SV = 22> <Delay = 6.07>
+ST_23 : Operation 94 [4/16] (6.07ns)   --->   "%complex_M_real_writ = fdiv float %tmp_2, %tmp_5"   --->   Operation 94 'fdiv' 'complex_M_real_writ' <Predicate = true> <Delay = 6.07> <Core = "FDiv">   --->   Core 106 'FDiv' <Latency = 15> <II = 1> <Delay = 6.07> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+ST_23 : Operation 95 [4/16] (6.07ns)   --->   "%complex_M_imag_writ = fdiv float %tmp_8, %tmp_5"   --->   Operation 95 'fdiv' 'complex_M_imag_writ' <Predicate = true> <Delay = 6.07> <Core = "FDiv">   --->   Core 106 'FDiv' <Latency = 15> <II = 1> <Delay = 6.07> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+
+State 24 <SV = 23> <Delay = 6.07>
+ST_24 : Operation 96 [3/16] (6.07ns)   --->   "%complex_M_real_writ = fdiv float %tmp_2, %tmp_5"   --->   Operation 96 'fdiv' 'complex_M_real_writ' <Predicate = true> <Delay = 6.07> <Core = "FDiv">   --->   Core 106 'FDiv' <Latency = 15> <II = 1> <Delay = 6.07> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+ST_24 : Operation 97 [3/16] (6.07ns)   --->   "%complex_M_imag_writ = fdiv float %tmp_8, %tmp_5"   --->   Operation 97 'fdiv' 'complex_M_imag_writ' <Predicate = true> <Delay = 6.07> <Core = "FDiv">   --->   Core 106 'FDiv' <Latency = 15> <II = 1> <Delay = 6.07> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+
+State 25 <SV = 24> <Delay = 6.07>
+ST_25 : Operation 98 [2/16] (6.07ns)   --->   "%complex_M_real_writ = fdiv float %tmp_2, %tmp_5"   --->   Operation 98 'fdiv' 'complex_M_real_writ' <Predicate = true> <Delay = 6.07> <Core = "FDiv">   --->   Core 106 'FDiv' <Latency = 15> <II = 1> <Delay = 6.07> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+ST_25 : Operation 99 [2/16] (6.07ns)   --->   "%complex_M_imag_writ = fdiv float %tmp_8, %tmp_5"   --->   Operation 99 'fdiv' 'complex_M_imag_writ' <Predicate = true> <Delay = 6.07> <Core = "FDiv">   --->   Core 106 'FDiv' <Latency = 15> <II = 1> <Delay = 6.07> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+
+State 26 <SV = 25> <Delay = 6.07>
+ST_26 : Operation 100 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecInterface(float* %p_z_M_real, float* %p_z_M_imag, [8 x i8]* @p_str11, i32 0, i32 0, [1 x i8]* @p_str3, i32 0, i32 1024, [1 x i8]* @p_str3, [1 x i8]* @p_str3, [1 x i8]* @p_str3, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str3, [1 x i8]* @p_str3)"   --->   Operation 100 'specinterface' <Predicate = true> <Delay = 0.00>
+ST_26 : Operation 101 [1/16] (6.07ns)   --->   "%complex_M_real_writ = fdiv float %tmp_2, %tmp_5"   --->   Operation 101 'fdiv' 'complex_M_real_writ' <Predicate = true> <Delay = 6.07> <Core = "FDiv">   --->   Core 106 'FDiv' <Latency = 15> <II = 1> <Delay = 6.07> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+ST_26 : Operation 102 [1/16] (6.07ns)   --->   "%complex_M_imag_writ = fdiv float %tmp_8, %tmp_5"   --->   Operation 102 'fdiv' 'complex_M_imag_writ' <Predicate = true> <Delay = 6.07> <Core = "FDiv">   --->   Core 106 'FDiv' <Latency = 15> <II = 1> <Delay = 6.07> <FuncUnit> <Opcode : 'fdiv' 'frem'> <InPorts = 2> <OutPorts = 1>
+ST_26 : Operation 103 [1/1] (0.00ns)   --->   "%mrv = insertvalue { float, float } undef, float %complex_M_real_writ, 0"   --->   Operation 103 'insertvalue' 'mrv' <Predicate = true> <Delay = 0.00>
+ST_26 : Operation 104 [1/1] (0.00ns)   --->   "%mrv_1 = insertvalue { float, float } %mrv, float %complex_M_imag_writ, 1"   --->   Operation 104 'insertvalue' 'mrv_1' <Predicate = true> <Delay = 0.00>
+ST_26 : Operation 105 [1/1] (0.00ns)   --->   "ret { float, float } %mrv_1"   --->   Operation 105 'ret' <Predicate = true> <Delay = 0.00>
+
+
+============================================================
++ Verbose Summary: Timing violations
+============================================================
+Target clock period: 10ns, clock uncertainty: 1.25ns.
+
+ <State 1>: 3.63ns
+The critical path consists of the following:
+	fifo read on port 'p_z_M_real' [8]  (3.63 ns)
+
+ <State 2>: 5.7ns
+The critical path consists of the following:
+	wire read on port 'complex_float_M_imag_read' [6]  (0 ns)
+	'fmul' operation ('tmp_1') [11]  (5.7 ns)
+
+ <State 3>: 5.7ns
+The critical path consists of the following:
+	'fmul' operation ('tmp') [10]  (5.7 ns)
+
+ <State 4>: 5.7ns
+The critical path consists of the following:
+	'fmul' operation ('tmp') [10]  (5.7 ns)
+
+ <State 5>: 5.7ns
+The critical path consists of the following:
+	'fmul' operation ('tmp') [10]  (5.7 ns)
+
+ <State 6>: 7.26ns
+The critical path consists of the following:
+	'fadd' operation ('tmp_2') [12]  (7.26 ns)
+
+ <State 7>: 7.26ns
+The critical path consists of the following:
+	'fadd' operation ('tmp_2') [12]  (7.26 ns)
+
+ <State 8>: 7.26ns
+The critical path consists of the following:
+	'fadd' operation ('tmp_2') [12]  (7.26 ns)
+
+ <State 9>: 7.26ns
+The critical path consists of the following:
+	'fadd' operation ('tmp_2') [12]  (7.26 ns)
+
+ <State 10>: 7.26ns
+The critical path consists of the following:
+	'fadd' operation ('tmp_2') [12]  (7.26 ns)
+
+ <State 11>: 6.08ns
+The critical path consists of the following:
+	'fdiv' operation ('complex<float>._M_real') [19]  (6.08 ns)
+
+ <State 12>: 6.08ns
+The critical path consists of the following:
+	'fdiv' operation ('complex<float>._M_real') [19]  (6.08 ns)
+
+ <State 13>: 6.08ns
+The critical path consists of the following:
+	'fdiv' operation ('complex<float>._M_real') [19]  (6.08 ns)
+
+ <State 14>: 6.08ns
+The critical path consists of the following:
+	'fdiv' operation ('complex<float>._M_real') [19]  (6.08 ns)
+
+ <State 15>: 6.08ns
+The critical path consists of the following:
+	'fdiv' operation ('complex<float>._M_real') [19]  (6.08 ns)
+
+ <State 16>: 6.08ns
+The critical path consists of the following:
+	'fdiv' operation ('complex<float>._M_real') [19]  (6.08 ns)
+
+ <State 17>: 6.08ns
+The critical path consists of the following:
+	'fdiv' operation ('complex<float>._M_real') [19]  (6.08 ns)
+
+ <State 18>: 6.08ns
+The critical path consists of the following:
+	'fdiv' operation ('complex<float>._M_real') [19]  (6.08 ns)
+
+ <State 19>: 6.08ns
+The critical path consists of the following:
+	'fdiv' operation ('complex<float>._M_real') [19]  (6.08 ns)
+
+ <State 20>: 6.08ns
+The critical path consists of the following:
+	'fdiv' operation ('complex<float>._M_real') [19]  (6.08 ns)
+
+ <State 21>: 6.08ns
+The critical path consists of the following:
+	'fdiv' operation ('complex<float>._M_real') [19]  (6.08 ns)
+
+ <State 22>: 6.08ns
+The critical path consists of the following:
+	'fdiv' operation ('complex<float>._M_real') [19]  (6.08 ns)
+
+ <State 23>: 6.08ns
+The critical path consists of the following:
+	'fdiv' operation ('complex<float>._M_real') [19]  (6.08 ns)
+
+ <State 24>: 6.08ns
+The critical path consists of the following:
+	'fdiv' operation ('complex<float>._M_real') [19]  (6.08 ns)
+
+ <State 25>: 6.08ns
+The critical path consists of the following:
+	'fdiv' operation ('complex<float>._M_real') [19]  (6.08 ns)
+
+ <State 26>: 6.08ns
+The critical path consists of the following:
+	'fdiv' operation ('complex<float>._M_real') [19]  (6.08 ns)
+
+
+============================================================
++ Verbose Summary: Binding
+============================================================
+N/A
+* FSMD analyzer results:
+  - Output states:
+ - Input state : 
+  - Chain level:
+	State 1
+	State 2
+	State 3
+	State 4
+	State 5
+	State 6
+	State 7
+	State 8
+	State 9
+	State 10
+	State 11
+	State 12
+	State 13
+	State 14
+	State 15
+	State 16
+	State 17
+	State 18
+	State 19
+	State 20
+	State 21
+	State 22
+	State 23
+	State 24
+	State 25
+	State 26
+
+
+============================================================
++ Verbose Summary: Datapath Resource usage 
+============================================================
+N/A

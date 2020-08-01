@@ -1,0 +1,177 @@
+
+
+================================================================
+== Vivado HLS Report for 'InnerProd381'
+================================================================
+* Date:           Sat Aug  1 17:20:37 2020
+
+* Version:        2018.3 (Build 2405991 on Thu Dec 06 23:56:15 MST 2018)
+* Project:        deblur_IP
+* Solution:       solution1
+* Product family: zynq
+* Target device:  xc7z020clg400-1
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing (ns): 
+    * Summary: 
+    +--------+-------+----------+------------+
+    |  Clock | Target| Estimated| Uncertainty|
+    +--------+-------+----------+------------+
+    |ap_clk  |  10.00|     7.256|        1.25|
+    +--------+-------+----------+------------+
+
++ Latency (clock cycles): 
+    * Summary: 
+    +--------+--------+--------+--------+---------+
+    |     Latency     |     Interval    | Pipeline|
+    |   min  |   max  |   min  |   max  |   Type  |
+    +--------+--------+--------+--------+---------+
+    |  655871|  655872|  655871|  655872|   none  |
+    +--------+--------+--------+--------+---------+
+
+    + Detail: 
+        * Instance: 
+        +------------------------------+--------------------+-----+-----+-----+-----+----------+
+        |                              |                    |  Latency  |  Interval | Pipeline |
+        |           Instance           |       Module       | min | max | min | max |   Type   |
+        +------------------------------+--------------------+-----+-----+-----+-----+----------+
+        |grp_operator_mul_float_fu_97  |operator_mul_float  |    9|    9|    1|    1| function |
+        +------------------------------+--------------------+-----+-----+-----+-----+----------+
+
+        * Loop: 
+        +----------+--------+--------+----------+-----------+-----------+------+----------+
+        |          |     Latency     | Iteration|  Initiation Interval  | Trip |          |
+        | Loop Name|   min  |   max  |  Latency |  achieved |   target  | Count| Pipelined|
+        +----------+--------+--------+----------+-----------+-----------+------+----------+
+        |- Loop 1  |  655871|  655871|      2562|          -|          -|   256|    no    |
+        +----------+--------+--------+----------+-----------+-----------+------+----------+
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++-----------------+---------+-------+--------+-------+
+|       Name      | BRAM_18K| DSP48E|   FF   |  LUT  |
++-----------------+---------+-------+--------+-------+
+|DSP              |        -|      -|       -|      -|
+|Expression       |        -|      -|       0|     32|
+|FIFO             |        -|      -|       -|      -|
+|Instance         |        -|     16|    1258|   2156|
+|Memory           |        -|      -|       -|      -|
+|Multiplexer      |        -|      -|       -|   2292|
+|Register         |        -|      -|    2645|      -|
++-----------------+---------+-------+--------+-------+
+|Total            |        0|     16|    3903|   4480|
++-----------------+---------+-------+--------+-------+
+|Available        |      280|    220|  106400|  53200|
++-----------------+---------+-------+--------+-------+
+|Utilization (%)  |        0|      7|       3|      8|
++-----------------+---------+-------+--------+-------+
+
++ Detail: 
+    * Instance: 
+    +------------------------------+--------------------+---------+-------+------+------+
+    |           Instance           |       Module       | BRAM_18K| DSP48E|  FF  |  LUT |
+    +------------------------------+--------------------+---------+-------+------+------+
+    |grp_operator_mul_float_fu_97  |operator_mul_float  |        0|     16|  1258|  2156|
+    +------------------------------+--------------------+---------+-------+------+------+
+    |Total                         |                    |        0|     16|  1258|  2156|
+    +------------------------------+--------------------+---------+-------+------+------+
+
+    * DSP48: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +-----------------------------------+----------+-------+---+----+------------+------------+
+    |           Variable Name           | Operation| DSP48E| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +-----------------------------------+----------+-------+---+----+------------+------------+
+    |r_19_fu_127_p2                     |     +    |      0|  0|  15|           8|           1|
+    |exitcond1_fu_133_p2                |   icmp   |      0|  0|  11|           8|           2|
+    |ap_block_state1003                 |    or    |      0|  0|   2|           1|           1|
+    |ap_block_state1003_ignore_call502  |    or    |      0|  0|   2|           1|           1|
+    |ap_block_state3                    |    or    |      0|  0|   2|           1|           1|
+    +-----------------------------------+----------+-------+---+----+------------+------------+
+    |Total                              |          |      0|  0|  32|          19|           6|
+    +-----------------------------------+----------+-------+---+----+------------+------------+
+
+    * Multiplexer: 
+    +-------------------------+------+-----------+-----+-----------+
+    |           Name          |  LUT | Input Size| Bits| Total Bits|
+    +-------------------------+------+-----------+-----+-----------+
+    |G_M_imag_blk_n           |     9|          2|    1|          2|
+    |G_M_imag_read            |     9|          2|    1|          2|
+    |G_M_real_blk_n           |     9|          2|    1|          2|
+    |G_M_real_read            |     9|          2|    1|          2|
+    |ap_NS_fsm                |  2193|       2564|    1|       2564|
+    |gauss_blur_M_imag_blk_n  |     9|          2|    1|          2|
+    |gauss_blur_M_imag_read   |     9|          2|    1|          2|
+    |gauss_blur_M_real_blk_n  |     9|          2|    1|          2|
+    |gauss_blur_M_real_read   |     9|          2|    1|          2|
+    |r_reg_82                 |     9|          2|    8|         16|
+    |xk1_M_imag_blk_n         |     9|          2|    1|          2|
+    |xk1_M_real_blk_n         |     9|          2|    1|          2|
+    +-------------------------+------+-----------+-----+-----------+
+    |Total                    |  2292|       2586|   19|       2600|
+    +-------------------------+------+-----------+-----+-----------+
+
+    * Register: 
+    +-------------------------------------------+------+----+------+-----------+
+    |                    Name                   |  FF  | LUT| Bits | Const Bits|
+    +-------------------------------------------+------+----+------+-----------+
+    |ap_CS_fsm                                  |  2563|   0|  2563|          0|
+    |exitcond1_reg_146                          |     1|   0|     1|          0|
+    |grp_operator_mul_float_fu_97_ap_start_reg  |     1|   0|     1|          0|
+    |r_19_reg_141                               |     8|   0|     8|          0|
+    |r_reg_82                                   |     8|   0|     8|          0|
+    |reg_117                                    |    32|   0|    32|          0|
+    |reg_122                                    |    32|   0|    32|          0|
+    +-------------------------------------------+------+----+------+-----------+
+    |Total                                      |  2645|   0|  2645|          0|
+    +-------------------------------------------+------+----+------+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++---------------------------+-----+-----+------------+-------------------+--------------+
+|         RTL Ports         | Dir | Bits|  Protocol  |   Source Object   |    C Type    |
++---------------------------+-----+-----+------------+-------------------+--------------+
+|ap_clk                     |  in |    1| ap_ctrl_hs |    InnerProd381   | return value |
+|ap_rst                     |  in |    1| ap_ctrl_hs |    InnerProd381   | return value |
+|ap_start                   |  in |    1| ap_ctrl_hs |    InnerProd381   | return value |
+|ap_done                    | out |    1| ap_ctrl_hs |    InnerProd381   | return value |
+|ap_idle                    | out |    1| ap_ctrl_hs |    InnerProd381   | return value |
+|ap_ready                   | out |    1| ap_ctrl_hs |    InnerProd381   | return value |
+|gauss_blur_M_real_dout     |  in |   32|   ap_fifo  | gauss_blur_M_real |    pointer   |
+|gauss_blur_M_real_empty_n  |  in |    1|   ap_fifo  | gauss_blur_M_real |    pointer   |
+|gauss_blur_M_real_read     | out |    1|   ap_fifo  | gauss_blur_M_real |    pointer   |
+|gauss_blur_M_imag_dout     |  in |   32|   ap_fifo  | gauss_blur_M_imag |    pointer   |
+|gauss_blur_M_imag_empty_n  |  in |    1|   ap_fifo  | gauss_blur_M_imag |    pointer   |
+|gauss_blur_M_imag_read     | out |    1|   ap_fifo  | gauss_blur_M_imag |    pointer   |
+|G_M_real_dout              |  in |   32|   ap_fifo  |      G_M_real     |    pointer   |
+|G_M_real_empty_n           |  in |    1|   ap_fifo  |      G_M_real     |    pointer   |
+|G_M_real_read              | out |    1|   ap_fifo  |      G_M_real     |    pointer   |
+|G_M_imag_dout              |  in |   32|   ap_fifo  |      G_M_imag     |    pointer   |
+|G_M_imag_empty_n           |  in |    1|   ap_fifo  |      G_M_imag     |    pointer   |
+|G_M_imag_read              | out |    1|   ap_fifo  |      G_M_imag     |    pointer   |
+|xk1_M_real_din             | out |   32|   ap_fifo  |     xk1_M_real    |    pointer   |
+|xk1_M_real_full_n          |  in |    1|   ap_fifo  |     xk1_M_real    |    pointer   |
+|xk1_M_real_write           | out |    1|   ap_fifo  |     xk1_M_real    |    pointer   |
+|xk1_M_imag_din             | out |   32|   ap_fifo  |     xk1_M_imag    |    pointer   |
+|xk1_M_imag_full_n          |  in |    1|   ap_fifo  |     xk1_M_imag    |    pointer   |
+|xk1_M_imag_write           | out |    1|   ap_fifo  |     xk1_M_imag    |    pointer   |
++---------------------------+-----+-----+------------+-------------------+--------------+
+

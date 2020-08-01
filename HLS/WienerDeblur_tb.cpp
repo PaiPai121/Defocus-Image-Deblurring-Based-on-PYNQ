@@ -4,13 +4,14 @@
 #include <hls_opencv.h>
 
 #include "WienerDeblur.h"
-
-#define INPUT_IMG "E:/XilinxDeblur/Defocus-Image-Deblurring-Based-on-PYNQ/HLS/blurImg.bmp"
+//test_img_gray
+//girl_gray
+#define INPUT_IMG "E:/FPGA/SummerSchool/project_things/images/test_img_gray.jpg"
 //#define INPUT_IMG "../../../solidWhiteRight.jpg"
-#define OUTPUT_IMG "E:/XilinxDeblur/Defocus-Image-Deblurring-Based-on-PYNQ/HLS/outputtest.png"
+#define OUTPUT_IMG "E:/FPGA/SummerSchool/project_things/images/test_out.jpg"
 
-#define W 512//1000//960//512//640//1920
-#define H 512//1000//540//512//480//1080
+#define W 256//1000//960//512//640//1920
+#define H 256//1000//540//512//480//1080
 #define CH 1//3
 
 
@@ -33,12 +34,13 @@ int main() {
 
 	cv::Mat imgSrc;
 	imgSrc = cv::imread(INPUT_IMG,CV_8UC1);
+
 	printf("r %d, c %d, d %d\n",imgSrc.rows,imgSrc.cols,imgSrc.dims);
 
 	uint8_t *myData = imgSrc.data;
 	int width = imgSrc.cols;
 	int height = imgSrc.rows;
-	int _stride = imgSrc.step;
+	int _stride = imgSrc.step;//in case cols != strides
 	for(int i = 0; i < height; i++)
 	{
 	    for(int j = 0; j < width; j++)
@@ -64,7 +66,8 @@ int main() {
 	ap_uint<32> r1 = *((unsigned long *)k0);
 	ap_uint<32> r2 = *((unsigned long *)k1);
 	ap_uint<32> r3 = *((unsigned long *)k2);
-
+	int th1 = 80;
+	int th2 = 80;
 	WienerDeblur(input_data,output_data,imgSrc.rows,imgSrc.cols);
 	printf("Evaluate results\n");
 
@@ -89,5 +92,4 @@ int main() {
 	}
 
 	cv::imwrite(OUTPUT_IMG, imgHWcalc);
-
 }

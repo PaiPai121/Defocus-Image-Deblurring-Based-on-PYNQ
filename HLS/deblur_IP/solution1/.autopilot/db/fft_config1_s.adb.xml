@@ -1,0 +1,33 @@
+<stg><name>fft<config1></name>
+
+
+<trans_list>
+</trans_list>
+
+
+
+<state_list>
+</state_list>
+
+
+<ports>
+<port id="1" name="xn" dir="0" iftype="3">
+<core>NULL</core><StgValue><ssdm name="xn"/></StgValue>
+</port>
+<port id="2" name="xk" dir="1" iftype="3">
+<core>NULL</core><StgValue><ssdm name="xk"/></StgValue>
+</port>
+<port id="3" name="status_data_V" dir="1" iftype="3">
+<core>NULL</core><StgValue><ssdm name="status_data_V"/></StgValue>
+</port>
+<port id="4" name="config_ch_data_V" dir="0" iftype="3">
+<core>NULL</core><StgValue><ssdm name="config_ch_data_V"/></StgValue>
+</port>
+</ports>
+
+
+<dataflows>
+</dataflows>
+
+
+</stg>

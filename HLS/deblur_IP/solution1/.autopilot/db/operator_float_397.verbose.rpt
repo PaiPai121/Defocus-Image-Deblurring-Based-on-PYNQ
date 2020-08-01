@@ -1,0 +1,527 @@
+
+
+================================================================
+== Vivado HLS Report for 'operator_float_397'
+================================================================
+* Date:           Sat Aug  1 17:19:54 2020
+
+* Version:        2018.3 (Build 2405991 on Thu Dec 06 23:56:15 MST 2018)
+* Project:        deblur_IP
+* Solution:       solution1
+* Product family: zynq
+* Target device:  xc7z020clg400-1
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing (ns): 
+    * Summary: 
+    +--------+-------+----------+------------+
+    |  Clock | Target| Estimated| Uncertainty|
+    +--------+-------+----------+------------+
+    |ap_clk  |  10.00|     7.256|        1.25|
+    +--------+-------+----------+------------+
+
++ Latency (clock cycles): 
+    * Summary: 
+    +-----+-----+-----+-----+----------+
+    |  Latency  |  Interval | Pipeline |
+    | min | max | min | max |   Type   |
+    +-----+-----+-----+-----+----------+
+    |    9|    9|    1|    1| function |
+    +-----+-----+-----+-----+----------+
+
+    + Detail: 
+        * Instance: 
+        +------------------------------+--------------------+-----+-----+-----+-----+----------+
+        |                              |                    |  Latency  |  Interval | Pipeline |
+        |           Instance           |       Module       | min | max | min | max |   Type   |
+        +------------------------------+--------------------+-----+-----+-----+-----+----------+
+        |grp_operator_float_398_fu_34  |operator_float_398  |    9|    9|    1|    1| function |
+        +------------------------------+--------------------+-----+-----+-----+-----+----------+
+
+        * Loop: 
+        N/A
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++-----------------+---------+-------+--------+-------+
+|       Name      | BRAM_18K| DSP48E|   FF   |  LUT  |
++-----------------+---------+-------+--------+-------+
+|DSP              |        -|      -|       -|      -|
+|Expression       |        -|      -|       0|     12|
+|FIFO             |        -|      -|       -|      -|
+|Instance         |        -|     16|    1248|   2090|
+|Memory           |        -|      -|       -|      -|
+|Multiplexer      |        -|      -|       -|     54|
+|Register         |        -|      -|      10|      -|
++-----------------+---------+-------+--------+-------+
+|Total            |        0|     16|    1258|   2156|
++-----------------+---------+-------+--------+-------+
+|Available        |      280|    220|  106400|  53200|
++-----------------+---------+-------+--------+-------+
+|Utilization (%)  |        0|      7|       1|      4|
++-----------------+---------+-------+--------+-------+
+
++ Detail: 
+    * Instance: 
+    +------------------------------+--------------------+---------+-------+------+------+
+    |           Instance           |       Module       | BRAM_18K| DSP48E|  FF  |  LUT |
+    +------------------------------+--------------------+---------+-------+------+------+
+    |grp_operator_float_398_fu_34  |operator_float_398  |        0|     16|  1248|  2090|
+    +------------------------------+--------------------+---------+-------+------+------+
+    |Total                         |                    |        0|     16|  1248|  2090|
+    +------------------------------+--------------------+---------+-------+------+------+
+
+    * DSP48: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +-----------------------------------------------+----------+-------+---+----+------------+------------+
+    |                 Variable Name                 | Operation| DSP48E| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +-----------------------------------------------+----------+-------+---+----+------------+------------+
+    |ap_block_pp0_stage0_11001                      |    and   |      0|  0|   2|           1|           1|
+    |ap_block_pp0_stage0_11001_ignoreCallOp13       |    and   |      0|  0|   2|           1|           1|
+    |ap_block_pp0_stage0_subdone                    |    or    |      0|  0|   2|           1|           1|
+    |ap_block_state1_pp0_stage0_iter0               |    or    |      0|  0|   2|           1|           1|
+    |ap_block_state1_pp0_stage0_iter0_ignore_call4  |    or    |      0|  0|   2|           1|           1|
+    |ap_enable_pp0                                  |    xor   |      0|  0|   2|           1|           2|
+    +-----------------------------------------------+----------+-------+---+----+------------+------------+
+    |Total                                          |          |      0|  0|  12|           6|           7|
+    +-----------------------------------------------+----------+-------+---+----+------------+------------+
+
+    * Multiplexer: 
+    +-------------------------+----+-----------+-----+-----------+
+    |           Name          | LUT| Input Size| Bits| Total Bits|
+    +-------------------------+----+-----------+-----+-----------+
+    |fft_kernel_M_imag_blk_n  |   9|          2|    1|          2|
+    |fft_kernel_M_imag_read   |   9|          2|    1|          2|
+    |fft_kernel_M_real_blk_n  |   9|          2|    1|          2|
+    |fft_kernel_M_real_read   |   9|          2|    1|          2|
+    |xk1_M_imag_blk_n         |   9|          2|    1|          2|
+    |xk1_M_real_blk_n         |   9|          2|    1|          2|
+    +-------------------------+----+-----------+-----+-----------+
+    |Total                    |  54|         12|    6|         12|
+    +-------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +-------------------------+---+----+-----+-----------+
+    |           Name          | FF| LUT| Bits| Const Bits|
+    +-------------------------+---+----+-----+-----------+
+    |ap_CS_fsm                |  1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter1  |  1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter2  |  1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter3  |  1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter4  |  1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter5  |  1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter6  |  1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter7  |  1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter8  |  1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter9  |  1|   0|    1|          0|
+    +-------------------------+---+----+-----+-----------+
+    |Total                    | 10|   0|   10|          0|
+    +-------------------------+---+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++---------------------------+-----+-----+------------+---------------------+--------------+
+|         RTL Ports         | Dir | Bits|  Protocol  |    Source Object    |    C Type    |
++---------------------------+-----+-----+------------+---------------------+--------------+
+|ap_clk                     |  in |    1| ap_ctrl_hs | operator*<float>397 | return value |
+|ap_rst                     |  in |    1| ap_ctrl_hs | operator*<float>397 | return value |
+|ap_start                   |  in |    1| ap_ctrl_hs | operator*<float>397 | return value |
+|ap_done                    | out |    1| ap_ctrl_hs | operator*<float>397 | return value |
+|ap_idle                    | out |    1| ap_ctrl_hs | operator*<float>397 | return value |
+|ap_ready                   | out |    1| ap_ctrl_hs | operator*<float>397 | return value |
+|ap_ce                      |  in |    1| ap_ctrl_hs | operator*<float>397 | return value |
+|ap_return_0                | out |   32| ap_ctrl_hs | operator*<float>397 | return value |
+|ap_return_1                | out |   32| ap_ctrl_hs | operator*<float>397 | return value |
+|xk1_M_real_blk_n           | out |    1| ap_ctrl_hs | operator*<float>397 | return value |
+|xk1_M_imag_blk_n           | out |    1| ap_ctrl_hs | operator*<float>397 | return value |
+|fft_kernel_M_real_blk_n    | out |    1| ap_ctrl_hs | operator*<float>397 | return value |
+|fft_kernel_M_imag_blk_n    | out |    1| ap_ctrl_hs | operator*<float>397 | return value |
+|xk1_M_real_dout            |  in |   32|   ap_fifo  |      xk1_M_real     |    pointer   |
+|xk1_M_real_empty_n         |  in |    1|   ap_fifo  |      xk1_M_real     |    pointer   |
+|xk1_M_real_read            | out |    1|   ap_fifo  |      xk1_M_real     |    pointer   |
+|xk1_M_imag_dout            |  in |   32|   ap_fifo  |      xk1_M_imag     |    pointer   |
+|xk1_M_imag_empty_n         |  in |    1|   ap_fifo  |      xk1_M_imag     |    pointer   |
+|xk1_M_imag_read            | out |    1|   ap_fifo  |      xk1_M_imag     |    pointer   |
+|fft_kernel_M_real_dout     |  in |   32|   ap_fifo  |  fft_kernel_M_real  |    pointer   |
+|fft_kernel_M_real_empty_n  |  in |    1|   ap_fifo  |  fft_kernel_M_real  |    pointer   |
+|fft_kernel_M_real_read     | out |    1|   ap_fifo  |  fft_kernel_M_real  |    pointer   |
+|fft_kernel_M_imag_dout     |  in |   32|   ap_fifo  |  fft_kernel_M_imag  |    pointer   |
+|fft_kernel_M_imag_empty_n  |  in |    1|   ap_fifo  |  fft_kernel_M_imag  |    pointer   |
+|fft_kernel_M_imag_read     | out |    1|   ap_fifo  |  fft_kernel_M_imag  |    pointer   |
++---------------------------+-----+-----+------------+---------------------+--------------+
+
+============================================================
++ Verbose Summary: Synthesis Manager
+============================================================
+InlineROM: 1
+ExposeGlobal: 0
+============================================================
++ Verbose Summary: CDFG Model
+============================================================
+IsTopModel: 0
+ResetActiveHigh: 1
+IsCombinational: 2
+IsDatapathOnly: 2
+HasWiredReturn: 1
+HasMFsm: 2
+HasVarLatency: 0
+IsPipeline: 1
+IsRtlPipelined: 1
+IsInstanceOverlapped: 0
+IsDontTouch: 0
+HasImplIP: 0
+IsGatedGlobalClock: 0
+
++ Individual pipeline summary: 
+  * Pipeline-0: initiation interval (II) = 1, depth = 10
+
+
+============================================================
++ Verbose Summary: Schedule
+============================================================
+* Number of FSM states : 10
+* Pipeline : 1
+  Pipeline-0 : II = 1, D = 10, States = { 1 2 3 4 5 6 7 8 9 10 }
+* Dataflow Pipeline: 0
+
+* FSM state transitions: 
+1 --> 
+	2  / true
+2 --> 
+	3  / true
+3 --> 
+	4  / true
+4 --> 
+	5  / true
+5 --> 
+	6  / true
+6 --> 
+	7  / true
+7 --> 
+	8  / true
+8 --> 
+	9  / true
+9 --> 
+	10  / true
+10 --> 
+
+* FSM state operations: 
+
+State 1 <SV = 0> <Delay = 3.63>
+ST_1 : Operation 11 [1/1] (3.63ns)   --->   "%p_r_M_real = call float @_ssdm_op_Read.ap_fifo.volatile.floatP(float* @xk1_M_real)"   --->   Operation 11 'read' 'p_r_M_real' <Predicate = true> <Delay = 3.63> <Core = "FIFO">   --->   Core 32 'FIFO' <Latency = 0> <II = 1> <Delay = 3.61> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = 64> <Depth = 256> <FIFO>
+ST_1 : Operation 12 [1/1] (3.63ns)   --->   "%p_r_M_imag = call float @_ssdm_op_Read.ap_fifo.volatile.floatP(float* @xk1_M_imag)"   --->   Operation 12 'read' 'p_r_M_imag' <Predicate = true> <Delay = 3.63> <Core = "FIFO">   --->   Core 32 'FIFO' <Latency = 0> <II = 1> <Delay = 3.61> <Storage> <Opcode : 'read' 'write' 'nbread' 'nbwrite'> <Ports = 0> <Width = 64> <Depth = 256> <FIFO>
+ST_1 : Operation 13 [10/10] (0.00ns)   --->   "%tmp1 = call fastcc { float, float } @"operator*=<float>398"(float %p_r_M_real, float %p_r_M_imag)"   --->   Operation 13 'call' 'tmp1' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 2 <SV = 1> <Delay = 7.25>
+ST_2 : Operation 14 [9/10] (7.25ns)   --->   "%tmp1 = call fastcc { float, float } @"operator*=<float>398"(float %p_r_M_real, float %p_r_M_imag)"   --->   Operation 14 'call' 'tmp1' <Predicate = true> <Delay = 7.25> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 3 <SV = 2> <Delay = 7.25>
+ST_3 : Operation 15 [8/10] (7.25ns)   --->   "%tmp1 = call fastcc { float, float } @"operator*=<float>398"(float %p_r_M_real, float %p_r_M_imag)"   --->   Operation 15 'call' 'tmp1' <Predicate = true> <Delay = 7.25> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 4 <SV = 3> <Delay = 7.25>
+ST_4 : Operation 16 [7/10] (7.25ns)   --->   "%tmp1 = call fastcc { float, float } @"operator*=<float>398"(float %p_r_M_real, float %p_r_M_imag)"   --->   Operation 16 'call' 'tmp1' <Predicate = true> <Delay = 7.25> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 5 <SV = 4> <Delay = 7.25>
+ST_5 : Operation 17 [6/10] (7.25ns)   --->   "%tmp1 = call fastcc { float, float } @"operator*=<float>398"(float %p_r_M_real, float %p_r_M_imag)"   --->   Operation 17 'call' 'tmp1' <Predicate = true> <Delay = 7.25> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 6 <SV = 5> <Delay = 7.25>
+ST_6 : Operation 18 [5/10] (7.25ns)   --->   "%tmp1 = call fastcc { float, float } @"operator*=<float>398"(float %p_r_M_real, float %p_r_M_imag)"   --->   Operation 18 'call' 'tmp1' <Predicate = true> <Delay = 7.25> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 7 <SV = 6> <Delay = 7.25>
+ST_7 : Operation 19 [4/10] (7.25ns)   --->   "%tmp1 = call fastcc { float, float } @"operator*=<float>398"(float %p_r_M_real, float %p_r_M_imag)"   --->   Operation 19 'call' 'tmp1' <Predicate = true> <Delay = 7.25> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 8 <SV = 7> <Delay = 7.25>
+ST_8 : Operation 20 [3/10] (7.25ns)   --->   "%tmp1 = call fastcc { float, float } @"operator*=<float>398"(float %p_r_M_real, float %p_r_M_imag)"   --->   Operation 20 'call' 'tmp1' <Predicate = true> <Delay = 7.25> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 9 <SV = 8> <Delay = 7.25>
+ST_9 : Operation 21 [2/10] (7.25ns)   --->   "%tmp1 = call fastcc { float, float } @"operator*=<float>398"(float %p_r_M_real, float %p_r_M_imag)"   --->   Operation 21 'call' 'tmp1' <Predicate = true> <Delay = 7.25> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 10 <SV = 9> <Delay = 7.25>
+ST_10 : Operation 22 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecInterface(float* @xk1_M_real, float* @xk1_M_imag, [8 x i8]* @p_str11, i32 0, i32 0, [1 x i8]* @p_str3, i32 0, i32 1024, [1 x i8]* @p_str3, [1 x i8]* @p_str3, [1 x i8]* @p_str3, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str3, [1 x i8]* @p_str3)"   --->   Operation 22 'specinterface' <Predicate = true> <Delay = 0.00>
+ST_10 : Operation 23 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecInterface(float* @fft_kernel_M_real, float* @fft_kernel_M_imag, [8 x i8]* @p_str11, i32 0, i32 0, [1 x i8]* @p_str3, i32 0, i32 1024, [1 x i8]* @p_str3, [1 x i8]* @p_str3, [1 x i8]* @p_str3, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str3, [1 x i8]* @p_str3)"   --->   Operation 23 'specinterface' <Predicate = true> <Delay = 0.00>
+ST_10 : Operation 24 [1/10] (7.25ns)   --->   "%tmp1 = call fastcc { float, float } @"operator*=<float>398"(float %p_r_M_real, float %p_r_M_imag)"   --->   Operation 24 'call' 'tmp1' <Predicate = true> <Delay = 7.25> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_10 : Operation 25 [1/1] (0.00ns)   --->   "ret { float, float } %tmp1"   --->   Operation 25 'ret' <Predicate = true> <Delay = 0.00>
+
+
+============================================================
++ Verbose Summary: Binding
+============================================================
+STG Binding: 
+---------------- STG Properties BEGIN ----------------
+- Is combinational: 0
+- Is one-state seq: 0
+- Is datapath-only: 0
+- Is pipelined: 1
+- Is top level: 0
+Port [ Return ] is wired: 1; IO mode=ap_ctrl_hs:ce=0
+Port [ xk1_M_real]:  wired=1; compound=1; hidden=0; nouse=0; global=1; static=1; extern=0; dir=0; type=3; pingpong=0; private_global=0; linkage=7; visibility=0; IO mode=ap_fifo:ce=0
+Port [ xk1_M_imag]:  wired=1; compound=1; hidden=0; nouse=0; global=1; static=1; extern=0; dir=0; type=3; pingpong=0; private_global=0; linkage=7; visibility=0; IO mode=ap_fifo:ce=0
+Port [ fft_kernel_M_real]:  wired=1; compound=1; hidden=0; nouse=0; global=1; static=1; extern=0; dir=0; type=3; pingpong=0; private_global=0; linkage=7; visibility=0; IO mode=ap_fifo:ce=0
+Port [ fft_kernel_M_imag]:  wired=1; compound=1; hidden=0; nouse=0; global=1; static=1; extern=0; dir=0; type=3; pingpong=0; private_global=0; linkage=7; visibility=0; IO mode=ap_fifo:ce=0
+---------------- STG Properties END ------------------
+
+---------------- Datapath Model BEGIN ----------------
+
+<LifeTime>
+<method=bitvector/>
+p_r_M_real  (read         ) [ 00000000000]
+p_r_M_imag  (read         ) [ 00000000000]
+StgValue_22 (specinterface) [ 00000000000]
+StgValue_23 (specinterface) [ 00000000000]
+tmp1        (call         ) [ 00000000000]
+StgValue_25 (ret          ) [ 00000000000]
+</LifeTime>
+
+<model>
+
+<comp_list>
+<comp id="0" class="1000" name="xk1_M_real">
+<pin_list>
+<pin id="1" dir="1" index="0" bw="1" slack="0"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name="xk1_M_real"/></StgValue>
+</bind>
+</comp>
+
+<comp id="2" class="1000" name="xk1_M_imag">
+<pin_list>
+<pin id="3" dir="1" index="0" bw="1" slack="0"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name="xk1_M_imag"/></StgValue>
+</bind>
+</comp>
+
+<comp id="4" class="1000" name="fft_kernel_M_real">
+<pin_list>
+<pin id="5" dir="1" index="0" bw="1" slack="0"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name="fft_kernel_M_real"/></StgValue>
+</bind>
+</comp>
+
+<comp id="6" class="1000" name="fft_kernel_M_imag">
+<pin_list>
+<pin id="7" dir="1" index="0" bw="1" slack="0"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name="fft_kernel_M_imag"/></StgValue>
+</bind>
+</comp>
+
+<comp id="8" class="1001" name="const_8">
+<pin_list>
+<pin id="9" dir="1" index="0" bw="1" slack="0"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name="_ssdm_op_Read.ap_fifo.volatile.floatP"/></StgValue>
+</bind>
+</comp>
+
+<comp id="10" class="1001" name="const_10">
+<pin_list>
+<pin id="11" dir="1" index="0" bw="1" slack="0"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name="operator*=<float>398"/></StgValue>
+</bind>
+</comp>
+
+<comp id="12" class="1001" name="const_12">
+<pin_list>
+<pin id="13" dir="1" index="0" bw="1" slack="2147483647"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name="_ssdm_op_SpecInterface"/></StgValue>
+</bind>
+</comp>
+
+<comp id="14" class="1001" name="const_14">
+<pin_list>
+<pin id="15" dir="1" index="0" bw="1" slack="2147483647"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name="p_str11"/></StgValue>
+</bind>
+</comp>
+
+<comp id="16" class="1001" name="const_16">
+<pin_list>
+<pin id="17" dir="1" index="0" bw="1" slack="2147483647"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name=""/></StgValue>
+</bind>
+</comp>
+
+<comp id="18" class="1001" name="const_18">
+<pin_list>
+<pin id="19" dir="1" index="0" bw="1" slack="2147483647"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name="p_str3"/></StgValue>
+</bind>
+</comp>
+
+<comp id="20" class="1001" name="const_20">
+<pin_list>
+<pin id="21" dir="1" index="0" bw="1" slack="2147483647"/>
+</pin_list>
+<bind>
+<StgValue><ssdm name=""/></StgValue>
+</bind>
+</comp>
+
+<comp id="22" class="1004" name="p_r_M_real_read_fu_22">
+<pin_list>
+<pin id="23" dir="0" index="0" bw="32" slack="0"/>
+<pin id="24" dir="0" index="1" bw="32" slack="0"/>
+<pin id="25" dir="1" index="2" bw="32" slack="0"/>
+</pin_list>
+<bind>
+<opcode="read(1150) " fcode="read"/>
+<opset="p_r_M_real/1 "/>
+</bind>
+</comp>
+
+<comp id="28" class="1004" name="p_r_M_imag_read_fu_28">
+<pin_list>
+<pin id="29" dir="0" index="0" bw="32" slack="0"/>
+<pin id="30" dir="0" index="1" bw="32" slack="0"/>
+<pin id="31" dir="1" index="2" bw="32" slack="0"/>
+</pin_list>
+<bind>
+<opcode="read(1150) " fcode="read"/>
+<opset="p_r_M_imag/1 "/>
+</bind>
+</comp>
+
+<comp id="34" class="1004" name="grp_operator_float_398_fu_34">
+<pin_list>
+<pin id="35" dir="0" index="0" bw="64" slack="0"/>
+<pin id="36" dir="0" index="1" bw="32" slack="0"/>
+<pin id="37" dir="0" index="2" bw="32" slack="0"/>
+<pin id="38" dir="0" index="3" bw="32" slack="0"/>
+<pin id="39" dir="0" index="4" bw="32" slack="0"/>
+<pin id="40" dir="1" index="5" bw="64" slack="2147483647"/>
+</pin_list>
+<bind>
+<opcode="call(48) " fcode="call"/>
+<opset="tmp1/1 "/>
+</bind>
+</comp>
+
+</comp_list>
+
+<net_list>
+<net id="26"><net_src comp="8" pin="0"/><net_sink comp="22" pin=0"/></net>
+
+<net id="27"><net_src comp="0" pin="0"/><net_sink comp="22" pin=1"/></net>
+
+<net id="32"><net_src comp="8" pin="0"/><net_sink comp="28" pin=0"/></net>
+
+<net id="33"><net_src comp="2" pin="0"/><net_sink comp="28" pin=1"/></net>
+
+<net id="41"><net_src comp="10" pin="0"/><net_sink comp="34" pin=0"/></net>
+
+<net id="42"><net_src comp="22" pin="2"/><net_sink comp="34" pin=1"/></net>
+
+<net id="43"><net_src comp="28" pin="2"/><net_sink comp="34" pin=2"/></net>
+
+<net id="44"><net_src comp="4" pin="0"/><net_sink comp="34" pin=3"/></net>
+
+<net id="45"><net_src comp="6" pin="0"/><net_sink comp="34" pin=4"/></net>
+
+</net_list>
+
+</model> 
+---------------- Datapath Model END ------------------
+
+* FSMD analyzer results:
+  - Output states:
+	Port: xk1_M_real | {}
+	Port: xk1_M_imag | {}
+	Port: fft_kernel_M_real | {}
+	Port: fft_kernel_M_imag | {}
+ - Input state : 
+	Port: operator*<float>397 : xk1_M_real | {1 }
+	Port: operator*<float>397 : xk1_M_imag | {1 }
+	Port: operator*<float>397 : fft_kernel_M_real | {1 }
+	Port: operator*<float>397 : fft_kernel_M_imag | {1 }
+  - Chain level:
+	State 1
+	State 2
+	State 3
+	State 4
+	State 5
+	State 6
+	State 7
+	State 8
+	State 9
+	State 10
+		StgValue_25 : 1
+
+
+============================================================
++ Verbose Summary: Datapath Resource usage 
+============================================================
+
+* Functional unit list:
+|----------|------------------------------|---------|---------|---------|
+| Operation|        Functional Unit       |  DSP48E |    FF   |   LUT   |
+|----------|------------------------------|---------|---------|---------|
+|   call   | grp_operator_float_398_fu_34 |    16   |   1238  |   2064  |
+|----------|------------------------------|---------|---------|---------|
+|   read   |     p_r_M_real_read_fu_22    |    0    |    0    |    0    |
+|          |     p_r_M_imag_read_fu_28    |    0    |    0    |    0    |
+|----------|------------------------------|---------|---------|---------|
+|   Total  |                              |    16   |   1238  |   2064  |
+|----------|------------------------------|---------|---------|---------|
+
+Memories:
+N/A
+
+* Register list:
+N/A
+
+* Multiplexer (MUX) list: 
+|--------|------|------|------|--------|
+|  Comp  |  Pin | Size |  BW  | S x BW |
+|--------|------|------|------|--------|
+|  Total |      |      |      |    0   |
+|--------|------|------|------|--------|
+
+
+
+* Summary:
++-----------+--------+--------+--------+
+|           | DSP48E |   FF   |   LUT  |
++-----------+--------+--------+--------+
+|  Function |   16   |  1238  |  2064  |
+|   Memory  |    -   |    -   |    -   |
+|Multiplexer|    -   |    -   |    -   |
+|  Register |    -   |    -   |    -   |
++-----------+--------+--------+--------+
+|   Total   |   16   |  1238  |  2064  |
++-----------+--------+--------+--------+

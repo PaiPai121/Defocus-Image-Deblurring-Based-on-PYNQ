@@ -1,6 +1,20 @@
-# 用于HLS生成IP核的代码
+# HLS工程源码
 
-## 2020年7月28日
-勉强的实现了我给它一个图片它再给我吐回来。
-测试图片是3.bmp，512x512，32位
+本文件夹存放了进行HLS工程所需要的源码及C仿真时的相关测试文件。
 
+其中WienerDeblur.cpp为源文件
+WienerDeblur_tb.cpp为testbench测试文件
+deblur_IP文件夹下为HLS工程文件
+
+## 示例：
+原图
+
+[img1](/HLS/test_img_gray.jpg)
+
+模糊图
+
+[img2](/HLS/blur.jpg)
+
+复原图
+
+[img3](/HLS/test_out.jpg)

@@ -1,0 +1,432 @@
+
+
+================================================================
+== Vivado HLS Report for 'KernelMaker'
+================================================================
+* Date:           Sat Aug  1 17:12:55 2020
+
+* Version:        2018.3 (Build 2405991 on Thu Dec 06 23:56:15 MST 2018)
+* Project:        deblur_IP
+* Solution:       solution1
+* Product family: zynq
+* Target device:  xc7z020clg400-1
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing (ns): 
+    * Summary: 
+    +--------+-------+----------+------------+
+    |  Clock | Target| Estimated| Uncertainty|
+    +--------+-------+----------+------------+
+    |ap_clk  |  10.00|    10.136|        1.25|
+    +--------+-------+----------+------------+
+
++ Latency (clock cycles): 
+    * Summary: 
+    +---------+---------+---------+---------+---------+
+    |      Latency      |      Interval     | Pipeline|
+    |   min   |   max   |   min   |   max   |   Type  |
+    +---------+---------+---------+---------+---------+
+    |  1769985|  1769985|  1769985|  1769985|   none  |
+    +---------+---------+---------+---------+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +-------------+---------+---------+----------+-----------+-----------+------+----------+
+        |             |      Latency      | Iteration|  Initiation Interval  | Trip |          |
+        |  Loop Name  |   min   |   max   |  Latency |  achieved |   target  | Count| Pipelined|
+        +-------------+---------+---------+----------+-----------+-----------+------+----------+
+        |- Loop 1     |  1769984|  1769984|      6914|          -|          -|   256|    no    |
+        | + Loop 1.1  |     6912|     6912|        27|          -|          -|   256|    no    |
+        +-------------+---------+---------+----------+-----------+-----------+------+----------+
+
+============================================================
++ Verbose Summary: Synthesis Manager
+============================================================
+InlineROM: 1
+ExposeGlobal: 0
+============================================================
++ Verbose Summary: CDFG Model
+============================================================
+IsTopModel: 0
+ResetActiveHigh: 1
+IsCombinational: 0
+IsDatapathOnly: 0
+HasWiredReturn: 1
+HasMFsm: 0
+HasVarLatency: 1
+IsPipeline: 0
+IsRtlPipelined: 0
+IsInstanceOverlapped: 0
+IsDontTouch: 0
+HasImplIP: 0
+IsGatedGlobalClock: 0
+
+
+============================================================
++ Verbose Summary: Schedule
+============================================================
+* Number of FSM states : 29
+* Pipeline : 0
+* Dataflow Pipeline: 0
+
+* FSM state transitions: 
+1 --> 
+	2  / true
+2 --> 
+	3  / (!exitcond)
+3 --> 
+	4  / (!exitcond1)
+	2  / (exitcond1)
+4 --> 
+	5  / true
+5 --> 
+	6  / true
+6 --> 
+	7  / true
+7 --> 
+	8  / true
+8 --> 
+	9  / true
+9 --> 
+	10  / true
+10 --> 
+	11  / true
+11 --> 
+	12  / true
+12 --> 
+	13  / true
+13 --> 
+	14  / true
+14 --> 
+	15  / true
+15 --> 
+	16  / true
+16 --> 
+	17  / true
+17 --> 
+	18  / true
+18 --> 
+	19  / true
+19 --> 
+	20  / true
+20 --> 
+	21  / true
+21 --> 
+	22  / true
+22 --> 
+	23  / true
+23 --> 
+	24  / true
+24 --> 
+	25  / true
+25 --> 
+	26  / true
+26 --> 
+	27  / true
+27 --> 
+	28  / true
+28 --> 
+	29  / true
+29 --> 
+	3  / true
+
+* FSM state operations: 
+
+State 1 <SV = 0> <Delay = 1.76>
+ST_1 : Operation 30 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecInterface(float* @kernel_M_real, float* @kernel_M_imag, [8 x i8]* @p_str11, i32 0, i32 0, [1 x i8]* @p_str3, i32 0, i32 1024, [1 x i8]* @p_str3, [1 x i8]* @p_str3, [1 x i8]* @p_str3, i32 0, i32 0, i32 0, i32 0, [1 x i8]* @p_str3, [1 x i8]* @p_str3)"   --->   Operation 30 'specinterface' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 31 [1/1] (1.76ns)   --->   "br label %.loopexit1" [WienerDeblur.cpp:393]   --->   Operation 31 'br' <Predicate = true> <Delay = 1.76>
+
+State 2 <SV = 1> <Delay = 6.17>
+ST_2 : Operation 32 [1/1] (0.00ns)   --->   "%i = phi i9 [ 0, %0 ], [ %i_3, %.loopexit1.loopexit ]"   --->   Operation 32 'phi' 'i' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 33 [1/1] (1.66ns)   --->   "%exitcond = icmp eq i9 %i, -256" [WienerDeblur.cpp:393]   --->   Operation 33 'icmp' 'exitcond' <Predicate = true> <Delay = 1.66> <Core = "Cmp">   --->   Core 25 'Cmp' <Latency = 0> <II = 1> <Delay = 1.66> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 34 [1/1] (0.00ns)   --->   "%empty = call i32 (...)* @_ssdm_op_SpecLoopTripCount(i64 256, i64 256, i64 256)"   --->   Operation 34 'speclooptripcount' 'empty' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 35 [1/1] (1.82ns)   --->   "%i_3 = add i9 %i, 1" [WienerDeblur.cpp:393]   --->   Operation 35 'add' 'i_3' <Predicate = true> <Delay = 1.82> <Core = "AddSub">   --->   Core 14 'AddSub' <Latency = 0> <II = 1> <Delay = 1.65> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 36 [1/1] (0.00ns)   --->   "br i1 %exitcond, label %.loopexit, label %.preheader2.preheader" [WienerDeblur.cpp:393]   --->   Operation 36 'br' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 37 [1/1] (1.82ns)   --->   "%tmp_s = add i9 %i, -128" [WienerDeblur.cpp:397]   --->   Operation 37 'add' 'tmp_s' <Predicate = (!exitcond)> <Delay = 1.82> <Core = "AddSub">   --->   Core 14 'AddSub' <Latency = 0> <II = 1> <Delay = 1.65> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 38 [1/1] (0.00ns)   --->   "%tmp = sext i9 %tmp_s to i17" [WienerDeblur.cpp:397]   --->   Operation 38 'sext' 'tmp' <Predicate = (!exitcond)> <Delay = 0.00>
+ST_2 : Operation 39 [1/1] (4.35ns)   --->   "%tmp_138_cast = mul i17 %tmp, %tmp" [WienerDeblur.cpp:397]   --->   Operation 39 'mul' 'tmp_138_cast' <Predicate = (!exitcond)> <Delay = 4.35> <Core = "Mul">   --->   Core 16 'Mul' <Latency = 0> <II = 1> <Delay = 4.35> <FuncUnit> <Opcode : 'mul'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 40 [1/1] (1.76ns)   --->   "br label %.preheader2" [WienerDeblur.cpp:395]   --->   Operation 40 'br' <Predicate = (!exitcond)> <Delay = 1.76>
+ST_2 : Operation 41 [1/1] (0.00ns)   --->   "ret void" [WienerDeblur.cpp:442]   --->   Operation 41 'ret' <Predicate = (exitcond)> <Delay = 0.00>
+
+State 3 <SV = 2> <Delay = 8.20>
+ST_3 : Operation 42 [1/1] (0.00ns)   --->   "%j = phi i9 [ %j_1, %1 ], [ 0, %.preheader2.preheader ]"   --->   Operation 42 'phi' 'j' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 43 [1/1] (1.66ns)   --->   "%exitcond1 = icmp eq i9 %j, -256" [WienerDeblur.cpp:395]   --->   Operation 43 'icmp' 'exitcond1' <Predicate = true> <Delay = 1.66> <Core = "Cmp">   --->   Core 25 'Cmp' <Latency = 0> <II = 1> <Delay = 1.66> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_3 : Operation 44 [1/1] (0.00ns)   --->   "%empty_446 = call i32 (...)* @_ssdm_op_SpecLoopTripCount(i64 256, i64 256, i64 256)"   --->   Operation 44 'speclooptripcount' 'empty_446' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 45 [1/1] (1.82ns)   --->   "%j_1 = add i9 %j, 1" [WienerDeblur.cpp:395]   --->   Operation 45 'add' 'j_1' <Predicate = true> <Delay = 1.82> <Core = "AddSub">   --->   Core 14 'AddSub' <Latency = 0> <II = 1> <Delay = 1.65> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_3 : Operation 46 [1/1] (0.00ns)   --->   "br i1 %exitcond1, label %.loopexit1.loopexit, label %1" [WienerDeblur.cpp:395]   --->   Operation 46 'br' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 47 [1/1] (1.82ns)   --->   "%tmp_92 = add i9 %j, -128" [WienerDeblur.cpp:397]   --->   Operation 47 'add' 'tmp_92' <Predicate = (!exitcond1)> <Delay = 1.82> <Core = "AddSub">   --->   Core 14 'AddSub' <Latency = 0> <II = 1> <Delay = 1.65> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_3 : Operation 48 [1/1] (0.00ns)   --->   "%tmp_91 = sext i9 %tmp_92 to i17" [WienerDeblur.cpp:397]   --->   Operation 48 'sext' 'tmp_91' <Predicate = (!exitcond1)> <Delay = 0.00>
+ST_3 : Operation 49 [1/1] (3.36ns) (grouped into DSP with root node tmp_93)   --->   "%tmp_140_cast = mul i17 %tmp_91, %tmp_91" [WienerDeblur.cpp:397]   --->   Operation 49 'mul' 'tmp_140_cast' <Predicate = (!exitcond1)> <Delay = 3.36> <Core = "DSP48">   --->   Core 65 'DSP48' <Latency = 0> <II = 1> <Delay = 6.38> <IPBlock> <Opcode : 'mul' 'add' 'sub' 'select'> <InPorts = 0> <OutPorts = 1> <Sync> <CReg>
+ST_3 : Operation 50 [1/1] (3.02ns) (root node of the DSP)   --->   "%tmp_93 = add i17 %tmp_140_cast, %tmp_138_cast" [WienerDeblur.cpp:397]   --->   Operation 50 'add' 'tmp_93' <Predicate = (!exitcond1)> <Delay = 3.02> <Core = "DSP48">   --->   Core 65 'DSP48' <Latency = 0> <II = 1> <Delay = 6.38> <IPBlock> <Opcode : 'mul' 'add' 'sub' 'select'> <InPorts = 0> <OutPorts = 1> <Sync> <CReg>
+ST_3 : Operation 51 [1/1] (0.00ns)   --->   "%tmp_113 = call i1 @_ssdm_op_BitSelect.i1.i17.i32(i17 %tmp_93, i32 16)" [WienerDeblur.cpp:397]   --->   Operation 51 'bitselect' 'tmp_113' <Predicate = (!exitcond1)> <Delay = 0.00>
+ST_3 : Operation 52 [1/1] (0.00ns)   --->   "%tmp_97 = call i2 @_ssdm_op_PartSelect.i2.i17.i32.i32(i17 %tmp_93, i32 15, i32 16)" [WienerDeblur.cpp:397]   --->   Operation 52 'partselect' 'tmp_97' <Predicate = (!exitcond1)> <Delay = 0.00>
+ST_3 : Operation 53 [1/1] (0.00ns)   --->   "br label %.loopexit1"   --->   Operation 53 'br' <Predicate = (exitcond1)> <Delay = 0.00>
+
+State 4 <SV = 3> <Delay = 3.13>
+ST_4 : Operation 54 [1/1] (2.10ns)   --->   "%p_neg = sub i17 0, %tmp_93" [WienerDeblur.cpp:397]   --->   Operation 54 'sub' 'p_neg' <Predicate = (tmp_113)> <Delay = 2.10> <Core = "AddSub">   --->   Core 14 'AddSub' <Latency = 0> <II = 1> <Delay = 1.65> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_4 : Operation 55 [1/1] (0.00ns)   --->   "%tmp_95 = call i2 @_ssdm_op_PartSelect.i2.i17.i32.i32(i17 %p_neg, i32 15, i32 16)" [WienerDeblur.cpp:397]   --->   Operation 55 'partselect' 'tmp_95' <Predicate = (tmp_113)> <Delay = 0.00>
+ST_4 : Operation 56 [1/1] (0.00ns)   --->   "%tmp_96 = sext i2 %tmp_95 to i3" [WienerDeblur.cpp:397]   --->   Operation 56 'sext' 'tmp_96' <Predicate = (tmp_113)> <Delay = 0.00>
+ST_4 : Operation 57 [1/1] (0.00ns)   --->   "%p_lshr_cast = zext i3 %tmp_96 to i4" [WienerDeblur.cpp:397]   --->   Operation 57 'zext' 'p_lshr_cast' <Predicate = (tmp_113)> <Delay = 0.00>
+ST_4 : Operation 58 [1/1] (0.00ns)   --->   "%tmp_98 = sext i2 %tmp_97 to i3" [WienerDeblur.cpp:397]   --->   Operation 58 'sext' 'tmp_98' <Predicate = (!tmp_113)> <Delay = 0.00>
+ST_4 : Operation 59 [1/1] (0.00ns)   --->   "%p_lshr_f_cast = zext i3 %tmp_98 to i4" [WienerDeblur.cpp:397]   --->   Operation 59 'zext' 'p_lshr_f_cast' <Predicate = (!tmp_113)> <Delay = 0.00>
+ST_4 : Operation 60 [1/1] (1.65ns)   --->   "%p_neg_f = sub i4 0, %p_lshr_f_cast" [WienerDeblur.cpp:397]   --->   Operation 60 'sub' 'p_neg_f' <Predicate = (!tmp_113)> <Delay = 1.65> <Core = "AddSub">   --->   Core 14 'AddSub' <Latency = 0> <II = 1> <Delay = 1.65> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_4 : Operation 61 [1/1] (1.02ns)   --->   "%tmp_99 = select i1 %tmp_113, i4 %p_lshr_cast, i4 %p_neg_f" [WienerDeblur.cpp:397]   --->   Operation 61 'select' 'tmp_99' <Predicate = true> <Delay = 1.02> <Core = "Sel">   --->   Core 26 'Sel' <Latency = 0> <II = 1> <Delay = 1.02> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+
+State 5 <SV = 4> <Delay = 6.28>
+ST_5 : Operation 62 [1/1] (0.00ns)   --->   "%tmp_103 = sext i4 %tmp_99 to i32" [WienerDeblur.cpp:397]   --->   Operation 62 'sext' 'tmp_103' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 63 [6/6] (6.28ns)   --->   "%tmp_100 = sitofp i32 %tmp_103 to double" [WienerDeblur.cpp:397]   --->   Operation 63 'sitodp' 'tmp_100' <Predicate = true> <Delay = 6.28> <Core = "Int2Double">   --->   Core 121 'Int2Double' <Latency = 5> <II = 1> <Delay = 6.28> <FuncUnit> <Opcode : 'sitodp' 'uitodp'> <InPorts = 1> <OutPorts = 1>
+
+State 6 <SV = 5> <Delay = 6.28>
+ST_6 : Operation 64 [5/6] (6.28ns)   --->   "%tmp_100 = sitofp i32 %tmp_103 to double" [WienerDeblur.cpp:397]   --->   Operation 64 'sitodp' 'tmp_100' <Predicate = true> <Delay = 6.28> <Core = "Int2Double">   --->   Core 121 'Int2Double' <Latency = 5> <II = 1> <Delay = 6.28> <FuncUnit> <Opcode : 'sitodp' 'uitodp'> <InPorts = 1> <OutPorts = 1>
+
+State 7 <SV = 6> <Delay = 6.28>
+ST_7 : Operation 65 [4/6] (6.28ns)   --->   "%tmp_100 = sitofp i32 %tmp_103 to double" [WienerDeblur.cpp:397]   --->   Operation 65 'sitodp' 'tmp_100' <Predicate = true> <Delay = 6.28> <Core = "Int2Double">   --->   Core 121 'Int2Double' <Latency = 5> <II = 1> <Delay = 6.28> <FuncUnit> <Opcode : 'sitodp' 'uitodp'> <InPorts = 1> <OutPorts = 1>
+
+State 8 <SV = 7> <Delay = 6.28>
+ST_8 : Operation 66 [3/6] (6.28ns)   --->   "%tmp_100 = sitofp i32 %tmp_103 to double" [WienerDeblur.cpp:397]   --->   Operation 66 'sitodp' 'tmp_100' <Predicate = true> <Delay = 6.28> <Core = "Int2Double">   --->   Core 121 'Int2Double' <Latency = 5> <II = 1> <Delay = 6.28> <FuncUnit> <Opcode : 'sitodp' 'uitodp'> <InPorts = 1> <OutPorts = 1>
+
+State 9 <SV = 8> <Delay = 6.28>
+ST_9 : Operation 67 [2/6] (6.28ns)   --->   "%tmp_100 = sitofp i32 %tmp_103 to double" [WienerDeblur.cpp:397]   --->   Operation 67 'sitodp' 'tmp_100' <Predicate = true> <Delay = 6.28> <Core = "Int2Double">   --->   Core 121 'Int2Double' <Latency = 5> <II = 1> <Delay = 6.28> <FuncUnit> <Opcode : 'sitodp' 'uitodp'> <InPorts = 1> <OutPorts = 1>
+
+State 10 <SV = 9> <Delay = 6.28>
+ST_10 : Operation 68 [1/6] (6.28ns)   --->   "%tmp_100 = sitofp i32 %tmp_103 to double" [WienerDeblur.cpp:397]   --->   Operation 68 'sitodp' 'tmp_100' <Predicate = true> <Delay = 6.28> <Core = "Int2Double">   --->   Core 121 'Int2Double' <Latency = 5> <II = 1> <Delay = 6.28> <FuncUnit> <Opcode : 'sitodp' 'uitodp'> <InPorts = 1> <OutPorts = 1>
+
+State 11 <SV = 10> <Delay = 7.32>
+ST_11 : Operation 69 [18/18] (7.32ns)   --->   "%tmp_101 = call double @llvm.exp.f64(double %tmp_100)" [WienerDeblur.cpp:397]   --->   Operation 69 'dexp' 'tmp_101' <Predicate = true> <Delay = 7.32> <Core = "DExp">   --->   Core 127 'DExp' <Latency = 17> <II = 1> <Delay = 7.32> <FuncUnit> <Opcode : 'dexp'> <InPorts = 1> <OutPorts = 1>
+
+State 12 <SV = 11> <Delay = 7.32>
+ST_12 : Operation 70 [17/18] (7.32ns)   --->   "%tmp_101 = call double @llvm.exp.f64(double %tmp_100)" [WienerDeblur.cpp:397]   --->   Operation 70 'dexp' 'tmp_101' <Predicate = true> <Delay = 7.32> <Core = "DExp">   --->   Core 127 'DExp' <Latency = 17> <II = 1> <Delay = 7.32> <FuncUnit> <Opcode : 'dexp'> <InPorts = 1> <OutPorts = 1>
+
+State 13 <SV = 12> <Delay = 7.32>
+ST_13 : Operation 71 [16/18] (7.32ns)   --->   "%tmp_101 = call double @llvm.exp.f64(double %tmp_100)" [WienerDeblur.cpp:397]   --->   Operation 71 'dexp' 'tmp_101' <Predicate = true> <Delay = 7.32> <Core = "DExp">   --->   Core 127 'DExp' <Latency = 17> <II = 1> <Delay = 7.32> <FuncUnit> <Opcode : 'dexp'> <InPorts = 1> <OutPorts = 1>
+
+State 14 <SV = 13> <Delay = 7.32>
+ST_14 : Operation 72 [15/18] (7.32ns)   --->   "%tmp_101 = call double @llvm.exp.f64(double %tmp_100)" [WienerDeblur.cpp:397]   --->   Operation 72 'dexp' 'tmp_101' <Predicate = true> <Delay = 7.32> <Core = "DExp">   --->   Core 127 'DExp' <Latency = 17> <II = 1> <Delay = 7.32> <FuncUnit> <Opcode : 'dexp'> <InPorts = 1> <OutPorts = 1>
+
+State 15 <SV = 14> <Delay = 7.32>
+ST_15 : Operation 73 [14/18] (7.32ns)   --->   "%tmp_101 = call double @llvm.exp.f64(double %tmp_100)" [WienerDeblur.cpp:397]   --->   Operation 73 'dexp' 'tmp_101' <Predicate = true> <Delay = 7.32> <Core = "DExp">   --->   Core 127 'DExp' <Latency = 17> <II = 1> <Delay = 7.32> <FuncUnit> <Opcode : 'dexp'> <InPorts = 1> <OutPorts = 1>
+
+State 16 <SV = 15> <Delay = 7.32>
+ST_16 : Operation 74 [13/18] (7.32ns)   --->   "%tmp_101 = call double @llvm.exp.f64(double %tmp_100)" [WienerDeblur.cpp:397]   --->   Operation 74 'dexp' 'tmp_101' <Predicate = true> <Delay = 7.32> <Core = "DExp">   --->   Core 127 'DExp' <Latency = 17> <II = 1> <Delay = 7.32> <FuncUnit> <Opcode : 'dexp'> <InPorts = 1> <OutPorts = 1>
+
+State 17 <SV = 16> <Delay = 7.32>
+ST_17 : Operation 75 [12/18] (7.32ns)   --->   "%tmp_101 = call double @llvm.exp.f64(double %tmp_100)" [WienerDeblur.cpp:397]   --->   Operation 75 'dexp' 'tmp_101' <Predicate = true> <Delay = 7.32> <Core = "DExp">   --->   Core 127 'DExp' <Latency = 17> <II = 1> <Delay = 7.32> <FuncUnit> <Opcode : 'dexp'> <InPorts = 1> <OutPorts = 1>
+
+State 18 <SV = 17> <Delay = 7.32>
+ST_18 : Operation 76 [11/18] (7.32ns)   --->   "%tmp_101 = call double @llvm.exp.f64(double %tmp_100)" [WienerDeblur.cpp:397]   --->   Operation 76 'dexp' 'tmp_101' <Predicate = true> <Delay = 7.32> <Core = "DExp">   --->   Core 127 'DExp' <Latency = 17> <II = 1> <Delay = 7.32> <FuncUnit> <Opcode : 'dexp'> <InPorts = 1> <OutPorts = 1>
+
+State 19 <SV = 18> <Delay = 7.32>
+ST_19 : Operation 77 [10/18] (7.32ns)   --->   "%tmp_101 = call double @llvm.exp.f64(double %tmp_100)" [WienerDeblur.cpp:397]   --->   Operation 77 'dexp' 'tmp_101' <Predicate = true> <Delay = 7.32> <Core = "DExp">   --->   Core 127 'DExp' <Latency = 17> <II = 1> <Delay = 7.32> <FuncUnit> <Opcode : 'dexp'> <InPorts = 1> <OutPorts = 1>
+
+State 20 <SV = 19> <Delay = 7.32>
+ST_20 : Operation 78 [9/18] (7.32ns)   --->   "%tmp_101 = call double @llvm.exp.f64(double %tmp_100)" [WienerDeblur.cpp:397]   --->   Operation 78 'dexp' 'tmp_101' <Predicate = true> <Delay = 7.32> <Core = "DExp">   --->   Core 127 'DExp' <Latency = 17> <II = 1> <Delay = 7.32> <FuncUnit> <Opcode : 'dexp'> <InPorts = 1> <OutPorts = 1>
+
+State 21 <SV = 20> <Delay = 7.32>
+ST_21 : Operation 79 [8/18] (7.32ns)   --->   "%tmp_101 = call double @llvm.exp.f64(double %tmp_100)" [WienerDeblur.cpp:397]   --->   Operation 79 'dexp' 'tmp_101' <Predicate = true> <Delay = 7.32> <Core = "DExp">   --->   Core 127 'DExp' <Latency = 17> <II = 1> <Delay = 7.32> <FuncUnit> <Opcode : 'dexp'> <InPorts = 1> <OutPorts = 1>
+
+State 22 <SV = 21> <Delay = 7.32>
+ST_22 : Operation 80 [7/18] (7.32ns)   --->   "%tmp_101 = call double @llvm.exp.f64(double %tmp_100)" [WienerDeblur.cpp:397]   --->   Operation 80 'dexp' 'tmp_101' <Predicate = true> <Delay = 7.32> <Core = "DExp">   --->   Core 127 'DExp' <Latency = 17> <II = 1> <Delay = 7.32> <FuncUnit> <Opcode : 'dexp'> <InPorts = 1> <OutPorts = 1>
+
+State 23 <SV = 22> <Delay = 7.32>
+ST_23 : Operation 81 [6/18] (7.32ns)   --->   "%tmp_101 = call double @llvm.exp.f64(double %tmp_100)" [WienerDeblur.cpp:397]   --->   Operation 81 'dexp' 'tmp_101' <Predicate = true> <Delay = 7.32> <Core = "DExp">   --->   Core 127 'DExp' <Latency = 17> <II = 1> <Delay = 7.32> <FuncUnit> <Opcode : 'dexp'> <InPorts = 1> <OutPorts = 1>
+
+State 24 <SV = 23> <Delay = 7.32>
+ST_24 : Operation 82 [5/18] (7.32ns)   --->   "%tmp_101 = call double @llvm.exp.f64(double %tmp_100)" [WienerDeblur.cpp:397]   --->   Operation 82 'dexp' 'tmp_101' <Predicate = true> <Delay = 7.32> <Core = "DExp">   --->   Core 127 'DExp' <Latency = 17> <II = 1> <Delay = 7.32> <FuncUnit> <Opcode : 'dexp'> <InPorts = 1> <OutPorts = 1>
+
+State 25 <SV = 24> <Delay = 7.32>
+ST_25 : Operation 83 [4/18] (7.32ns)   --->   "%tmp_101 = call double @llvm.exp.f64(double %tmp_100)" [WienerDeblur.cpp:397]   --->   Operation 83 'dexp' 'tmp_101' <Predicate = true> <Delay = 7.32> <Core = "DExp">   --->   Core 127 'DExp' <Latency = 17> <II = 1> <Delay = 7.32> <FuncUnit> <Opcode : 'dexp'> <InPorts = 1> <OutPorts = 1>
+
+State 26 <SV = 25> <Delay = 7.32>
+ST_26 : Operation 84 [3/18] (7.32ns)   --->   "%tmp_101 = call double @llvm.exp.f64(double %tmp_100)" [WienerDeblur.cpp:397]   --->   Operation 84 'dexp' 'tmp_101' <Predicate = true> <Delay = 7.32> <Core = "DExp">   --->   Core 127 'DExp' <Latency = 17> <II = 1> <Delay = 7.32> <FuncUnit> <Opcode : 'dexp'> <InPorts = 1> <OutPorts = 1>
+
+State 27 <SV = 26> <Delay = 7.32>
+ST_27 : Operation 85 [2/18] (7.32ns)   --->   "%tmp_101 = call double @llvm.exp.f64(double %tmp_100)" [WienerDeblur.cpp:397]   --->   Operation 85 'dexp' 'tmp_101' <Predicate = true> <Delay = 7.32> <Core = "DExp">   --->   Core 127 'DExp' <Latency = 17> <II = 1> <Delay = 7.32> <FuncUnit> <Opcode : 'dexp'> <InPorts = 1> <OutPorts = 1>
+
+State 28 <SV = 27> <Delay = 7.32>
+ST_28 : Operation 86 [1/18] (7.32ns)   --->   "%tmp_101 = call double @llvm.exp.f64(double %tmp_100)" [WienerDeblur.cpp:397]   --->   Operation 86 'dexp' 'tmp_101' <Predicate = true> <Delay = 7.32> <Core = "DExp">   --->   Core 127 'DExp' <Latency = 17> <II = 1> <Delay = 7.32> <FuncUnit> <Opcode : 'dexp'> <InPorts = 1> <OutPorts = 1>
+
+State 29 <SV = 28> <Delay = 10.1>
+ST_29 : Operation 87 [1/1] (6.50ns)   --->   "%tmp_102 = fptrunc double %tmp_101 to float" [WienerDeblur.cpp:397]   --->   Operation 87 'fptrunc' 'tmp_102' <Predicate = true> <Delay = 6.50> <Core = "Double2Float">   --->   Core 122 'Double2Float' <Latency = 0> <II = 1> <Delay = 6.50> <FuncUnit> <Opcode : 'fptrunc'> <InPorts = 1> <OutPorts = 1>
+ST_29 : Operation 88 [1/1] (3.63ns)   --->   "call fastcc void @real379(float* @kernel_M_real, float %tmp_102)" [WienerDeblur.cpp:397]   --->   Operation 88 'call' <Predicate = true> <Delay = 3.63> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_29 : Operation 89 [1/1] (3.63ns)   --->   "call fastcc void @imag380(float* @kernel_M_imag, float 0.000000e+00)" [WienerDeblur.cpp:398]   --->   Operation 89 'call' <Predicate = true> <Delay = 3.63> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_29 : Operation 90 [1/1] (0.00ns)   --->   "br label %.preheader2" [WienerDeblur.cpp:395]   --->   Operation 90 'br' <Predicate = true> <Delay = 0.00>
+
+
+============================================================
++ Verbose Summary: Timing violations
+============================================================
+Target clock period: 10ns, clock uncertainty: 1.25ns.
+
+ <State 1>: 1.77ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation ('i') with incoming values : ('i', WienerDeblur.cpp:393) [6]  (1.77 ns)
+
+ <State 2>: 6.17ns
+The critical path consists of the following:
+	'phi' operation ('i') with incoming values : ('i', WienerDeblur.cpp:393) [6]  (0 ns)
+	'add' operation ('tmp_s', WienerDeblur.cpp:397) [12]  (1.82 ns)
+	'mul' operation ('tmp_138_cast', WienerDeblur.cpp:397) [14]  (4.35 ns)
+
+ <State 3>: 8.2ns
+The critical path consists of the following:
+	'phi' operation ('j') with incoming values : ('j', WienerDeblur.cpp:395) [17]  (0 ns)
+	'add' operation ('tmp_92', WienerDeblur.cpp:397) [23]  (1.82 ns)
+	'mul' operation of DSP[26] ('tmp_140_cast', WienerDeblur.cpp:397) [25]  (3.36 ns)
+	'add' operation of DSP[26] ('tmp_93', WienerDeblur.cpp:397) [26]  (3.02 ns)
+
+ <State 4>: 3.13ns
+The critical path consists of the following:
+	'sub' operation ('p_neg', WienerDeblur.cpp:397) [28]  (2.11 ns)
+	'select' operation ('tmp_99', WienerDeblur.cpp:397) [36]  (1.02 ns)
+
+ <State 5>: 6.28ns
+The critical path consists of the following:
+	'sitodp' operation ('tmp_100', WienerDeblur.cpp:397) [38]  (6.28 ns)
+
+ <State 6>: 6.28ns
+The critical path consists of the following:
+	'sitodp' operation ('tmp_100', WienerDeblur.cpp:397) [38]  (6.28 ns)
+
+ <State 7>: 6.28ns
+The critical path consists of the following:
+	'sitodp' operation ('tmp_100', WienerDeblur.cpp:397) [38]  (6.28 ns)
+
+ <State 8>: 6.28ns
+The critical path consists of the following:
+	'sitodp' operation ('tmp_100', WienerDeblur.cpp:397) [38]  (6.28 ns)
+
+ <State 9>: 6.28ns
+The critical path consists of the following:
+	'sitodp' operation ('tmp_100', WienerDeblur.cpp:397) [38]  (6.28 ns)
+
+ <State 10>: 6.28ns
+The critical path consists of the following:
+	'sitodp' operation ('tmp_100', WienerDeblur.cpp:397) [38]  (6.28 ns)
+
+ <State 11>: 7.32ns
+The critical path consists of the following:
+	'dexp' operation ('tmp_101', WienerDeblur.cpp:397) [39]  (7.32 ns)
+
+ <State 12>: 7.32ns
+The critical path consists of the following:
+	'dexp' operation ('tmp_101', WienerDeblur.cpp:397) [39]  (7.32 ns)
+
+ <State 13>: 7.32ns
+The critical path consists of the following:
+	'dexp' operation ('tmp_101', WienerDeblur.cpp:397) [39]  (7.32 ns)
+
+ <State 14>: 7.32ns
+The critical path consists of the following:
+	'dexp' operation ('tmp_101', WienerDeblur.cpp:397) [39]  (7.32 ns)
+
+ <State 15>: 7.32ns
+The critical path consists of the following:
+	'dexp' operation ('tmp_101', WienerDeblur.cpp:397) [39]  (7.32 ns)
+
+ <State 16>: 7.32ns
+The critical path consists of the following:
+	'dexp' operation ('tmp_101', WienerDeblur.cpp:397) [39]  (7.32 ns)
+
+ <State 17>: 7.32ns
+The critical path consists of the following:
+	'dexp' operation ('tmp_101', WienerDeblur.cpp:397) [39]  (7.32 ns)
+
+ <State 18>: 7.32ns
+The critical path consists of the following:
+	'dexp' operation ('tmp_101', WienerDeblur.cpp:397) [39]  (7.32 ns)
+
+ <State 19>: 7.32ns
+The critical path consists of the following:
+	'dexp' operation ('tmp_101', WienerDeblur.cpp:397) [39]  (7.32 ns)
+
+ <State 20>: 7.32ns
+The critical path consists of the following:
+	'dexp' operation ('tmp_101', WienerDeblur.cpp:397) [39]  (7.32 ns)
+
+ <State 21>: 7.32ns
+The critical path consists of the following:
+	'dexp' operation ('tmp_101', WienerDeblur.cpp:397) [39]  (7.32 ns)
+
+ <State 22>: 7.32ns
+The critical path consists of the following:
+	'dexp' operation ('tmp_101', WienerDeblur.cpp:397) [39]  (7.32 ns)
+
+ <State 23>: 7.32ns
+The critical path consists of the following:
+	'dexp' operation ('tmp_101', WienerDeblur.cpp:397) [39]  (7.32 ns)
+
+ <State 24>: 7.32ns
+The critical path consists of the following:
+	'dexp' operation ('tmp_101', WienerDeblur.cpp:397) [39]  (7.32 ns)
+
+ <State 25>: 7.32ns
+The critical path consists of the following:
+	'dexp' operation ('tmp_101', WienerDeblur.cpp:397) [39]  (7.32 ns)
+
+ <State 26>: 7.32ns
+The critical path consists of the following:
+	'dexp' operation ('tmp_101', WienerDeblur.cpp:397) [39]  (7.32 ns)
+
+ <State 27>: 7.32ns
+The critical path consists of the following:
+	'dexp' operation ('tmp_101', WienerDeblur.cpp:397) [39]  (7.32 ns)
+
+ <State 28>: 7.32ns
+The critical path consists of the following:
+	'dexp' operation ('tmp_101', WienerDeblur.cpp:397) [39]  (7.32 ns)
+
+ <State 29>: 10.1ns
+The critical path consists of the following:
+	'fptrunc' operation ('tmp_102', WienerDeblur.cpp:397) [40]  (6.5 ns)
+	'call' operation (WienerDeblur.cpp:397) to 'real379' [41]  (3.63 ns)
+
+
+============================================================
++ Verbose Summary: Binding
+============================================================
+N/A
+* FSMD analyzer results:
+  - Output states:
+ - Input state : 
+  - Chain level:
+	State 1
+	State 2
+	State 3
+	State 4
+	State 5
+	State 6
+	State 7
+	State 8
+	State 9
+	State 10
+	State 11
+	State 12
+	State 13
+	State 14
+	State 15
+	State 16
+	State 17
+	State 18
+	State 19
+	State 20
+	State 21
+	State 22
+	State 23
+	State 24
+	State 25
+	State 26
+	State 27
+	State 28
+	State 29
+
+
+============================================================
++ Verbose Summary: Datapath Resource usage 
+============================================================
+N/A

@@ -1,0 +1,132 @@
+
+
+================================================================
+== Vivado HLS Report for 'imag_1'
+================================================================
+* Date:           Sat Aug  1 17:19:49 2020
+
+* Version:        2018.3 (Build 2405991 on Thu Dec 06 23:56:15 MST 2018)
+* Project:        deblur_IP
+* Solution:       solution1
+* Product family: zynq
+* Target device:  xc7z020clg400-1
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing (ns): 
+    * Summary: 
+    +--------+-------+----------+------------+
+    |  Clock | Target| Estimated| Uncertainty|
+    +--------+-------+----------+------------+
+    |ap_clk  |  10.00|     7.268|        1.25|
+    +--------+-------+----------+------------+
+
++ Latency (clock cycles): 
+    * Summary: 
+    +-----+-----+-----+-----+---------+
+    |  Latency  |  Interval | Pipeline|
+    | min | max | min | max |   Type  |
+    +-----+-----+-----+-----+---------+
+    |    0|    0|    0|    0|   none  |
+    +-----+-----+-----+-----+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        N/A
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++-----------------+---------+-------+--------+-------+
+|       Name      | BRAM_18K| DSP48E|   FF   |  LUT  |
++-----------------+---------+-------+--------+-------+
+|DSP              |        -|      -|       -|      -|
+|Expression       |        -|      -|       0|      2|
+|FIFO             |        -|      -|       -|      -|
+|Instance         |        -|      -|       -|      -|
+|Memory           |        -|      -|       -|      -|
+|Multiplexer      |        -|      -|       -|     18|
+|Register         |        -|      -|       1|      -|
++-----------------+---------+-------+--------+-------+
+|Total            |        0|      0|       1|     20|
++-----------------+---------+-------+--------+-------+
+|Available        |      280|    220|  106400|  53200|
++-----------------+---------+-------+--------+-------+
+|Utilization (%)  |        0|      0|   ~0   |   ~0  |
++-----------------+---------+-------+--------+-------+
+
++ Detail: 
+    * Instance: 
+    N/A
+
+    * DSP48: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +-----------------+----------+-------+---+----+------------+------------+
+    |  Variable Name  | Operation| DSP48E| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +-----------------+----------+-------+---+----+------------+------------+
+    |ap_block_state1  |    or    |      0|  0|   2|           1|           1|
+    +-----------------+----------+-------+---+----+------------+------------+
+    |Total            |          |      0|  0|   2|           1|           1|
+    +-----------------+----------+-------+---+----+------------+------------+
+
+    * Multiplexer: 
+    +-------------------------+----+-----------+-----+-----------+
+    |           Name          | LUT| Input Size| Bits| Total Bits|
+    +-------------------------+----+-----------+-----+-----------+
+    |complex_float_s_i_blk_n  |   9|          2|    1|          2|
+    |complex_float_s_o_blk_n  |   9|          2|    1|          2|
+    +-------------------------+----+-----------+-----+-----------+
+    |Total                    |  18|          4|    2|          4|
+    +-------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +-----------+---+----+-----+-----------+
+    |    Name   | FF| LUT| Bits| Const Bits|
+    +-----------+---+----+-----+-----------+
+    |ap_CS_fsm  |  1|   0|    1|          0|
+    +-----------+---+----+-----+-----------+
+    |Total      |  1|   0|    1|          0|
+    +-----------+---+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++-------------------------+-----+-----+------------+-----------------+--------------+
+|        RTL Ports        | Dir | Bits|  Protocol  |  Source Object  |    C Type    |
++-------------------------+-----+-----+------------+-----------------+--------------+
+|ap_clk                   |  in |    1| ap_ctrl_hs |      imag.1     | return value |
+|ap_rst                   |  in |    1| ap_ctrl_hs |      imag.1     | return value |
+|ap_start                 |  in |    1| ap_ctrl_hs |      imag.1     | return value |
+|ap_done                  | out |    1| ap_ctrl_hs |      imag.1     | return value |
+|ap_idle                  | out |    1| ap_ctrl_hs |      imag.1     | return value |
+|ap_ready                 | out |    1| ap_ctrl_hs |      imag.1     | return value |
+|complex_float_s_i_blk_n  | out |    1| ap_ctrl_hs |      imag.1     | return value |
+|complex_float_s_o_blk_n  | out |    1| ap_ctrl_hs |      imag.1     | return value |
+|complex_float_s_dout     |  in |   64|   ap_fifo  | complex_float_s |    pointer   |
+|complex_float_s_empty_n  |  in |    1|   ap_fifo  | complex_float_s |    pointer   |
+|complex_float_s_read     | out |    1|   ap_fifo  | complex_float_s |    pointer   |
+|complex_float_s_din      | out |   64|   ap_fifo  | complex_float_s |    pointer   |
+|complex_float_s_full_n   |  in |    1|   ap_fifo  | complex_float_s |    pointer   |
+|complex_float_s_write    | out |    1|   ap_fifo  | complex_float_s |    pointer   |
+|p_val                    |  in |   32|   ap_none  |      p_val      |    scalar    |
++-------------------------+-----+-----+------------+-----------------+--------------+
+
