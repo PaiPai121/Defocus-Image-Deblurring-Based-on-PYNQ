@@ -9,12 +9,12 @@ deblur_IP文件夹下为HLS工程文件
 ## 示例：
 原图
 
-[img1](/HLS/test_img_gray.jpg)
+![img1](/HLS/test_img_gray.jpg)
 
 模糊图
 
-[img2](/HLS/blur.jpg)
+![img2](/HLS/blur.jpg)
 
 复原图
 
-[img3](/HLS/test_out.jpg)
+![img3](/HLS/test_out.jpg)
