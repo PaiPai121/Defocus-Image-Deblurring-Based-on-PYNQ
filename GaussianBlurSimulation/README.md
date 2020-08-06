@@ -1,31 +1,34 @@
-# PC上的去模糊算法模拟
+# PC debluring algorithm simulation / PC上的去模糊算法模拟
+This folder does not involve HLS, FPGA and other contents
 
+Just use Python to simulate the restoration of the blur image
+*******************************************************************
 本文件夹内容不涉及HLS、FPGA等内容
 
 只是单纯的使用python来模拟一下算法对模糊图像的恢复情况
 
-## 示例1：
+## example 1：
 
-原图
+original
 
 ![img1](/GaussianBlurSimulation/test_img_gray.jpg)
 
-模糊图
+blurred
 
 ![img2](/GaussianBlurSimulation/blur.jpg)
 
-复原图
+deblurred
 
 ![img3](/GaussianBlurSimulation/test_out.jpg)
 
 
-## 示例2：
+## example 2：
 
-模糊图
+blurred
 
 ![img4](/GaussianBlurSimulation/2.jpg)
 
-复原图
+deblurred
 
 ![img4](/GaussianBlurSimulation/Wiener10.jpg)
 
