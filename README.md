@@ -11,10 +11,7 @@ This system can deblur the gaussian blur image, but it has limited ability to re
 ## Authors Information
 **2020 New Engineering Alliance -Xilinx Summer School Project.**
 Powered by Zhang Zekun, Wang Jiyao, Shen Naijie, Guan Bin
-## Quick Start
-```
-pip3 install git+https://github.com/strath-sdr/rfsoc_sam.git
-```
+
 ## First Time Setup 
 
 - [x] Laptop/Computer
