@@ -12,6 +12,17 @@ This system can deblur the gaussian blur image, but it has limited ability to re
 **2020 New Engineering Alliance -Xilinx Summer School Project.**
 Powered by Zhang Zekun, Wang Jiyao, Shen Naijie, Guan Bin
 
+## Quick Start
+
+Open a terminal on your PYNQ board and run:
+```sh
+sudo pip3 install git+https://github.com/PaiPai121/Defocus-Image-Deblurring-Based-on-PYNQ.git
+```
+or offline install:
+```sh
+sudo pip3 install --upgrade
+```
+
 ## First Time Setup 
 
 - [x] Laptop/Computer
